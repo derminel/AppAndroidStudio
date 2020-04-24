@@ -3,7 +3,7 @@ package com.example.secondtest;
 public class Product {
     private String productNb ;
     private String name ;
-    private Double price ;
+    private double price ;
     private String info ;
     private String category ;
     private String website ;
@@ -19,5 +19,8 @@ public class Product {
         this.likes = 0 ;
     }
 
+    public double getPrice() {
+        return this.price ;
+    }
 
 }
