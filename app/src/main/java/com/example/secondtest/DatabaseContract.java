@@ -13,6 +13,6 @@ public class DatabaseContract {
             "CREATE TABLE " + DatabaseContract.TABLE_NAME + " (" +
                     DatabaseContract.COLUMN_NAME_TITLE + " TEXT )";
 
-    private static final String SQL_DELETE_ENTRIES =
+    public static final String SQL_DELETE_ENTRIES =
             "DROP TABLE IF EXISTS " + DatabaseContract.TABLE_NAME;
 }
