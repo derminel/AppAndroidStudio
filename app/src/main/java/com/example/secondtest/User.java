@@ -17,9 +17,10 @@ public class User {
 
     public boolean exist(String login){
         //call DAO
+        return true;
     }
 
-    public void setProfile(String n, String l, byte photo, String a, String p) {
+    public void setProfile(String n, String l, byte[] photo, String a, String p) {
         this.profile.setName(n);
         this.profile.setLastname(l);
         this.profile.setPhoto(photo);
@@ -29,11 +30,14 @@ public class User {
 
     public boolean addAProduct(WishList w, Product p){
         w.addProduct(p);
+        return true;
     }
 
-    public void addWishlist(String){
+    public void addWishlist(String w){
         //Ajouter une wishlist a la DAO
     }
 
-    public boolean connection(String )
+    public boolean connection(String login){
+        return true;
+    }
 }

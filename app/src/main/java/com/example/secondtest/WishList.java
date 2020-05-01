@@ -76,6 +76,6 @@ public class WishList {
     }
 
     public boolean isInWishList(Product p){
-        this.products.contains(p) ;
+        return this.products.contains(p) ;
     }
 }

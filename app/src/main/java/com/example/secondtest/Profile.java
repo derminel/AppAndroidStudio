@@ -3,7 +3,7 @@ package com.example.secondtest;
 public class Profile {
     private String name ;
     private String lastname ;
-    private byte photo ;
+    private byte[] photo ;
     private String address ;
     private String preferences ;
 
@@ -23,7 +23,7 @@ public class Profile {
         this.lastname = l ;
     }
 
-    public void setPhoto(byte p){
+    public void setPhoto(byte[] p){
         this.photo = p ;
     }
 
