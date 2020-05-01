@@ -1,23 +1,26 @@
 package com.example.secondtest;
 
+import android.content.Context;
+
 import java.util.ArrayList;
 
 public class User {
+    private UserDAO userDAO ;
     private String password ;
     private String login ;
     private ArrayList<User> friends ;
     private Profile profile ;
 
-    public User(String p, String l) {
+    public User(String p, String l, Context context) {
         this.password = p ;
         this.login = l ;
         this.friends = new ArrayList<User>() ;
         this.profile = new Profile() ;
+        this.userDAO = new UserDAO(context);
     }
 
     public boolean exist(String login){
-        //call DAO
-        return true;
+        return this.userDAO.exist(login);
     }
 
     public void setProfile(String n, String l, byte[] photo, String a, String p) {
