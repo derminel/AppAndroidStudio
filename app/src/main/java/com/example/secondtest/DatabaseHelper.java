@@ -1,3 +1,4 @@
+
 package com.example.secondtest;
 
 import android.content.Context;
@@ -19,6 +20,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
+        db.execSQL(DatabaseContract.SQL_DELETE_ENTRIES);
+        onCreate(db);
     }
 }
