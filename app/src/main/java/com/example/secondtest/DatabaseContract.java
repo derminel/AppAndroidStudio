@@ -50,8 +50,8 @@ public class DatabaseContract {
     public static final String SQL_CREATE_CONTENT =
             "CREATE TABLE Content (ListNb TEXT, ProductNb TEXT)";
 
-    public static final String SQL_CREATE_USER =
-            "CREATE TABLE User (Login TEXT NOT NULL, Name TEXT NOT NULL, LastName TEXT NOT NULL, Address TEXT NOT NULL, Preferences TEXT, Photo TEXT, Password TEXT NOT NULL)";
+    public static final String SQL_CREATE_USERS =
+            "CREATE TABLE Users (Login TEXT NOT NULL, Name TEXT NOT NULL, LastName TEXT NOT NULL, Address TEXT NOT NULL, Preferences TEXT, Photo TEXT, Password TEXT NOT NULL)";
 
     public static final String SQL_CREATE_FRIENDS =
             "CREATE TABLE Friends (Login1 TEXT, Login2 TEXT)";

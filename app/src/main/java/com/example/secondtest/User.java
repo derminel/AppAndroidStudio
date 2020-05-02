@@ -40,7 +40,7 @@ public class User {
         //Ajouter une wishlist a la DAO
     }
 
-    public boolean connection(String login){
-        return true;
+    public boolean connection(String login, String password){
+        return this.userDAO.getPassword(login).equals(password);
     }
 }

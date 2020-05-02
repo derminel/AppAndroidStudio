@@ -2,6 +2,7 @@ package com.example.secondtest;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -10,10 +11,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import static com.example.secondtest.DatabaseContract.COLUMN_NAME_TITLE_USERS_1;
+
 public class MainActivity extends AppCompatActivity {
 
     private DatabaseHelper myDb ;
-    User user;
+    private User user;
 
     EditText login;
     EditText password;
@@ -29,8 +32,10 @@ public class MainActivity extends AppCompatActivity {
         this.password = findViewById(R.id.password);
         this.user = new User(this.password.getText().toString(), this.login.getText().toString(), this);
 
-        configureNextButtonConnect();
+        AddData();
+
         configureNextButtonCreateAccount();
+        configureNextButtonConnect();
     }
 
     private void showToast(String msg) {
@@ -47,6 +52,9 @@ public class MainActivity extends AppCompatActivity {
                 else if (!(user.exist(login.getText().toString()))){
                     showToast("You have got no account, create one");
                 }
+                else if (!(user.connection(login.getText().toString(), password.getText().toString()))){
+                    showToast("You've made a mistake in your password");
+                }
                 else{
                     startActivity(new Intent(MainActivity.this, PageAccueil.class));
                 }
@@ -55,11 +63,22 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void configureNextButtonCreateAccount() {
-        Button nextButton = (Button)  findViewById(R.id.CreateAccount);
+        Button nextButton = (Button) findViewById(R.id.CreateAccount);
         nextButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view){
                 startActivity(new Intent(MainActivity.this, PageCreationAccount.class));
             }
         });
     }
+
+    public void AddData() {
+        boolean isInserted = myDb.insertData();
+        if(isInserted){
+            Toast.makeText(MainActivity.this,"Data Inserted",Toast.LENGTH_LONG).show();
+        }
+        else{
+            Toast.makeText(MainActivity.this,"Data not Inserted",Toast.LENGTH_LONG).show();
+        }
+    }
+
 }
