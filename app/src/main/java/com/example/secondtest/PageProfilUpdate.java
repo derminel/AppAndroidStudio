@@ -24,16 +24,17 @@ public class PageProfilUpdate extends AppCompatActivity {
         this.myDb = new DatabaseHelper(this);
         this.profile = new ProfileDAO(this);
 
-        this.name = findViewById(R.id.name_update);
+        this.name = (EditText) findViewById(R.id.name_update);
         this.last_name = findViewById(R.id.last_name_update);
         this.address = findViewById(R.id.address_update);
         this.preferences = findViewById(R.id.preferences_update);
+
         configureButtonSaveProfile();
 
     }
 
     private void configureButtonSaveProfile() {
-        profile.updateProfile("derminel", name.toString(), last_name.toString(), address.toString(), preferences.toString());
+        profile.updateProfile("derminel", name.getText().toString(), last_name.getText().toString(), address.getText().toString(), preferences.getText().toString());
         Button buttonSaveProfile = (Button) findViewById(R.id.buttonSaveProfile);
         buttonSaveProfile.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view){

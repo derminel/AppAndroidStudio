@@ -10,11 +10,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".PagePourAjouterUneListeDeSouhait"></activity>
+        <activity android:name=".PageProfilUpdate" />
         <activity android:name=".PagesListesDeSouhaits" />
         <activity android:name=".PageProfil" />
         <activity android:name=".PageCreationAccount" />
         <activity android:name=".PageAccueil" />
         <activity android:name=".MainActivity">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

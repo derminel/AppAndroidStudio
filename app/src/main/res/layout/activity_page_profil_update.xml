@@ -15,7 +15,7 @@
         android:layout_gravity="center_horizontal|top"
         android:gravity="start"
         android:hint="Click to change your Preferences"
-        android:inputType="textPassword"
+        android:inputType="textLongMessage"
         android:translationY="280dp" />
 
     <TextView
@@ -48,7 +48,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Click to change your Last Name"
-            android:inputType="textPassword"
+            android:inputType="textShortMessage"
             android:translationY="-10dp" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -61,7 +61,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Click to change your Address"
-            android:inputType="textPassword" />
+            android:inputType="textShortMessage" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
