@@ -65,7 +65,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:id="@+id/buttonChangeProfile"
+        android:id="@+id/buttonSaveProfile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Save my profile"
