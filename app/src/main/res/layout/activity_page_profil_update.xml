@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    tools:context=".PageProfilUpdate"
+    android:orientation="vertical">
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/preferences_update"
+        android:layout_width="312dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|top"
+        android:gravity="start"
+        android:hint="Click to change your Preferences"
+        android:inputType="textPassword"
+        android:translationY="280dp" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Profile"
+        android:textSize="36sp"
+        android:translationY="-130dp" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="309dp"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/name_update"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Click to change your Name"
+            android:translationY="-20dp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="309dp"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/last_name_update"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Click to change your Last Name"
+            android:inputType="textPassword"
+            android:translationY="-10dp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="309dp"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/address_update"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Click to change your Address"
+            android:inputType="textPassword" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/buttonChangeProfile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Save my profile"
+        android:translationY="162dp" />
+
+
+
+</LinearLayout>

@@ -5,11 +5,29 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
-    tools:context=".MainActivity"
+    tools:context=".PageProfil"
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/PreferencesDB"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginLeft="35dp"
+        android:layout_marginRight="35dp"
+        android:text='"Preferences"'
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:translationY="320dp" />
+
+    <TextView
+        android:id="@+id/AddressDB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text='"Address"'
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:translationY="128dp" />
+
+    <TextView
+        android:id="@+id/textView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -17,47 +35,69 @@
         android:textSize="36sp"
         android:translationY="-130dp" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="309dp"
-        android:layout_height="wrap_content">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Enter a login"
-            android:translationY="-20dp" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="309dp"
-        android:layout_height="wrap_content">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Password"
-            android:inputType="textPassword"
-            android:translationY="-10dp"/>
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="309dp"
-        android:layout_height="wrap_content">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Confirm the password"
-            android:inputType="textPassword"/>
-    </com.google.android.material.textfield.TextInputLayout>
-
     <Button
-        android:id="@+id/button"
+        android:id="@+id/buttonChangeProfile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Save my profile"
-        android:translationY="162dp" />
+        android:layout_gravity="bottom|center"
+        android:text="Change my profile"
+        android:translationY="280dp" />
 
+    <TextView
+        android:id="@+id/LastNameDB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text='"LastName"'
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:translationY="-40dp" />
+
+    <TextView
+        android:id="@+id/textViewName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_marginLeft="35dp"
+        android:text="Name:"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:translationY="-120dp" />
+
+    <TextView
+        android:id="@+id/textViewLastName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_marginLeft="35dp"
+        android:text="Last Name:"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:translationY="-100dp" />
+
+    <TextView
+        android:id="@+id/textViewAddress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_marginLeft="35dp"
+        android:text="Address:"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:translationY="-80dp" />
+
+    <TextView
+        android:id="@+id/textViewPreferences"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_marginLeft="35dp"
+        android:text="Preferences:"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:translationY="-60dp" />
+
+    <TextView
+        android:id="@+id/NameDB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text='"Name"'
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:translationY="-239dp" />
 
 
 </LinearLayout>
