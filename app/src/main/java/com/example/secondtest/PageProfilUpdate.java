@@ -34,10 +34,11 @@ public class PageProfilUpdate extends AppCompatActivity {
     }
 
     private void configureButtonSaveProfile() {
-        profile.updateProfile("derminel", name.getText().toString(), last_name.getText().toString(), address.getText().toString(), preferences.getText().toString());
+
         Button buttonSaveProfile = (Button) findViewById(R.id.buttonSaveProfile);
         buttonSaveProfile.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view){
+                profile.updateProfile("derminel", name.getText().toString(), last_name.getText().toString(), address.getText().toString(), preferences.getText().toString());
                 startActivity(new Intent(PageProfilUpdate.this, PageProfil.class));
             }
         });
