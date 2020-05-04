@@ -1,8 +1,12 @@
 package com.example.secondtest;
 
+import android.content.Context;
+
 import java.util.ArrayList;
 
 public class WishList {
+    private WishlistDAO wishlistDAO;
+    private ModifierDAO modifierDAO;
     private String name ;
     private String listNumber ;
     private boolean publicAccess ;
@@ -14,17 +18,21 @@ public class WishList {
     private ArrayList<String> readers ;
     private ArrayList<Product> products;
 
-    public WishList(String n, String lNb, boolean pA, String d, String r, String c) {
+
+    public WishList(String n, String lNb, boolean pA, String d, String r, String c, Context context) {
         this.name = n;
         this.listNumber = lNb;
         this.publicAccess = pA;
         this.description = d;
         this.recipient = r;
-        this.admins = new ArrayList<String>();
+        this.admins = new ArrayList<>();
         this.admins.add(c);
-        this.invisibles = new ArrayList<String>();
-        this.readers = new ArrayList<String>();
-        this.products = new ArrayList<Product>();
+        this.invisibles = new ArrayList<>();
+        this.readers = new ArrayList<>();
+        this.products = new ArrayList<>();
+        this.wishlistDAO = new WishlistDAO(context);
+        this.modifierDAO = new ModifierDAO(context);
+
     }
 
     public void addProduct(Product p) {
@@ -68,14 +76,18 @@ public class WishList {
     }
 
     public boolean isAdmin(String login) {
+        this.admins = modifierDAO.usersThatAreStatus(this.listNumber,"Admin");
         return this.admins.contains(login) ;
     }
 
     public boolean isReader(String login) {
+        this.readers = modifierDAO.usersThatAreStatus(this.listNumber,"Reader");
         return this.readers.contains(login) ;
     }
 
+    //permet de savoir si un produit est déja la
     public boolean isInWishList(Product p){
+        this.products = contentDAO;
         return this.products.contains(p) ;
     }
 }
