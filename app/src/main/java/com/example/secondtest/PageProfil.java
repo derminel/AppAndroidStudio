@@ -36,7 +36,7 @@ public class PageProfil extends AppCompatActivity {
         PreferencesDB.setText(profile.getPreferences());
 
         configureNextButtonChangeProfile();
-
+        configureNextButtonBackToMenu();
     }
     private void configureNextButtonChangeProfile() {
         Button changeProfile = (Button) findViewById(R.id.buttonChangeProfile);
@@ -48,4 +48,12 @@ public class PageProfil extends AppCompatActivity {
 
     }
 
+    private void configureNextButtonBackToMenu() {
+        Button retourAcceuil = (Button) findViewById(R.id.buttonRetourAccueuil);
+        retourAcceuil.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view){
+                startActivity(new Intent(PageProfil.this, PageAccueil.class));
+            }
+        });
+    }
 }
