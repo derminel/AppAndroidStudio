@@ -42,7 +42,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center"
         android:text="Change my profile"
-        android:translationY="280dp" />
+        android:translationY="300dp" />
 
     <TextView
         android:id="@+id/LastNameDB"
@@ -102,6 +102,15 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:translationX="80dp"
         android:translationY="-239dp" />
+
+    <Button
+        android:id="@+id/buttonRetourAccueuil"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Back to Menu"
+        android:translationX="-130dp"
+        android:translationY="-460dp"
+        android:visibility="visible" />
 
 
 </LinearLayout>
