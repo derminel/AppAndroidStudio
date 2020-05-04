@@ -35,16 +35,19 @@ public class DatabaseContract {
 
     public static final String TABLE_NAME_LISTS = "Lists";
     public static final String COLUMN_NAME_TITLE_LISTS_1 = "Name";
-    public static final String COLUMN_NAME_TITLE_LISTS_2 = "Name";
-    public static final String COLUMN_NAME_TITLE_LISTS_3 = "Name";
-    public static final String COLUMN_NAME_TITLE_LISTS_4 = "Name";
-    public static final String COLUMN_NAME_TITLE_LISTS_5 = "Name";
-    public static final String COLUMN_NAME_TITLE_LISTS_6 = "Name";
+    public static final String COLUMN_NAME_TITLE_LISTS_2 = "Public";
+    public static final String COLUMN_NAME_TITLE_LISTS_3 = "ListNb";
+    public static final String COLUMN_NAME_TITLE_LISTS_4 = "Description";
+    public static final String COLUMN_NAME_TITLE_LISTS_5 = "Recipient";
+    public static final String COLUMN_NAME_TITLE_LISTS_6 = "Creator";
 
     public static final String TABLE_NAME_LIKE = "Like";
     public static final String COLUMN_NAME_TITLE_LIKE_1 = "ProductNb";
 
     public static final String TABLE_NAME_MODIFIER = "Modifier";
+    public static final String COLUMN_NAME_TITLE_MODIFIER_1 = "ListNb";
+    public static final String COLUMN_NAME_TITLE_MODIFIER_2 = "Login";
+    public static final String COLUMN_NAME_TITLE_MODIFIER_3 = "Status";
 
 
     public static final String SQL_CREATE_CONTENT =
