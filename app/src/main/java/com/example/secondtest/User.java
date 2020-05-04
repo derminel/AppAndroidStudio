@@ -15,7 +15,7 @@ public class User {
         this.password = p ;
         this.login = l ;
         this.friends = new ArrayList<User>() ;
-        this.profile = new Profile() ;
+        this.profile = new Profile(this.login, context);
         this.userDAO = new UserDAO(context);
     }
 

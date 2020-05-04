@@ -1,18 +1,23 @@
 package com.example.secondtest;
 
+
+import android.content.Context;
+
 public class Profile {
     private String name ;
     private String lastname ;
     private byte[] photo ;
     private String address ;
     private String preferences ;
+    private ProfileDAO profileDAO;
 
-    public Profile(){
-        this.name = null ;
-        this.lastname = null ;
-        this.photo = null ;
-        this.address = null ;
-        this.preferences = null ;
+    public Profile(String login, Context context){
+        profileDAO = new ProfileDAO(context);
+        this.name = profileDAO.findName(login);
+        this.lastname = profileDAO.findLastName(login) ;
+        this.photo = null;
+        this.address = profileDAO.findAddress(login) ;
+        this.preferences = profileDAO.findPreference(login);
     }
 
     public void setName(String n){
@@ -34,4 +39,10 @@ public class Profile {
     public void setPreferences(String p){
         this.preferences = p ;
     }
+
+    public String getName() {return this.name;}
+    public String getLastname() {return this.lastname;}
+    public String getAddress() {return this.address;}
+    public String getPreferences() {return this.preferences;}
+
 }

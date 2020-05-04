@@ -16,8 +16,8 @@ public class DatabaseContract {
     public static final String COLUMN_NAME_TITLE_USERS_2 = "Name";
     public static final String COLUMN_NAME_TITLE_USERS_3 = "LastName";
     public static final String COLUMN_NAME_TITLE_USERS_4 = "Address";
-    public static final String COLUMN_NAME_TITLE_USERS_5 = "Preferences";
-    public static final String COLUMN_NAME_TITLE_USERS_6 = "Photo";
+    public static final String COLUMN_NAME_TITLE_USERS_5 = "Photo";
+    public static final String COLUMN_NAME_TITLE_USERS_6 = "Preferences";
     public static final String COLUMN_NAME_TITLE_USERS_7 = "Password";
 
     public static final String TABLE_NAME_FRIENDS = "Friends";
