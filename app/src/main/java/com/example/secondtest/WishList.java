@@ -1,10 +1,12 @@
 package com.example.secondtest;
 
 import java.util.ArrayList;
+import android.content.Context;
 
 public class WishList {
     private String name ;
     private String listNumber ;
+    private WishListDAO DAO;
     private boolean publicAccess ;
     private String description ;
     private String recipient ;
@@ -14,14 +16,15 @@ public class WishList {
     private ArrayList<String> readers ;
     private ArrayList<Product> products;
 
-    public WishList(String n, String lNb, boolean pA, String d, String r, String c) {
-        this.name = n;
-        this.listNumber = lNb;
+    public WishList(String naame, boolean pA,Context context) {
+        this.name = naame;
+        //this.listNumber = lNb;
         this.publicAccess = pA;
-        this.description = d;
-        this.recipient = r;
+        this.DAO = new WishListDAO(context);
+        //this.description = d;
+        //this.recipient = r;
         this.admins = new ArrayList<String>();
-        this.admins.add(c);
+        //this.admins.add(c);
         this.invisibles = new ArrayList<String>();
         this.readers = new ArrayList<String>();
         this.products = new ArrayList<Product>();
