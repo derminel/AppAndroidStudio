@@ -17,6 +17,7 @@ public class WishList {
     private ArrayList<String> invisibles ;
     private ArrayList<String> readers ;
     private ArrayList<Product> products;
+    private ContentDAO contentDAO;
 
 
     public WishList(String n, String lNb, boolean pA, String d, String r, String c, Context context) {
@@ -32,14 +33,17 @@ public class WishList {
         this.products = new ArrayList<>();
         this.wishlistDAO = new WishlistDAO(context);
         this.modifierDAO = new ModifierDAO(context);
+        this.contentDAO = new ContentDAO(context);
 
     }
 
     public void addProduct(Product p) {
+        contentDAO.addProduct(p.getNb(),this.listNumber);
         this.products.add(p) ;
     }
 
     public void deleteProduct (Product p) {
+        contentDAO.delProd(this.listNumber,p.getNb());
         this.products.remove(p) ;
     }
 
@@ -52,34 +56,39 @@ public class WishList {
     }
 
     public void addAdmin(String login) {
+        modifierDAO.addStatus(login,this.listNumber,"Admin");
         this.admins.add(login);
     }
 
     public void addReader(String login) {
+        modifierDAO.addStatus(login,this.listNumber,"Reader");
         this.readers.add(login);
     }
 
     public void addInvisible(String login) {
+        modifierDAO.addStatus(login,this.listNumber,"Invisible");
         this.invisibles.add(login);
     }
 
     public void deleteAdmin(String login) {
+        modifierDAO.delStatus(this.listNumber, login);
         this.admins.remove(login);
     }
 
     public void deleteReader(String login) {
-        this.readers.add(login);
+        modifierDAO.delStatus(this.listNumber, login);
+        this.readers.remove(login);
     }
 
     public void deleteInvisible(String login) {
-        this.invisibles.add(login);
+        modifierDAO.delStatus(this.listNumber, login);
+        this.invisibles.remove(login);
     }
 
     public boolean isAdmin(String login) {
         this.admins = modifierDAO.usersThatAreStatus(this.listNumber,"Admin");
         return this.admins.contains(login) ;
     }
-
     public boolean isReader(String login) {
         this.readers = modifierDAO.usersThatAreStatus(this.listNumber,"Reader");
         return this.readers.contains(login) ;
@@ -87,7 +96,7 @@ public class WishList {
 
     //permet de savoir si un produit est déja la
     public boolean isInWishList(Product p){
-        this.products = contentDAO;
+
         return this.products.contains(p) ;
     }
 }

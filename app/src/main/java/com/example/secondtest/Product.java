@@ -18,7 +18,7 @@ public class Product {
         this.website = w ;
         this.likes = 0 ;
     }
-
+    public String getNb() {return this.productNb ; }
     public double getPrice() {
         return this.price ;
     }
