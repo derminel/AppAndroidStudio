@@ -20,13 +20,6 @@ public class WishListDAO {
         this.wishlist = dbh.getDb().rawQuery(String.format("SELECT * FROM %s", TABLE_NAME_LISTS),null);
     }
 
-
-
-
-
-
-
-
     public boolean updateWishlist(String name,boolean publicc) {
         SQLiteDatabase db =  dbh.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
