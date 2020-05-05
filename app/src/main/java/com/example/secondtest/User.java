@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 public class User {
     private UserDAO userDAO ;
+    private FriendsDAO friendsDAO;
     private String password ;
     private String login ;
     private ArrayList<User> friends ;
@@ -17,11 +18,20 @@ public class User {
         this.friends = new ArrayList<User>() ;
         this.profile = new Profile(this.login, context);
         this.userDAO = new UserDAO(context);
+        this.friendsDAO = new FriendsDAO(context);
     }
 
     public boolean exist(String login){
 
         return this.userDAO.exist(login);
+    }
+
+    public Profile getProfile(){
+        return this.profile;
+    }
+
+    public String getLogin() {
+        return this.login;
     }
 
     public void setProfile(String n, String l, byte[] photo, String a, String p) {
@@ -48,5 +58,9 @@ public class User {
         catch (Exception e){
             return false;
         }
+    }
+
+    public boolean friendRequest(String login){
+        return this.friendsDAO.addFriends(this.login, login);
     }
 }

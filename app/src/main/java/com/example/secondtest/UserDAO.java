@@ -3,12 +3,10 @@ package com.example.secondtest;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.widget.Toast;
+import android.database.DatabaseUtils;
 
-import static com.example.secondtest.DatabaseContract.COLUMN_LISTS_CREATOR;
-import static com.example.secondtest.DatabaseContract.COLUMN_LISTS_DESCRIPTION;
-import static com.example.secondtest.DatabaseContract.COLUMN_LISTS_RECIPIENT;
+import java.util.ArrayList;
+
 import static com.example.secondtest.DatabaseContract.COLUMN_USERS_ADDRESS;
 import static com.example.secondtest.DatabaseContract.COLUMN_USERS_LASTNAME;
 import static com.example.secondtest.DatabaseContract.COLUMN_USERS_LOGIN;
@@ -25,6 +23,10 @@ public class UserDAO {
     public UserDAO (Context activePage){
         this.dbh = new DatabaseHelper(activePage);
         this.users = dbh.getDb().rawQuery(String.format("SELECT * FROM %s", TABLE_USERS),null);
+    }
+
+    public String lineCounter (){
+        return String.valueOf(DatabaseUtils.queryNumEntries(this.dbh.getDb(), TABLE_USERS));
     }
 
     public boolean exist(String login){
@@ -59,7 +61,7 @@ public class UserDAO {
         }
     }
 
-    public boolean addList(String name, String lastname, String login, String password, byte[] photo, String address, String preferences){
+    public boolean addUser(String name, String lastname, String login, String password, byte[] photo, String address, String preferences){
         ContentValues contentValues = new ContentValues();
         contentValues.put(COLUMN_USERS_NAME, name);
         contentValues.put(COLUMN_USERS_LASTNAME, lastname);
@@ -86,6 +88,22 @@ public class UserDAO {
 
     public Integer deleteUser(String login) {
         return this.dbh.getDb().delete(TABLE_USERS, COLUMN_USERS_LOGIN + " = ?",new String[] {login});
+    }
+
+    public ArrayList<String> getUserLoginDb (){
+        ArrayList<String> usersLogin = new ArrayList<String>();
+        this.users.moveToFirst() ;
+        try{
+            while (!(this.users.isLast())){
+                usersLogin.add(this.users.getString(0));
+                this.users.moveToNext();
+            }
+            usersLogin.add(this.users.getString(0));
+            return usersLogin;
+        }
+        catch (Exception e){
+            return usersLogin;
+        }
     }
 }
 

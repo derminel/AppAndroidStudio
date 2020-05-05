@@ -63,7 +63,7 @@ public class PageCreationAccount extends AppCompatActivity {
                     showToast("You've written 2 differents password");
                 }
                 else{
-                    userDAO.addList(null, null, login.getText().toString(), password1.getText().toString(), null, null, null);
+                    userDAO.addUser(null, null, login.getText().toString(), password1.getText().toString(), null, null, null);
                     startActivity(new Intent(PageCreationAccount.this, PageProfil.class));
                 }
             }
@@ -73,14 +73,4 @@ public class PageCreationAccount extends AppCompatActivity {
     private void configureUser(){
         this.user = new User(this.password1.getText().toString(), this.login.getText().toString(), this);
     }
-
-    /*public void AddData() {
-        boolean isInserted = myDb.insertData();
-        if(isInserted){
-            Toast.makeText(MainActivity.this,"Data Inserted",Toast.LENGTH_LONG).show();
-        }
-        else{
-            Toast.makeText(MainActivity.this,"Data not Inserted",Toast.LENGTH_LONG).show();
-        }
-    }*/
 }
