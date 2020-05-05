@@ -1,6 +1,5 @@
 package com.example.secondtest;
 
-
 import static com.example.secondtest.DatabaseHelper.DATABASE_NAME;
 
 public class DatabaseContract {
