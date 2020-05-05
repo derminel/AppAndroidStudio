@@ -28,11 +28,12 @@ public class MainActivity extends AppCompatActivity {
 
         this.myDb = new DatabaseHelper(this);
 
+        AddData();
+
         this.login = findViewById(R.id.login);
         this.password = findViewById(R.id.password);
         this.user = new User(this.password.getText().toString(), this.login.getText().toString(), this);
 
-        AddData();
 
         configureNextButtonCreateAccount();
         configureNextButtonConnect();

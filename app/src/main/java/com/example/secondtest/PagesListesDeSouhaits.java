@@ -25,7 +25,6 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-
 public class PagesListesDeSouhaits extends AppCompatActivity {
 
     String[] items;

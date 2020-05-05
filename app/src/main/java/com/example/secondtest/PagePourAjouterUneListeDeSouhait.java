@@ -8,30 +8,45 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
 public class PagePourAjouterUneListeDeSouhait extends AppCompatActivity {
+    private DatabaseHelper myDb ;
+    EditText namee;
+    Button confirm;
+    Switch publicc;
+    Boolean publicc1;
+    WishListDAO WW;
 
+    //WishlistDAO nom;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_page_pour_ajouter_une_liste_de_souhait);
+        //this.profile = new WhislistDAO(this);
+        namee = (EditText) findViewById(R.id.nameNewList);
+        confirm= (Button) findViewById(R.id.ConfirmAddWishlist);
+        publicc= (Switch) findViewById(R.id.switch1);
+        publicc1= (Boolean)  publicc.isChecked();
+        this.WW = new WishListDAO(this);
 
-        EditText editText = findViewById(R.id.nameNewList);
-        final String inputText = editText.getText().toString();
+        final String inputText = namee.getText().toString();
+        configureButtonSaveList();
 
-        Button buttonConfirm = findViewById(R.id.ConfirmAddWishlist);
+        //Button buttonConfirm = findViewById(R.id.ConfirmAddWishlist);
 
-        buttonConfirm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent resultIntent = new Intent();
-                resultIntent.putExtra("inputtext", inputText);
 
-                setResult(RESULT_OK, resultIntent);
-                finish();
+    }
+
+    private void configureButtonSaveList() {
+
+        this.WW = new WishListDAO(this);
+        this.confirm.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view){
+                WW.updateWishlist(namee.getText().toString(),publicc1);
             }
         });
     }

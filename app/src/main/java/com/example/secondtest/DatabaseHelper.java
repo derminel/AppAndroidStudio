@@ -49,13 +49,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public boolean insertData() {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put(COLUMN_NAME_TITLE_USERS_1,"derminel");
-        contentValues.put(COLUMN_NAME_TITLE_USERS_2,"derminel");
-        contentValues.put(COLUMN_NAME_TITLE_USERS_3,"derminel");
-        contentValues.put(COLUMN_NAME_TITLE_USERS_4,"derminel");
-        contentValues.put(COLUMN_NAME_TITLE_USERS_5,"derminel");
-        contentValues.put(COLUMN_NAME_TITLE_USERS_6,"derminel");
-        contentValues.put(COLUMN_NAME_TITLE_USERS_7,"derminel");
+        contentValues.put(COLUMN_NAME_TITLE_USERS_1,"aurel");
+        contentValues.put(COLUMN_NAME_TITLE_USERS_2,"aurel");
+        contentValues.put(COLUMN_NAME_TITLE_USERS_3,"aurel");
+        contentValues.put(COLUMN_NAME_TITLE_USERS_4,"aurel");
+        contentValues.put(COLUMN_NAME_TITLE_USERS_5,"aurel");
+        contentValues.put(COLUMN_NAME_TITLE_USERS_6,"aurel");
+        contentValues.put(COLUMN_NAME_TITLE_USERS_7,"aurel");
         long result = db.insert(TABLE_NAME_USERS,null ,contentValues);
         if(result == -1)
             return false;

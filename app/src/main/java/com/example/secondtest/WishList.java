@@ -5,10 +5,11 @@ import android.content.Context;
 import java.util.ArrayList;
 
 public class WishList {
-    private WishlistDAO wishlistDAO;
+    private WishListDAO wishlistDAO;
     private ModifierDAO modifierDAO;
     private String name ;
     private String listNumber ;
+    private WishListDAO DAO;
     private boolean publicAccess ;
     private String description ;
     private String recipient ;
@@ -31,7 +32,7 @@ public class WishList {
         this.invisibles = new ArrayList<>();
         this.readers = new ArrayList<>();
         this.products = new ArrayList<>();
-        this.wishlistDAO = new WishlistDAO(context);
+        this.wishlistDAO = new WishListDAO(context);
         this.modifierDAO = new ModifierDAO(context);
         this.contentDAO = new ContentDAO(context);
 
@@ -89,14 +90,13 @@ public class WishList {
         this.admins = modifierDAO.usersThatAreStatus(this.listNumber,"Admin");
         return this.admins.contains(login) ;
     }
+
     public boolean isReader(String login) {
         this.readers = modifierDAO.usersThatAreStatus(this.listNumber,"Reader");
         return this.readers.contains(login) ;
     }
 
-    //permet de savoir si un produit est déja la
     public boolean isInWishList(Product p){
-
         return this.products.contains(p) ;
     }
 }
