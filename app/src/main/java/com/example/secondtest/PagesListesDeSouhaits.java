@@ -28,13 +28,15 @@ import java.util.Arrays;
 
 public class PagesListesDeSouhaits extends AppCompatActivity {
 
-    String[] items;
-    ArrayList<String> listItems;
-    ArrayAdapter<String> adapter;
+    ArrayList<WishList> wishLists;
+    CustomAdapterWishLists adapter;
     ListView listView;
     SearchView searchView;
     Button addButton;
+
     boolean canInit = true;
+    WishListDAO wishListDAO;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +46,8 @@ public class PagesListesDeSouhaits extends AppCompatActivity {
         listView=(ListView)findViewById(R.id.ListViewWishLists);
         searchView=(SearchView) findViewById(R.id.SearchbarWishlists);
         addButton=(Button) findViewById(R.id.addwishlistbutton);
+
+        this.wishListDAO = new WishListDAO(this);
 
         if(canInit){
             initList();
@@ -72,23 +76,19 @@ public class PagesListesDeSouhaits extends AppCompatActivity {
         });
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == 1) {
-            listItems.add(data.getStringExtra("inputtext"));
-            adapter=new ArrayAdapter<String>(this,
-                    R.layout.row_wishlists, R.id.textView1, listItems);
-            listView.setAdapter(adapter);
-        }
+    private void showToast(String msg) {
+        Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
     }
 
     public void initList(){
-        items=new String[]{"Canada","China","Japan","USA"};
-        listItems=new ArrayList<>(Arrays.asList(items));
-        adapter=new ArrayAdapter<String>(this,
-                R.layout.row_wishlists, R.id.textView1, listItems);
+        this.wishLists = new ArrayList<WishList>();
+        for (String elem : this.wishListDAO.getWishListsNameDb()){
+            WishList newList = new WishList(elem, true, this);
+            this.wishLists.add(newList);
+        }
+        adapter=new CustomAdapterWishLists(this,
+                R.layout.row_wishlists, wishLists);
         listView.setAdapter(adapter);
+        showToast(this.wishListDAO.lineCounter());
     }
 }

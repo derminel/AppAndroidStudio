@@ -6,7 +6,7 @@ import android.content.Context;
 public class WishList {
     private String name ;
     private String listNumber ;
-    private WishListDAO DAO;
+    private WishListDAO wishlistDAO;
     private boolean publicAccess ;
     private String description ;
     private String recipient ;
@@ -16,11 +16,11 @@ public class WishList {
     private ArrayList<String> readers ;
     private ArrayList<Product> products;
 
-    public WishList(String naame, boolean pA,Context context) {
-        this.name = naame;
-        //this.listNumber = lNb;
-        this.publicAccess = pA;
-        this.DAO = new WishListDAO(context);
+    public WishList(String name, boolean publicAccess,Context context) {
+        this.name = name;
+        this.wishlistDAO = new WishListDAO(context);
+        this.listNumber = this.setListNumber();
+        this.publicAccess = publicAccess;
         //this.description = d;
         //this.recipient = r;
         this.admins = new ArrayList<String>();
@@ -30,12 +30,30 @@ public class WishList {
         this.products = new ArrayList<Product>();
     }
 
+    public ArrayList<String> getWishListsName (){
+        return this.wishlistDAO.getWishListsNameDb();
+    }
+
     public void addProduct(Product p) {
+        //this.wishlistDAO.addProduct(this.listNumber, p);
         this.products.add(p) ;
     }
 
     public void deleteProduct (Product p) {
         this.products.remove(p) ;
+    }
+
+    private String setListNumber() {
+        try{
+            return "List" + String.valueOf(Integer.parseInt(this.wishlistDAO.lineCounter())+1);
+        }
+        catch (Exception e){
+            return "List1";
+        }
+    }
+
+    public String getListNumber(){
+        return this.listNumber;
     }
 
     public double getPrice() {
@@ -46,16 +64,27 @@ public class WishList {
         return tot ;
     }
 
-    public void addAdmin(String login) {
+    public String getName(){
+        return this.name;
+    }
+
+    public String getListNb(){
+        return this.listNumber;
+    }
+
+    public boolean addAdmin(String login) {
         this.admins.add(login);
+        return this.wishlistDAO.addStatus("Admin", login, this.listNumber);
     }
 
-    public void addReader(String login) {
+    public boolean addReader(String login) {
         this.readers.add(login);
+        return this.wishlistDAO.addStatus("Reader", login, this.listNumber);
     }
 
-    public void addInvisible(String login) {
+    public boolean addInvisible(String login) {
         this.invisibles.add(login);
+        return this.wishlistDAO.addStatus("Invisible", login, this.listNumber);
     }
 
     public void deleteAdmin(String login) {

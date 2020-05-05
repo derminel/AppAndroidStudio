@@ -11,7 +11,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import static com.example.secondtest.DatabaseContract.COLUMN_NAME_TITLE_USERS_1;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -30,9 +29,6 @@ public class MainActivity extends AppCompatActivity {
 
         this.login = findViewById(R.id.login);
         this.password = findViewById(R.id.password);
-        this.user = new User(this.password.getText().toString(), this.login.getText().toString(), this);
-
-        AddData();
 
         configureNextButtonCreateAccount();
         configureNextButtonConnect();
@@ -46,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
         Button nextButton = (Button) findViewById(R.id.ConfirmConnection);
         nextButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
+                configureUser();
                 if((login.getText().toString().equals("")) || (login.getText().toString().equals(""))) {
                     showToast("You have to enter your login, and your password");
                 }
@@ -71,14 +68,8 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void AddData() {
-        boolean isInserted = myDb.insertData();
-        if(isInserted){
-            Toast.makeText(MainActivity.this,"Data Inserted",Toast.LENGTH_LONG).show();
-        }
-        else{
-            Toast.makeText(MainActivity.this,"Data not Inserted",Toast.LENGTH_LONG).show();
-        }
+    private void configureUser(){
+        this.user = new User(this.password.getText().toString(), this.login.getText().toString(), this);
     }
 
 }
