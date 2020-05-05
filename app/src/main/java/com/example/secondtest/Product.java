@@ -23,4 +23,7 @@ public class Product {
         return this.price ;
     }
 
+    public String getProductNb(){
+        return this.productNb;
+    }
 }

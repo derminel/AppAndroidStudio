@@ -20,6 +20,7 @@ public class User {
     }
 
     public boolean exist(String login){
+
         return this.userDAO.exist(login);
     }
 
@@ -41,6 +42,11 @@ public class User {
     }
 
     public boolean connection(String login, String password){
-        return this.userDAO.getPassword(login).equals(password);
+        try{
+            return this.userDAO.getPassword(login).equals(password);
+        }
+        catch (Exception e){
+            return false;
+        }
     }
 }
