@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 else{
                     Intent intent = new Intent(MainActivity.this, PageAccueil.class);
-                    intent.putExtra("LOGIN1", login.getText().toString());
+                    intent.putExtra("LOGIN_ACCUEIL", login.getText().toString());
                     startActivity(intent);
                 }
             }

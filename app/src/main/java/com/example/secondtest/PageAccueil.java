@@ -21,7 +21,7 @@ public class PageAccueil extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_page_accueil);
 
-        this.login = getIntent().getStringExtra("LOGIN1");
+        this.login = getIntent().getStringExtra("LOGIN_ACCUEIL");
         this.user = new User(null, login, this);
 
         LayoutInflater inflater = this.getLayoutInflater();
@@ -41,7 +41,9 @@ public class PageAccueil extends AppCompatActivity {
         Button nextButton = (Button)  findViewById(R.id.Profile);
         nextButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view){
-                startActivity(new Intent(PageAccueil.this, PageProfil.class));
+                Intent intent = new Intent(PageAccueil.this, PageProfil.class);
+                intent.putExtra("LOGIN_PROFIL", login);
+                startActivity(intent);
             }
         });
     }
