@@ -12,6 +12,7 @@ import android.os.Bundle;
 public class PageProfil extends AppCompatActivity {
     Profile profile;
     ProfileDAO profileDAO;
+    String login;
 
 
 
@@ -19,7 +20,8 @@ public class PageProfil extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_page_profil);
-        this.profile = new Profile("derminel", this);
+        this.login = getIntent().getStringExtra("LOGIN_PROFIL");
+        this.profile = new Profile(login, this);
 
         TextView nameDB = findViewById(R.id.NameDB);
         nameDB.setText(profile.getName());
@@ -42,7 +44,9 @@ public class PageProfil extends AppCompatActivity {
         Button changeProfile = (Button) findViewById(R.id.buttonChangeProfile);
         changeProfile.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view){
-                startActivity(new Intent(PageProfil.this, PageProfilUpdate.class));
+                Intent intent = new Intent(PageProfil.this, PageProfilUpdate.class);
+                intent.putExtra("LOGIN_CHANGE", login);
+                startActivity(intent);
             }
         });
 
@@ -52,7 +56,9 @@ public class PageProfil extends AppCompatActivity {
         Button retourAcceuil = (Button) findViewById(R.id.buttonRetourAccueuil);
         retourAcceuil.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view){
-                startActivity(new Intent(PageProfil.this, PageAccueil.class));
+                Intent intent = new Intent(PageProfil.this, PageAccueil.class);
+                intent.putExtra("LOGIN_ACCEUIL", login);
+                startActivity(intent);
             }
         });
     }

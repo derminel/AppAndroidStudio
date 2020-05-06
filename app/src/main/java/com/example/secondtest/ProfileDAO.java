@@ -31,6 +31,9 @@ public class ProfileDAO {
                 }
                 this.profile.moveToNext();
             }
+            if (this.profile.getString(0).equals(login)) {
+                return this.profile.getString(1) ;
+            }
             return null;
         }catch (Exception e){
             return null;
@@ -45,6 +48,9 @@ public class ProfileDAO {
                     return this.profile.getString(2) ;
                 }
                 this.profile.moveToNext();
+            }
+            if (this.profile.getString(0).equals(login)) {
+                return this.profile.getString(2) ;
             }
             return null;
         }
@@ -63,6 +69,9 @@ public class ProfileDAO {
                 }
                 this.profile.moveToNext();
             }
+            if (this.profile.getString(0).equals(login)) {
+                return this.profile.getString(3) ;
+            }
             return null;
         }
         catch (Exception e){
@@ -78,6 +87,9 @@ public class ProfileDAO {
                     return this.profile.getString(4) ;
                 }
                 this.profile.moveToNext();
+            }
+            if (this.profile.getString(0).equals(login)) {
+                return this.profile.getString(4) ;
             }
             return null;
         }

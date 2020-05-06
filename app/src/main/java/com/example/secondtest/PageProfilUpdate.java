@@ -15,11 +15,13 @@ public class PageProfilUpdate extends AppCompatActivity {
     EditText address;
     EditText preferences;
     ProfileDAO profile;
+    String login;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_page_profil_update);
+        this.login = getIntent().getStringExtra("LOGIN_CHANGE");
 
         this.myDb = new DatabaseHelper(this);
         this.profile = new ProfileDAO(this);
@@ -38,8 +40,10 @@ public class PageProfilUpdate extends AppCompatActivity {
         Button buttonSaveProfile = (Button) findViewById(R.id.buttonSaveProfile);
         buttonSaveProfile.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view){
-                profile.updateProfile("derminel", name.getText().toString(), last_name.getText().toString(), address.getText().toString(), preferences.getText().toString());
-                startActivity(new Intent(PageProfilUpdate.this, PageProfil.class));
+                profile.updateProfile(login, name.getText().toString(), last_name.getText().toString(), address.getText().toString(), preferences.getText().toString());
+                Intent intent = new Intent(PageProfilUpdate.this, PageProfil.class);
+                intent.putExtra("LOGIN_PROFIL", login);
+                startActivity(intent);
             }
         });
     }
