@@ -30,7 +30,7 @@ public class PagePourGererDmdAmis extends AppCompatActivity {
 
         listView=(ListView)findViewById(R.id.ListViewFriendsRequests);
 
-        this.login = getIntent().getStringExtra("LOGIN4");
+        this.login = getIntent().getStringExtra("LOGIN_GERER_AMIS");
         this.user = new User(null, login, this);
 
         if(canInit){

@@ -61,7 +61,7 @@ public class PageAccueil extends AppCompatActivity {
         nextButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view){
                 Intent intent = new Intent(PageAccueil.this, PageAmis.class);
-                intent.putExtra("LOGIN2", login);
+                intent.putExtra("LOGIN_AMIS", login);
                 startActivity(intent);
             }
         });
@@ -75,7 +75,7 @@ public class PageAccueil extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface arg0, int arg1) {
                 Intent intent = new Intent(PageAccueil.this, PagePourGererDmdAmis.class);
-                intent.putExtra("LOGIN4", login);
+                intent.putExtra("LOGIN_GERER_AMIS", login);
                 startActivity(intent);
             }
         });

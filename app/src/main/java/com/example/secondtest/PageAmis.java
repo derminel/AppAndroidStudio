@@ -49,7 +49,7 @@ public class PageAmis extends AppCompatActivity {
         searchView=(SearchView) findViewById(R.id.SearchbarFriends);
         addButton=(Button) findViewById(R.id.addFriendButton);
 
-        this.login = getIntent().getStringExtra("LOGIN2");
+        this.login = getIntent().getStringExtra("LOGIN_AMIS");
         this.user = new User(null,login,this);
         this.userDAO = new UserDAO(this);
 
@@ -76,7 +76,7 @@ public class PageAmis extends AppCompatActivity {
             public void onClick(View v) {
                 showToast(login);
                 Intent intent = new Intent(PageAmis.this, PagePourAjouterUnAmi.class) ;
-                intent.putExtra("LOGIN3", login);
+                intent.putExtra("LOGIN_AJOUT_AMI", login);
                 startActivity(intent);
             }
         });
