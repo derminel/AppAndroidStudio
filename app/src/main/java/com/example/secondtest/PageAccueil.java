@@ -21,7 +21,7 @@ public class PageAccueil extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_page_accueil);
 
-        this.login = getIntent().getStringExtra("LOGIN1");
+        this.login = getIntent().getStringExtra("LOGIN_ACCUEIL");
         this.user = new User(null, login, this);
 
         LayoutInflater inflater = this.getLayoutInflater();
@@ -41,7 +41,9 @@ public class PageAccueil extends AppCompatActivity {
         Button nextButton = (Button)  findViewById(R.id.Profile);
         nextButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view){
-                startActivity(new Intent(PageAccueil.this, PageProfil.class));
+                Intent intent = new Intent(PageAccueil.this, PageProfil.class);
+                intent.putExtra("LOGIN_PROFIL", login);
+                startActivity(intent);
             }
         });
     }
@@ -59,7 +61,7 @@ public class PageAccueil extends AppCompatActivity {
         nextButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view){
                 Intent intent = new Intent(PageAccueil.this, PageAmis.class);
-                intent.putExtra("LOGIN2", login);
+                intent.putExtra("LOGIN_AMIS", login);
                 startActivity(intent);
             }
         });
@@ -73,7 +75,7 @@ public class PageAccueil extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface arg0, int arg1) {
                 Intent intent = new Intent(PageAccueil.this, PagePourGererDmdAmis.class);
-                intent.putExtra("LOGIN4", login);
+                intent.putExtra("LOGIN_GERER_AMIS", login);
                 startActivity(intent);
             }
         });

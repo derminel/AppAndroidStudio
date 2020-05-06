@@ -52,7 +52,7 @@ public class PageCreationAccount extends AppCompatActivity {
     }
 
     private void configureNextButtonCreate() {
-        Button nextButton = (Button) findViewById(R.id.Create);
+        final Button nextButton = (Button) findViewById(R.id.Create);
         nextButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 configureUser();
@@ -63,8 +63,10 @@ public class PageCreationAccount extends AppCompatActivity {
                     showToast("You've written 2 differents password");
                 }
                 else{
-                    userDAO.addUser(null, null, login.getText().toString(), password1.getText().toString(), null, null, null);
-                    startActivity(new Intent(PageCreationAccount.this, PageProfil.class));
+                    userDAO.addUser("", "", login.getText().toString(), password1.getText().toString(), null, "", "");
+                    Intent intent = new Intent(PageCreationAccount.this, PageProfil.class);
+                    intent.putExtra("LOGIN_PROFIL", login.getText().toString());
+                    startActivity(intent);
                 }
             }
         });

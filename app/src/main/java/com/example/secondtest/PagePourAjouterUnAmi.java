@@ -24,7 +24,7 @@ public class PagePourAjouterUnAmi extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_page_pour_ajouter_un_ami);
 
-        this.login = getIntent().getStringExtra("LOGIN3");
+        this.login = getIntent().getStringExtra("LOGIN_AJOUT_AMI");
 
         this.userDAO = new UserDAO(this);
         this.friendsDAO = new FriendsDAO(this);
