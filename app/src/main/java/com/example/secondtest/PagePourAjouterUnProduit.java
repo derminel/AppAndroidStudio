@@ -11,7 +11,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class PagePourAjouterUnAmi extends AppCompatActivity {
+//Juste copier-coller A modifier
+public class PagePourAjouterUnProduit extends AppCompatActivity {
 
     private UserDAO userDAO ;
     private FriendsDAO friendsDAO;
@@ -22,7 +23,7 @@ public class PagePourAjouterUnAmi extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_page_pour_ajouter_un_ami);
+        setContentView(R.layout.activity_page_pour_ajouter_un_produit);
 
         this.login = getIntent().getStringExtra("LOGIN3");
 
@@ -56,7 +57,7 @@ public class PagePourAjouterUnAmi extends AppCompatActivity {
                     else{
                         showToast("Problem with your invitation, try again");
                     }
-                    startActivity(new Intent(PagePourAjouterUnAmi.this, PageAmis.class));
+                    startActivity(new Intent(PagePourAjouterUnProduit.this, PageProduits.class));
                 }
             }
         });

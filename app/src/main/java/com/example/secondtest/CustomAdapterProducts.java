@@ -17,9 +17,8 @@ import androidx.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CustomAdapterFriends extends ArrayAdapter<User> {
-    //the list values in the List of type hero
-    ArrayList<User> friends;
+public class CustomAdapterProducts extends ArrayAdapter<Product> {
+    ArrayList<Product> products;
 
     //activity context
     Context context;
@@ -27,17 +26,19 @@ public class CustomAdapterFriends extends ArrayAdapter<User> {
     //the layout resource file for the list items
     int resource;
 
-    FriendsDAO friendsDAO;
-    String login;
+    WishListDAO wishListDAO;
+    ContentDAO contentDAO;
+    String listNb;
 
     //constructor initializing the values
-    public CustomAdapterFriends(Context context, int resource, ArrayList<User> friends, String login) {
-        super(context, resource, friends);
+    public CustomAdapterProducts(Context context, int resource, ArrayList<Product> products, String listNb) {
+        super(context, resource, products);
         this.context = context;
         this.resource = resource;
-        this.friends = friends;
-        this.login = login;
-        this.friendsDAO = new FriendsDAO(context);
+        this.products = products;
+        this.listNb = listNb;
+        this.contentDAO = new ContentDAO(context);
+        this.wishListDAO = new WishListDAO(context);
     }
 
     @NonNull
@@ -49,19 +50,19 @@ public class CustomAdapterFriends extends ArrayAdapter<User> {
         View view = layoutInflater.inflate(resource, null, false);
 
         //ImageView imageView = view.findViewById(R.id.imageView);
-        TextView friendName = view.findViewById(R.id.friendName);
-        Button buttonDelete = view.findViewById(R.id.deleteFriendButton);
+        TextView produtName = view.findViewById(R.id.productName);
+        Button deleteButton = view.findViewById(R.id.deleteProduct);
 
-        final User friend = friends.get(position);
+        final Product product = products.get(position);
 
         //adding values to the list item
         //imageView.setImageDrawable(context.getResources().getDrawable(hero.getImage()));
-        friendName.setText(friend.getLogin());
+        produtName.setText(product.getName());
 
-        buttonDelete.setOnClickListener(new View.OnClickListener() {
+        deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                removeFriend(friend);
+                removeProduct(product);
             }
         });
         return view;
@@ -71,23 +72,23 @@ public class CustomAdapterFriends extends ArrayAdapter<User> {
     @NonNull
     @Override
     public Filter getFilter() {
-        return friendsFilter;
+        return productsFilter;
     }
 
-    private Filter friendsFilter = new Filter() {
+    private Filter productsFilter = new Filter() {
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
             FilterResults results = new FilterResults();
-            List<User> suggestions = new ArrayList<>();
+            List<Product> suggestions = new ArrayList<>();
 
             if (constraint == null || constraint.length() == 0) {
-                suggestions.addAll(friends);
+                suggestions.addAll(products);
             } else {
                 String filterPattern = constraint.toString().toLowerCase().trim();
 
-                for (User friend : friends) {
-                    if (friend.getLogin().toLowerCase().contains(filterPattern)) {
-                        suggestions.add(friend);
+                for (Product item : products) {
+                    if (item.getName().toLowerCase().contains(filterPattern)) {
+                        suggestions.add(item);
                     }
                 }
             }
@@ -107,21 +108,21 @@ public class CustomAdapterFriends extends ArrayAdapter<User> {
 
         @Override
         public CharSequence convertResultToString(Object resultValue) {
-            return ((User) resultValue).getLogin();
+            return ((Product) resultValue).getName();
         }
     };
 
     //permet de supprimer une wishlist
-    private void removeFriend(final User friend) {
+    private void removeProduct(final Product product) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setTitle("Are you sure you want to delete this friend?");
+        builder.setTitle("Are you sure you want to delete this?");
 
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
 
-                friendsDAO.deleteFriend(friend.getLogin(),login);
-                friends.remove(friend);
+                contentDAO.removeProduct(listNb, product.getProductNb());
+                products.remove(product);
 
                 notifyDataSetChanged();
             }

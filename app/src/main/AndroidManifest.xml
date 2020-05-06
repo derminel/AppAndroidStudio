@@ -9,6 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".PagePourAjouterUnProduit"></activity>
+        <activity android:name=".PageProduits" />
+        <activity android:name=".PagePourGererDmdAmis" />
         <activity android:name=".PagePourAjouterUneListeDeSouhait" />
         <activity android:name=".PageProfilUpdate" />
         <activity android:name=".PagesListesDeSouhaits" />

@@ -7,6 +7,7 @@ public class WishList {
     private String name ;
     private String listNumber ;
     private WishListDAO wishlistDAO;
+    private ContentDAO contentDAO;
     private boolean publicAccess ;
     private String description ;
     private String recipient ;
@@ -19,6 +20,7 @@ public class WishList {
     public WishList(String name, boolean publicAccess,Context context) {
         this.name = name;
         this.wishlistDAO = new WishListDAO(context);
+        this.contentDAO = new ContentDAO(context);
         this.listNumber = this.setListNumber();
         this.publicAccess = publicAccess;
         //this.description = d;
@@ -70,6 +72,10 @@ public class WishList {
 
     public String getListNb(){
         return this.listNumber;
+    }
+
+    public ArrayList<Product> getProducts(){
+        return this.products;
     }
 
     public boolean addAdmin(String login) {

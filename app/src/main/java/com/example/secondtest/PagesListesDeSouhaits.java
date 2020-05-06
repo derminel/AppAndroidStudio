@@ -67,20 +67,14 @@ public class PagesListesDeSouhaits extends AppCompatActivity {
             }
         });
 
-        addButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(PagesListesDeSouhaits.this, PagePourAjouterUneListeDeSouhait.class) ;
-                startActivityForResult(intent, 1);
-            }
-        });
+        configureAddButton();
     }
 
     private void showToast(String msg) {
         Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
     }
 
-    public void initList(){
+    private void initList(){
         this.wishLists = new ArrayList<WishList>();
         for (String elem : this.wishListDAO.getWishListsNameDb()){
             WishList newList = new WishList(elem, true, this);
@@ -89,6 +83,15 @@ public class PagesListesDeSouhaits extends AppCompatActivity {
         adapter=new CustomAdapterWishLists(this,
                 R.layout.row_wishlists, wishLists);
         listView.setAdapter(adapter);
-        showToast(this.wishListDAO.lineCounter());
+    }
+
+    private void configureAddButton(){
+        addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(PagesListesDeSouhaits.this, PagePourAjouterUneListeDeSouhait.class) ;
+                startActivityForResult(intent, 1);
+            }
+        });
     }
 }

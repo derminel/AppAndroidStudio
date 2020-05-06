@@ -27,7 +27,6 @@ import java.util.Arrays;
 
 
 public class PageAmis extends AppCompatActivity {
-    public static final String EXTRA_LOGIN_3 = "com.example.application.example.EXTRA_TEXT";
 
     private ArrayList<User> friends;
     private CustomAdapterFriends adapter;
@@ -37,6 +36,7 @@ public class PageAmis extends AppCompatActivity {
 
     private boolean canInit = true;
     private UserDAO userDAO;
+    private User user;
     private String login;
 
 
@@ -49,9 +49,8 @@ public class PageAmis extends AppCompatActivity {
         searchView=(SearchView) findViewById(R.id.SearchbarFriends);
         addButton=(Button) findViewById(R.id.addFriendButton);
 
-        Intent intent = getIntent();
-        this.login = intent.getStringExtra(PageAccueil.EXTRA_LOGIN_2);
-
+        this.login = getIntent().getStringExtra("LOGIN2");
+        this.user = new User(null,login,this);
         this.userDAO = new UserDAO(this);
 
         if(canInit){
@@ -75,8 +74,9 @@ public class PageAmis extends AppCompatActivity {
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                showToast(login);
                 Intent intent = new Intent(PageAmis.this, PagePourAjouterUnAmi.class) ;
-                intent.putExtra(Intent.EXTRA_TEXT, login);
+                intent.putExtra("LOGIN3", login);
                 startActivity(intent);
             }
         });
@@ -87,15 +87,9 @@ public class PageAmis extends AppCompatActivity {
     }
 
     private void initList(){
-        this.friends = new ArrayList<User>();
-        for (String elem : this.userDAO.getUserLoginDb()){
-            if (!(elem.equals(this.login))){
-                User newFriend = new User(null, elem, this);
-                this.friends.add(newFriend);
-            }
-        }
+        this.friends = this.user.getFriends(this);
         adapter=new CustomAdapterFriends(this,
-                R.layout.row_friends, friends);
+                R.layout.row_friends, friends, login);
         listView.setAdapter(adapter);
     }
 }

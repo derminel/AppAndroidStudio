@@ -7,6 +7,8 @@ import android.database.DatabaseUtils;
 
 import java.util.ArrayList;
 
+import static com.example.secondtest.DatabaseContract.COLUMN_FRIENDS_LOGIN1;
+import static com.example.secondtest.DatabaseContract.COLUMN_FRIENDS_LOGIN2;
 import static com.example.secondtest.DatabaseContract.COLUMN_USERS_ADDRESS;
 import static com.example.secondtest.DatabaseContract.COLUMN_USERS_LASTNAME;
 import static com.example.secondtest.DatabaseContract.COLUMN_USERS_LOGIN;
@@ -14,6 +16,7 @@ import static com.example.secondtest.DatabaseContract.COLUMN_USERS_NAME;
 import static com.example.secondtest.DatabaseContract.COLUMN_USERS_PASSWORD;
 import static com.example.secondtest.DatabaseContract.COLUMN_USERS_PHOTO;
 import static com.example.secondtest.DatabaseContract.COLUMN_USERS_PREFERENCES;
+import static com.example.secondtest.DatabaseContract.TABLE_FRIENDS;
 import static com.example.secondtest.DatabaseContract.TABLE_USERS;
 
 public class UserDAO {
@@ -106,4 +109,5 @@ public class UserDAO {
         }
     }
 }
+
 

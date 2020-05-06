@@ -3,6 +3,7 @@ package com.example.secondtest;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +21,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CustomAdapterWishLists extends ArrayAdapter<WishList> {
-    //the list values in the List of type hero
     ArrayList<WishList> wishLists;
 
     //activity context
@@ -64,6 +64,18 @@ public class CustomAdapterWishLists extends ArrayAdapter<WishList> {
                 removeWishList(wishList);
             }
         });
+
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final WishList wishList = wishLists.get(position);
+                Intent intent = new Intent(context, PageProduits.class);
+                intent.putExtra("WISHLISTNAME1", wishList.getName());
+                intent.putExtra("WISHLISTNUMBER1", wishList.getListNb()); //Recoivent tous le même Numero....
+                context.startActivity(intent);
+            }
+        });
+
         return view;
     }
 

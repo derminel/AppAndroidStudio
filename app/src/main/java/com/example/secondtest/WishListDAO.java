@@ -86,15 +86,54 @@ public class WishListDAO {
         }
     }
 
-    public String getPassword(String login){
+    //pre: recoit un listNb du wishList qui figure deja dans la base de données
+    //post: retourne le nom de cette liste
+    public String getName(String listNb){
+        this.wishlists.moveToFirst() ;
+        try{
+            while (!(this.wishlists.isLast())){
+                if (this.wishlists.getString(2).equals(listNb)){
+                    return this.wishlists.getString(0) ;
+                }
+                this.wishlists.moveToNext();
+            }
+            return this.wishlists.getString(0) ;
+        }
+        catch (Exception e){
+            return null;
+        }
+    }
+
+    //pre: recoit un listNb du wishList qui figure deja dans la base de données
+    //post: retourne si son accès est public ou non
+    public boolean getAccess(String listNb){
+        String access = null;
         this.wishlists.moveToFirst() ;
         while (!(this.wishlists.isLast())){
-            if (this.wishlists.getString(0).equals(login)){
-                return this.wishlists.getString(6) ;
+            if (this.wishlists.getString(2).equals(listNb)){
+                access = this.wishlists.getString(1) ;
+                return access.equals("1");
             }
             this.wishlists.moveToNext();
         }
-        return null;
+        access = this.wishlists.getString(1) ;
+        return access.equals("1");
+    }
+
+    public String getPassword(String login){
+        this.wishlists.moveToFirst() ;
+        try{
+            while (!(this.wishlists.isLast())){
+                if (this.wishlists.getString(0).equals(login)){
+                    return this.wishlists.getString(6) ;
+                }
+                this.wishlists.moveToNext();
+            }
+            return this.wishlists.getString(6) ;
+        }
+        catch (Exception e){
+            return null;
+        }
     }
 
     public boolean addStatus (String status, String login, String listNb) {

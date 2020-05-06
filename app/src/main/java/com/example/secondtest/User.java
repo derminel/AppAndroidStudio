@@ -63,4 +63,21 @@ public class User {
     public boolean friendRequest(String login){
         return this.friendsDAO.addFriends(this.login, login);
     }
+
+
+    public ArrayList<User> getFriends(Context context){
+        ArrayList<User> friends = new ArrayList<User>();
+        for (String friend : this.friendsDAO.getFriends(this.getLogin())){
+            friends.add(new User(null,friend,context));
+        }
+        return friends;
+    }
+
+    public ArrayList<User> getRequests(Context context){
+        ArrayList<User> requests = new ArrayList<User>();
+        for (String request : this.friendsDAO.getRequests(this.getLogin())){
+            requests.add(new User(null,request,context));
+        }
+        return requests;
+    }
 }

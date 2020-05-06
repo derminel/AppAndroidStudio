@@ -20,7 +20,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:iconifiedByDefault="false"
-            android:queryHint="Search or add a wishlist" />
+            android:queryHint="Search or add a friend" />
 
         <Button
             android:id="@+id/addFriendButton"

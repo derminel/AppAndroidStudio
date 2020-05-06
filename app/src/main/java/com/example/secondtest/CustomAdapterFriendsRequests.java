@@ -17,9 +17,9 @@ import androidx.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CustomAdapterFriends extends ArrayAdapter<User> {
+public class CustomAdapterFriendsRequests extends ArrayAdapter<User> {
     //the list values in the List of type hero
-    ArrayList<User> friends;
+    ArrayList<User> friendsRequests;
 
     //activity context
     Context context;
@@ -31,11 +31,11 @@ public class CustomAdapterFriends extends ArrayAdapter<User> {
     String login;
 
     //constructor initializing the values
-    public CustomAdapterFriends(Context context, int resource, ArrayList<User> friends, String login) {
-        super(context, resource, friends);
+    public CustomAdapterFriendsRequests(Context context, int resource, ArrayList<User> friendsRequests, String login) {
+        super(context, resource, friendsRequests);
         this.context = context;
         this.resource = resource;
-        this.friends = friends;
+        this.friendsRequests = friendsRequests;
         this.login = login;
         this.friendsDAO = new FriendsDAO(context);
     }
@@ -49,21 +49,30 @@ public class CustomAdapterFriends extends ArrayAdapter<User> {
         View view = layoutInflater.inflate(resource, null, false);
 
         //ImageView imageView = view.findViewById(R.id.imageView);
-        TextView friendName = view.findViewById(R.id.friendName);
-        Button buttonDelete = view.findViewById(R.id.deleteFriendButton);
+        TextView friendRequestName = view.findViewById(R.id.friendRequestName);
+        Button refuseButton = view.findViewById(R.id.refuseButton);
+        Button acceptButton = view.findViewById(R.id.acceptButton);
 
-        final User friend = friends.get(position);
+        final User friendsRequest = friendsRequests.get(position);
 
         //adding values to the list item
         //imageView.setImageDrawable(context.getResources().getDrawable(hero.getImage()));
-        friendName.setText(friend.getLogin());
+        friendRequestName.setText(friendsRequest.getLogin());
 
-        buttonDelete.setOnClickListener(new View.OnClickListener() {
+        refuseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                removeFriend(friend);
+                refuseFriend(friendsRequest);
             }
         });
+
+        acceptButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                acceptFriend(friendsRequest);
+            }
+        });
+
         return view;
     }
 
@@ -71,23 +80,23 @@ public class CustomAdapterFriends extends ArrayAdapter<User> {
     @NonNull
     @Override
     public Filter getFilter() {
-        return friendsFilter;
+        return friendsRequestsFilter;
     }
 
-    private Filter friendsFilter = new Filter() {
+    private Filter friendsRequestsFilter = new Filter() {
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
             FilterResults results = new FilterResults();
             List<User> suggestions = new ArrayList<>();
 
             if (constraint == null || constraint.length() == 0) {
-                suggestions.addAll(friends);
+                suggestions.addAll(friendsRequests);
             } else {
                 String filterPattern = constraint.toString().toLowerCase().trim();
 
-                for (User friend : friends) {
-                    if (friend.getLogin().toLowerCase().contains(filterPattern)) {
-                        suggestions.add(friend);
+                for (User friendsRequest : friendsRequests) {
+                    if (friendsRequest.getLogin().toLowerCase().contains(filterPattern)) {
+                        suggestions.add(friendsRequest);
                     }
                 }
             }
@@ -112,16 +121,44 @@ public class CustomAdapterFriends extends ArrayAdapter<User> {
     };
 
     //permet de supprimer une wishlist
-    private void removeFriend(final User friend) {
+    private void refuseFriend(final User friendsRequest) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setTitle("Are you sure you want to delete this friend?");
+        builder.setTitle("Are you sure you want to refuse this person?");
 
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
 
-                friendsDAO.deleteFriend(friend.getLogin(),login);
-                friends.remove(friend);
+                friendsDAO.refuseFriend(login,friendsRequest.getLogin());
+                friendsRequests.remove(friendsRequest);
+
+                notifyDataSetChanged();
+            }
+        });
+
+        //if response is negative nothing is being done
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+
+        //creating and displaying the alert dialog
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }
+
+    private void acceptFriend(final User friendsRequest) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle("Are you sure you want to accept this person?");
+
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+                friendsDAO.acceptFriend(login, friendsRequest.getLogin());
+                friendsRequests.remove(friendsRequest);
 
                 notifyDataSetChanged();
             }

@@ -13,7 +13,6 @@ import android.widget.Toast;
 
 
 public class MainActivity extends AppCompatActivity {
-    public static final String EXTRA_LOGIN = "com.example.application.example.EXTRA_TEXT";
 
     private DatabaseHelper myDb ;
     private User user;
@@ -33,7 +32,6 @@ public class MainActivity extends AppCompatActivity {
         this.password = findViewById(R.id.password);
 
         this.friendsDAO = new FriendsDAO(this);
-        this.friendsDAO.addFriends("Lois", "Charlotte");
 
         configureNextButtonCreateAccount();
         configureNextButtonConnect();
@@ -59,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 else{
                     Intent intent = new Intent(MainActivity.this, PageAccueil.class);
-                    intent.putExtra(Intent.EXTRA_TEXT, login.getText().toString());
+                    intent.putExtra("LOGIN1", login.getText().toString());
                     startActivity(intent);
                 }
             }
