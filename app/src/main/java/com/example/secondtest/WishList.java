@@ -7,6 +7,7 @@ public class WishList {
     private String name ;
     private String listNumber ;
     private WishListDAO wishlistDAO;
+    private ProductDAO productDAO;
     private ContentDAO contentDAO;
     private boolean publicAccess ;
     private String description ;
@@ -21,6 +22,7 @@ public class WishList {
         this.name = name;
         this.wishlistDAO = new WishListDAO(context);
         this.contentDAO = new ContentDAO(context);
+        this.productDAO = new ProductDAO(context);
         this.listNumber = this.setListNumber();
         this.publicAccess = publicAccess;
         //this.description = d;
@@ -54,10 +56,6 @@ public class WishList {
         }
     }
 
-    public String getListNumber(){
-        return this.listNumber;
-    }
-
     public double getPrice() {
         double tot = 0 ;
         for (Product p : this.products){
@@ -74,8 +72,13 @@ public class WishList {
         return this.listNumber;
     }
 
-    public ArrayList<Product> getProducts(){
-        return this.products;
+    public ArrayList<Product> getProducts(String listNb, Context context){
+        ArrayList<Product> productsOfTheList = new ArrayList<Product>();
+        for(String product : this.contentDAO.getProductsOfAList(listNb)){
+            Product newProduct = new Product(productDAO.getProductName(product),0,null,null,null,context);
+            productsOfTheList.add(newProduct);
+        }
+        return productsOfTheList;
     }
 
     public boolean addAdmin(String login) {

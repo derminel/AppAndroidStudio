@@ -14,12 +14,11 @@ import androidx.appcompat.app.AppCompatActivity;
 //Juste copier-coller A modifier
 public class PagePourAjouterUnProduit extends AppCompatActivity {
 
-    private WishListDAO wishListDAO;
     private ProductDAO productDAO;
     private ContentDAO contentDAO;
     private boolean publicAccess;
-    private EditText inputText;
-    private String login;
+    private String wishListNb;
+    private String wishListName;
     private EditText name;
     private EditText category;
     private EditText price;
@@ -31,13 +30,16 @@ public class PagePourAjouterUnProduit extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_page_pour_ajouter_un_produit);
 
-
         this.publicAccess = false ;
         this.name = findViewById(R.id.setNameCreate);
         this.category = findViewById(R.id.setCategoryCreate);
         this.price = findViewById(R.id.setPriceCreate);
         this.website = findViewById(R.id.setWebsiteCreate);
         this.info = findViewById(R.id.setInfoCreate);
+        this.wishListNb = getIntent().getStringExtra("WISHLISTNUMBER2");
+        this.wishListName = getIntent().getStringExtra("WISHLISTNAME2");
+        this.contentDAO = new ContentDAO(this);
+        this.productDAO = new ProductDAO(this);
 
         Button buttonConfirm = findViewById(R.id.ConfirmAddProduct);
 
@@ -45,33 +47,34 @@ public class PagePourAjouterUnProduit extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Product product = configureProduct();
-                //if (contentDAO.alreadyInList()){
-                    showToast("You can't add yourself as friend");
-                //}
-                /*else if (!(userDAO.getUserLoginDb().contains(inputText.getText().toString()))){
-                    showToast("This login doesn't exist");
+                String productNb = product.getProductNb();
+                if (productNb == null){
+                    productNb = "Product" + String.valueOf(Integer.parseInt(productDAO.lineCounter())+1);
+                    productDAO.addProduct(productNb,name.getText().toString(),Integer.parseInt(price.getText().toString()),
+                            info.getText().toString(),category.getText().toString(),website.getText().toString());
+                    contentDAO.addProduct(wishListNb, productNb);
+                    Intent intent = new Intent(PagePourAjouterUnProduit.this, PageProduits.class);
+                    intent.putExtra("WISHLISTNAME3", wishListName);
+                    intent.putExtra("WISHLISTNUMBER3", wishListNb);
+                    startActivity(intent);
                 }
-                else if (friendsDAO.areFriends(user.getLogin(), inputText.getText().toString())){
-                    showToast("You're already friends");
+                else if (contentDAO.alreadyInList(wishListNb,product.getProductNb())){
+                    showToast("This product is already in the list");
                 }
                 else {
-                    boolean isGood = user.friendRequest(inputText.getText().toString());
-                    if (isGood){
-                        showToast("Invitation has been sent");
-                    }
-                    else{
-                        showToast("Problem with your invitation, try again");
-                    }
-                    startActivity(new Intent(PagePourAjouterUnProduit.this, PageProduits.class));
-                }*/
+                    contentDAO.addProduct(wishListNb, productNb);
+                    Intent intent = new Intent(PagePourAjouterUnProduit.this, PageProduits.class);
+                    intent.putExtra("WISHLISTNUMBER3", wishListNb);
+                    startActivity(intent);
+                }
             }
         });
     }
 
     private Product configureProduct(){
-        Double price = null;
+        int price = -1;
         if (!(this.price.getText().toString().equals(""))){
-            price = Double.parseDouble(this.price.getText().toString());
+            price = Integer.parseInt(this.price.getText().toString());
         }
         return new Product(this.name.getText().toString(), price,this.info.getText().toString(),
                 this.category.getText().toString(),this.website.getText().toString(),this);

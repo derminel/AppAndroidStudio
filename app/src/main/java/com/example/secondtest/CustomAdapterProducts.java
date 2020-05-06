@@ -70,6 +70,8 @@ public class CustomAdapterProducts extends ArrayAdapter<Product> {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(context, PageDetailProduits.class);
+                context.startActivity(intent);
             }
         });
         return view;

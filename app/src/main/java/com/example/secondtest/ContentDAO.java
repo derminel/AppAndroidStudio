@@ -14,12 +14,12 @@ import static com.example.secondtest.DatabaseContract.TABLE_CONTENT;
 
 public class ContentDAO {
 
-    private Cursor productsOfAList;
+    private Cursor cursor;
     private DatabaseHelper dbh ;
 
     public ContentDAO(Context activePage){
         this.dbh = new DatabaseHelper(activePage);
-        this.productsOfAList = dbh.getDb().rawQuery(String.format("SELECT * FROM %s", TABLE_CONTENT),null);
+        this.cursor = dbh.getDb().rawQuery(String.format("SELECT * FROM %s", TABLE_CONTENT),null);
     }
 
     public Integer removeProduct(String listNb, String productNb) {
@@ -28,25 +28,31 @@ public class ContentDAO {
 
     public ArrayList<String> getProductsOfAList(String listNb){
         ArrayList<String> products = new ArrayList<String>();
-        this.productsOfAList.moveToFirst();
+        Cursor cursor = this.dbh.getDb().rawQuery(String.format("SELECT * FROM %s WHERE %s = ?", TABLE_CONTENT,
+                COLUMN_CONTENT_LISTNB) ,new String[] {listNb});
+        cursor.moveToFirst();
         try{
-            while (!(this.productsOfAList.isLast())){
-                if (this.productsOfAList.getString(0).equals(listNb)){
-                    products.add(this.productsOfAList.getString(1)) ;
-                }
-                this.productsOfAList.moveToNext();
+            while (!(cursor.isLast())){
+                products.add(cursor.getString(1)) ;
+                cursor.moveToNext();
             }
-            if (this.productsOfAList.getString(0).equals(listNb)){
-                products.add(this.productsOfAList.getString(1)) ;
-            }
+            products.add(cursor.getString(1)) ;
         }
         catch (Exception e){}
         return products;
     }
 
     public boolean alreadyInList(String listNb, String productNb){
-        Cursor cursor = this.dbh.getDb().rawQuery("SELECT * FROM " + TABLE_CONTENT + " WHERE " + COLUMN_CONTENT_LISTNB + " = ? AND "
-                + COLUMN_CONTENT_PRODUCTNB + " = ?",new String[] {listNb, productNb});
+        Cursor cursor = this.dbh.getDb().rawQuery(String.format("SELECT * FROM %s WHERE %s = ? AND %s = ?", TABLE_CONTENT,
+                COLUMN_CONTENT_LISTNB, COLUMN_CONTENT_PRODUCTNB) ,new String[] {listNb, productNb});
         return (cursor.getCount() > 0);
+    }
+
+    public boolean addProduct(String listNb, String productNb){
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COLUMN_CONTENT_LISTNB, listNb);
+        contentValues.put(COLUMN_CONTENT_PRODUCTNB, productNb);
+        long result = this.dbh.getDb().insert(TABLE_CONTENT,null ,contentValues);
+        return result != -1;
     }
 }
