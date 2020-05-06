@@ -53,6 +53,8 @@ public class PageProduits extends AppCompatActivity {
         this.titleWishList.setText(nameWishList);
 
 
+        showToast(this.wishListNb);
+
         if(canInit){
             initList();
             canInit = false;
@@ -73,7 +75,6 @@ public class PageProduits extends AppCompatActivity {
         });
 
         configureAddButton();
-        clickOnItem();
     }
 
     private void showToast(String msg) {
@@ -94,19 +95,6 @@ public class PageProduits extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(PageProduits.this, PagePourAjouterUnProduit.class) ;
                 startActivityForResult(intent, 1);
-            }
-        });
-    }
-
-    private void clickOnItem(){
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                /*final WishList wishList = wishLists.get(position);
-                Intent intent = new Intent(PagesListesDeSouhaits.this, PageProduits.class);
-                intent.putExtra("WISHLISTNAME1", wishList.getListNb());
-                startActivity(intent);*/
-                showToast("Salut, je suis un produit");
             }
         });
     }

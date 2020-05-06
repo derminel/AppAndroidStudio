@@ -1,6 +1,7 @@
 package com.example.secondtest;
 
 
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.content.Context;
@@ -41,5 +42,11 @@ public class ContentDAO {
         }
         catch (Exception e){}
         return products;
+    }
+
+    public boolean alreadyInList(String listNb, String productNb){
+        Cursor cursor = this.dbh.getDb().rawQuery("SELECT * FROM " + TABLE_CONTENT + " WHERE " + COLUMN_CONTENT_LISTNB + " = ? AND "
+                + COLUMN_CONTENT_PRODUCTNB + " = ?",new String[] {listNb, productNb});
+        return (cursor.getCount() > 0);
     }
 }

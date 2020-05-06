@@ -68,10 +68,9 @@ public class CustomAdapterWishLists extends ArrayAdapter<WishList> {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final WishList wishList = wishLists.get(position);
                 Intent intent = new Intent(context, PageProduits.class);
                 intent.putExtra("WISHLISTNAME1", wishList.getName());
-                intent.putExtra("WISHLISTNUMBER1", wishList.getListNb()); //Recoivent tous le même Numero....
+                intent.putExtra("WISHLISTNUMBER1", "List" + String.valueOf(position+1)); // <------ ICI
                 context.startActivity(intent);
             }
         });
