@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#87cefa"
+    android:orientation="vertical"
+    android:padding="20sp"
+    tools:context=".PagePourModifierUnProduit">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/textEditProduct"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Edit product"
+            android:textColor="#FFFFFF"
+            android:textSize="40sp"
+            android:textStyle="bold|italic" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="20dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/textNameEdit"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Name"
+            android:textColor="#FFFFFF"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:paddingTop="5dp"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/setNameEdit"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textColor="#000000"
+            android:hint="Insert the name of the product"
+            android:background="#FFFFFF"
+            android:textSize="23sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="20dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/textViewCategoryEdit"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Category"
+            android:textColor="#FFFFFF"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textViewPriceEdit"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Price"
+            android:layout_marginLeft ="30dp"
+            android:layout_weight = "2"
+            android:textColor="#FFFFFF"
+            android:textSize="24sp"
+            android:textStyle="bold"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:paddingTop="5dp"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/setCategoryEdit"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="Select Category"
+            android:background="#FFFFFF"
+            android:layout_weight = "1"
+            android:layout_marginRight ="30dp"
+            android:textSize="23sp" />
+
+        <EditText
+            android:id="@+id/setPriceEdit"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="Insert"
+            android:background="#FFFFFF"
+            android:layout_marginLeft ="30dp"
+            android:layout_weight = "2"
+            android:textSize="23sp" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="20dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/textWebsiteEdit"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Website"
+            android:textColor="#FFFFFF"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:paddingTop="5dp"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/setWebsiteEdit"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="Insert website"
+            android:background="#FFFFFF"
+            android:textSize="23sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="20dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/textInfoEdit"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Info"
+            android:textColor="#FFFFFF"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:paddingTop="5dp"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/setInfoEdit"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="Insert informations about the product"
+            android:gravity="top"
+            android:background="#FFFFFF"
+            android:textSize="23sp" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingTop="40dp">
+
+        <Button
+            android:id="@+id/saveProduct"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/confirm_button"
+            android:textColor="#FFFFFF"
+            android:text="Save" />
+
+    </LinearLayout>
+
+
+</LinearLayout>
