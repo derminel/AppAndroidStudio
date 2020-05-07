@@ -52,7 +52,9 @@ public class PageAccueil extends AppCompatActivity {
         Button nextButton = (Button)  findViewById(R.id.Wishlists);
         nextButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view){
-                startActivity(new Intent(PageAccueil.this, PagesListesDeSouhaits.class));
+                Intent intent = new Intent(PageAccueil.this, PagesListesDeSouhaits.class);
+                intent.putExtra("LOGIN_LISTES_DE_SOUHAITS", login);
+                startActivity(intent);
             }
         });
     }

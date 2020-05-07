@@ -36,6 +36,7 @@ public class PagesListesDeSouhaits extends AppCompatActivity {
 
     boolean canInit = true;
     WishListDAO wishListDAO;
+    String login;
 
 
     @Override
@@ -48,6 +49,7 @@ public class PagesListesDeSouhaits extends AppCompatActivity {
         addButton=(Button) findViewById(R.id.addwishlistbutton);
 
         this.wishListDAO = new WishListDAO(this);
+        this.login = getIntent().getStringExtra("LOGIN_LISTES_DE_SOUHAITS");
 
         if(canInit){
             initList();
@@ -81,7 +83,7 @@ public class PagesListesDeSouhaits extends AppCompatActivity {
             this.wishLists.add(newList);
         }
         adapter=new CustomAdapterWishLists(this,
-                R.layout.row_wishlists, wishLists);
+                R.layout.row_wishlists, wishLists, login);
         listView.setAdapter(adapter);
     }
 

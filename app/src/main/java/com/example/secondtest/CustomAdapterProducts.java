@@ -30,14 +30,16 @@ public class CustomAdapterProducts extends ArrayAdapter<Product> {
     WishListDAO wishListDAO;
     ContentDAO contentDAO;
     String listNb;
+    private String login;
 
     //constructor initializing the values
-    public CustomAdapterProducts(Context context, int resource, ArrayList<Product> products, String listNb) {
+    public CustomAdapterProducts(Context context, int resource, ArrayList<Product> products, String listNb, String login) {
         super(context, resource, products);
         this.context = context;
         this.resource = resource;
         this.products = products;
         this.listNb = listNb;
+        this.login = login;
         this.contentDAO = new ContentDAO(context);
         this.wishListDAO = new WishListDAO(context);
     }
@@ -71,6 +73,8 @@ public class CustomAdapterProducts extends ArrayAdapter<Product> {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, PageDetailProduits.class);
+                intent.putExtra("PRODUCTNAME1", product.getName());
+                intent.putExtra("LOGIN_DETAILS_PRODUIT", login);
                 context.startActivity(intent);
             }
         });

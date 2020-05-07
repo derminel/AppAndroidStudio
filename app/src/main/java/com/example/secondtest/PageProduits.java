@@ -34,6 +34,8 @@ public class PageProduits extends AppCompatActivity {
     private String nameWishListReload;
     private String wishListNb ;
     private String wishListNbReload ;
+    private String login;
+    private String loginReload;
 
 
     @Override
@@ -49,6 +51,8 @@ public class PageProduits extends AppCompatActivity {
         this.dislikeButton=(Button) findViewById(R.id.dislikeButton);
         this.titleWishList =(TextView) findViewById(R.id.titleWishlist);
 
+        this.login = getIntent().getStringExtra("LOGIN_PRODUITS");
+        this.loginReload = getIntent().getStringExtra("LOGIN_PRODUITS_RELOAD");
         this.contentDAO = new ContentDAO(this);
         this.wishListDAO = new WishListDAO(this);
         this.wishListNb = getIntent().getStringExtra("WISHLISTNUMBER1");
@@ -61,6 +65,8 @@ public class PageProduits extends AppCompatActivity {
         else{
             this.titleWishList.setText(nameWishListReload);
         }
+
+        showToast(login);
 
         if(canInit){
             initList();
@@ -97,7 +103,7 @@ public class PageProduits extends AppCompatActivity {
             this.products = wishList.getProducts(wishListNbReload, this);
         }
         adapter=new CustomAdapterProducts(this,
-                R.layout.row_products, products,wishListNb);
+                R.layout.row_products, products,wishListNb, login);
         listView.setAdapter(adapter);
     }
 
@@ -109,10 +115,12 @@ public class PageProduits extends AppCompatActivity {
                 if (wishListNbReload == null){
                     intent.putExtra("WISHLISTNUMBER2", wishListNb);
                     intent.putExtra("WISHLISTNAME2", nameWishList);
+                    intent.putExtra("LOGIN_AJOUT_PRODUIT", login);
                 }
                 else {
                     intent.putExtra("WISHLISTNUMBER2", wishListNbReload);
                     intent.putExtra("WISHLISTNAME2", nameWishListReload);
+                    intent.putExtra("LOGIN_AJOUT_PRODUIT", loginReload);
                 }
 
                 startActivityForResult(intent, 1);

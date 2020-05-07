@@ -19,6 +19,7 @@ public class PagePourAjouterUnProduit extends AppCompatActivity {
     private boolean publicAccess;
     private String wishListNb;
     private String wishListName;
+    private String login;
     private EditText name;
     private EditText category;
     private EditText price;
@@ -38,6 +39,7 @@ public class PagePourAjouterUnProduit extends AppCompatActivity {
         this.info = findViewById(R.id.setInfoCreate);
         this.wishListNb = getIntent().getStringExtra("WISHLISTNUMBER2");
         this.wishListName = getIntent().getStringExtra("WISHLISTNAME2");
+        this.login = getIntent().getStringExtra("LOGIN_AJOUT_PRODUIT");
         this.contentDAO = new ContentDAO(this);
         this.productDAO = new ProductDAO(this);
 
@@ -50,7 +52,7 @@ public class PagePourAjouterUnProduit extends AppCompatActivity {
                 String productNb = product.getProductNb();
                 if (productNb == null){
                     productNb = "Product" + String.valueOf(Integer.parseInt(productDAO.lineCounter())+1);
-                    productDAO.addProduct(productNb,name.getText().toString(),Integer.parseInt(price.getText().toString()),
+                    productDAO.addProduct(login, wishListNb, productNb,name.getText().toString(),Integer.parseInt(price.getText().toString()),
                             info.getText().toString(),category.getText().toString(),website.getText().toString());
                     contentDAO.addProduct(wishListNb, productNb);
                     Intent intent = new Intent(PagePourAjouterUnProduit.this, PageProduits.class);
