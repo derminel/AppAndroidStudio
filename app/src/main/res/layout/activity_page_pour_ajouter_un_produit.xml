@@ -15,8 +15,8 @@
 
         <TextView
             android:id="@+id/textNewProduct"
-            android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_width="0dp"
             android:layout_weight="1"
             android:gravity="center"
             android:text="New product"
@@ -33,8 +33,8 @@
 
         <TextView
             android:id="@+id/textNameCreate"
-            android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_width="0dp"
             android:layout_weight="1"
             android:text="Name"
             android:textColor="#FFFFFF"
@@ -90,6 +90,14 @@
         android:paddingTop="5dp"
         android:orientation="horizontal">
 
+        <Spinner
+            android:id="@+id/setCategorySpinner"
+            android:background="#FFFFFF"
+            android:layout_weight = "1"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"/>
+
+        <!--
         <EditText
             android:id="@+id/setCategoryCreate"
             android:layout_width="match_parent"
@@ -99,7 +107,7 @@
             android:layout_weight = "1"
             android:layout_marginRight ="30dp"
             android:textSize="23sp" />
-
+        -->
         <EditText
             android:id="@+id/setPriceCreate"
             android:layout_width="match_parent"
@@ -149,8 +157,8 @@
 
         <TextView
             android:id="@+id/textInfoCreate"
-            android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_width="0dp"
             android:layout_weight="1"
             android:text="Info"
             android:textColor="#FFFFFF"

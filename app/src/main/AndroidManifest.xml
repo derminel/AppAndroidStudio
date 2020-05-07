@@ -10,7 +10,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".PagePourModifierUnProduit"></activity>
-        <activity android:name=".PageCreationProduit" />
         <activity android:name=".PageDetailProduits" />
         <activity android:name=".PagePourAjouterUnProduit" />
         <activity android:name=".PageProduits" />

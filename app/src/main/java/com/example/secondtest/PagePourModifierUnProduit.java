@@ -32,11 +32,11 @@ public class PagePourModifierUnProduit extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_page_pour_modifier_un_produit);
 
-        this.productName = (EditText) findViewById(R.id.setNameEdit);
-        this.productCategory = (EditText) findViewById(R.id.setCategoryEdit);
-        this.productPrice = (EditText) findViewById(R.id.setPriceEdit);
-        this.productWebsite = (EditText) findViewById(R.id.setWebsiteEdit);
-        this.productInfo = (EditText) findViewById(R.id.setInfoEdit);
+        this.productName = findViewById(R.id.setNameEdit);
+        //this.productCategory =  findViewById(R.id.setCategorySpinner);
+        this.productPrice = findViewById(R.id.setPriceEdit);
+        this.productWebsite = findViewById(R.id.setWebsiteEdit);
+        this.productInfo = findViewById(R.id.setInfoEdit);
 
         this.productNb = getIntent().getStringExtra("PRODUCTNB_MODIFIER_PRODUIT");
         this.wishListNb = getIntent().getStringExtra("WISHLISTNB_MODIFIER_PRODUIT");
@@ -55,7 +55,8 @@ public class PagePourModifierUnProduit extends AppCompatActivity {
         buttonSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                productDAO.updateProduct(productNb,productName.getText().toString(),Integer.parseInt(productPrice.getText().toString()),productInfo.getText().toString(),
+                productDAO.updateProduct(productNb, productName.getText().toString(),
+                        Integer.parseInt(productPrice.getText().toString()),productInfo.getText().toString(),
                         productCategory.getText().toString(),productWebsite.getText().toString());
                 Intent intent = new Intent(PagePourModifierUnProduit.this, PageDetailProduits.class);
                 intent.putExtra("PRODUCTNB_DETAILS_PRODUIT_RELOAD", productNb);
