@@ -94,7 +94,7 @@ public class PageAmis extends AppCompatActivity {
     }
     public void activityretour4(){
         Intent intent = new Intent(this, PageAccueil.class);
-        intent.putExtra("LOGIN_ACCEUIL_APRES_VISITE_LISTES", login);
+        intent.putExtra("LOGIN_ACCEUIL_APRES_VISITE_AMIS", login);
         startActivity(intent);
     }
     private void initList(){
