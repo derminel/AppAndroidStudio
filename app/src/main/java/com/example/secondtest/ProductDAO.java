@@ -54,6 +54,17 @@ public class ProductDAO {
         return result != -1;
     }
 
+    public boolean updateProduct(String productNb, String name, int price, String info, String category, String website){
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COLUMN_PRODUCTS_NAME, name);
+        contentValues.put(COLUMN_PRODUCTS_PRICE, price);
+        contentValues.put(COLUMN_PRODUCTS_INFO, info);
+        contentValues.put(COLUMN_PRODUCTS_CATEGORY, category);
+        contentValues.put(COLUMN_PRODUCTS_WEBSITE, website);
+        long result = this.dbh.getDb().update(TABLE_PRODUCTS,contentValues,COLUMN_LIKE_PRODUCTNB + " = ?",new String[] {productNb});
+        return result != -1;
+    }
+
     public boolean updateLike(String login, String wishListNb, String productNb, byte likeValue){
         ContentValues contentValues = new ContentValues();
         contentValues.put(COLUMN_LIKE_COUNT, likeValue); //initialisé à 0
@@ -92,5 +103,14 @@ public class ProductDAO {
         }
         cursor.moveToFirst();
         return cursor.getString(1);
+    }
+
+    public boolean alreadyExist(String productName){
+        Cursor cursor = this.dbh.getDb().rawQuery(String.format("SELECT * FROM %s WHERE %s = ?", TABLE_PRODUCTS,
+                COLUMN_PRODUCTS_PRODUCTNB) ,new String[] {productName});
+        if (cursor.getCount() <= 0){
+            return false;
+        }
+        return true;
     }
 }
