@@ -87,7 +87,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="start"
         android:layout_marginLeft="35dp"
-        android:text="Visible pour:"
+        android:text="Visible for:"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:translationY="60dp" />
 
@@ -141,6 +141,15 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:translationX="80dp"
         android:translationY="-388dp" />
+
+    <ImageButton
+        android:id="@+id/editAdmins"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:tint="#121212"
+        android:translationX="-50dp"
+        android:translationY="-360dp"
+        app:srcCompat="@drawable/ic_edit_black_24dp" />
 
 
 </LinearLayout>
