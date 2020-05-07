@@ -11,8 +11,8 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 public class PageCreationProduit extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
-    String[] country = {"Sport","Clothes","Games","Technology","Jewellery","Decoration","Other"};
-
+    private String[] country = {"Sport","Clothes","Games","Technology","Jewellery","Decoration","Other"};
+    //
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_page_creation_produit);

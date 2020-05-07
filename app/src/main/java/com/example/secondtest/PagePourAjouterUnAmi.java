@@ -18,6 +18,7 @@ public class PagePourAjouterUnAmi extends AppCompatActivity {
     private boolean publicAccess;
     private EditText inputText;
     private String login;
+    private Button Back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +31,13 @@ public class PagePourAjouterUnAmi extends AppCompatActivity {
         this.friendsDAO = new FriendsDAO(this);
         this.publicAccess = false ;
         this.inputText = findViewById(R.id.nameNewFriend);
-
+        Back = (Button)findViewById(R.id.Con);
+        Back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                activityretour7();
+            }
+        });
         showToast(login);
 
         Button buttonConfirm = findViewById(R.id.ConfirmAddFriend);
@@ -64,6 +71,10 @@ public class PagePourAjouterUnAmi extends AppCompatActivity {
 
     private User configureUser(){
         return new User(null,this.login,this);
+    }
+    public void activityretour7(){
+        Intent intent = new Intent(this, PageAmis.class);
+        startActivity(intent);
     }
 
     private void showToast(String msg) {

@@ -9,7 +9,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="100dip"
         android:layout_gravity="center"
         android:gravity="center"
         android:paddingTop="20dp"
@@ -36,11 +36,17 @@
     <ListView
         android:id="@+id/ListViewWishLists"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="400dip"
         android:paddingTop="20dp"
         android:choiceMode="multipleChoice">
 
     </ListView>
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Back" />
 
 
 </LinearLayout>

@@ -2,7 +2,6 @@ package com.example.secondtest;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.drawable.Animatable;
 import android.os.Bundle;
@@ -20,28 +19,26 @@ import com.google.android.material.snackbar.Snackbar;
 
 public class PageDetailProduits extends AppCompatActivity {
 
-    private TextView titleProduct;
-    private TextView productName;
-    private TextView productCategory;
-    private TextView productPrice;
-    private TextView productWebsite;
-    private TextView productInfo;
+    private TextView titleProduct;//
+    private TextView productName;//
+    private TextView productCategory;//
+    private TextView productPrice;//
+    private TextView productWebsite;//
+    private TextView productInfo;//
+    private Button likeButton;
+    private Button dislikeButton;
     private ImageView unfillLike;
     private ImageView fillLike;
     private String checkLike = "unfillLike";
     private ImageView unfillDislike;
     private ImageView fillDislike;
     private String checkDislike = "unfillDislike";
-    private Button editButton;
 
     ProductDAO productDAO;
     Cursor aboutProduct;
-    private String productNb;
+    String productNb;
     private String login;
     private String wishListNb;
-    private String productNbReload;
-    private String loginReload;
-    private String wishListNbReload;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,22 +55,13 @@ public class PageDetailProduits extends AppCompatActivity {
         this.fillLike = (ImageView) findViewById(R.id.fillLike);
         this.unfillDislike = (ImageView) findViewById(R.id.unfillDislike);
         this.fillDislike = (ImageView) findViewById(R.id.fillDislike);
-        this.editButton = (Button) findViewById(R.id.editProduct);
 
         this.productDAO = new ProductDAO(this);
+        this.productNb = productDAO.getProductNumber(getIntent().getStringExtra("PRODUCTNAME1"));
         this.wishListNb = getIntent().getStringExtra("WISHLISTNB_DETAILS_PRODUIT");
+        this.aboutProduct = productDAO.getAllColumn(productNb);
         this.login = getIntent().getStringExtra("LOGIN_DETAILS_PRODUIT");
-        this.productNbReload = getIntent().getStringExtra("PRODUCTNB_DETAILS_PRODUIT_RELOAD");
-        this.wishListNbReload = getIntent().getStringExtra("WISHLISTNUMBER_DETAILS_RELOAD");
-        this.loginReload  = getIntent().getStringExtra("LOGIN_DETAILS_PRODUIT_RELOAD");
 
-        if(loginReload == null){
-            this.productNb = productDAO.getProductNumber(getIntent().getStringExtra("PRODUCTNAME1"));
-            this.aboutProduct = productDAO.getAllColumn(productNb);
-        }
-        else {
-            this.aboutProduct = productDAO.getAllColumn(productNbReload);
-        }
         this.aboutProduct.moveToFirst();
 
         this.titleProduct.setText(aboutProduct.getString(1));
@@ -84,13 +72,7 @@ public class PageDetailProduits extends AppCompatActivity {
         this.productWebsite.setText(aboutProduct.getString(6));
 
         //Permet de récupérer la réaction qui avait déjà été définie auparavant pour le produit
-        byte likeStatus;
-        if(loginReload == null){
-            likeStatus = Byte.parseByte(productDAO.getLikeStatus(login,wishListNb,productNb));
-        }
-        else {
-            likeStatus = Byte.parseByte(productDAO.getLikeStatus(loginReload,wishListNbReload,productNbReload));
-        }
+        byte likeStatus = Byte.parseByte(productDAO.getLikeStatus(login,wishListNb,productNb));
         if (likeStatus == 1){
             fillLike.setVisibility(View.VISIBLE);
             unfillLike.setVisibility(View.GONE);
@@ -102,27 +84,6 @@ public class PageDetailProduits extends AppCompatActivity {
             checkLike = "fillDislike";
         }
 
-        configureEditButton();
-    }
-
-    private void configureEditButton(){
-        editButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(PageDetailProduits.this, PagePourModifierUnProduit.class);
-                if(loginReload == null){
-                    intent.putExtra("PRODUCTNB_MODIFIER_PRODUIT", productNb);
-                    intent.putExtra("WISHLISTNB_MODIFIER_PRODUIT", wishListNb);
-                    intent.putExtra("LOGIN_MODIFIER_PRODUIT", login);
-                }
-                else{
-                    intent.putExtra("PRODUCTNB_MODIFIER_PRODUIT", productNbReload);
-                    intent.putExtra("WISHLISTNB_MODIFIER_PRODUIT", wishListNbReload);
-                    intent.putExtra("LOGIN_MODIFIER_PRODUIT", loginReload);
-                }
-                startActivity(intent);
-            }
-        });
     }
 
     public void unfilledLike(View view){

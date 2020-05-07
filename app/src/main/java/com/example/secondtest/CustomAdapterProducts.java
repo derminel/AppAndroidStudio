@@ -19,17 +19,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CustomAdapterProducts extends ArrayAdapter<Product> {
-    ArrayList<Product> products;
+    private ArrayList<Product> products;//
 
     //activity context
-    Context context;
+    private Context context;//
 
     //the layout resource file for the list items
-    int resource;
+    private int resource;//
 
-    WishListDAO wishListDAO;
-    ContentDAO contentDAO;
-    String listNb;
+    private WishListDAO wishListDAO;//
+    private ContentDAO contentDAO;//
+    private String listNb;//
     private String login;
 
     //constructor initializing the values

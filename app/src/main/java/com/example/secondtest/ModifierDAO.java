@@ -9,8 +9,8 @@ import java.util.List;
 import static com.example.secondtest.DatabaseContract.TABLE_MODIFIER;
 
 public class ModifierDAO {
-    DatabaseHelper dbh;
-    Cursor modifier;
+    private DatabaseHelper dbh;//
+    private Cursor modifier;//
 
     public ModifierDAO (Context activePage){
         this.dbh = new DatabaseHelper(activePage);
