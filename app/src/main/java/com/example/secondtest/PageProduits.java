@@ -17,20 +17,25 @@ import java.util.ArrayList;
 
 public class PageProduits extends AppCompatActivity {
 
-    ArrayList<Product> products;
-    CustomAdapterProducts adapter;
-    ListView listView;
-    SearchView searchView;
-    Button addButton;
-    Button settingButton;
-    Button likeButton;
-    Button dislikeButton;
-    TextView titleWishList;
+    private ArrayList<Product> products;
+    private CustomAdapterProducts adapter;
+    private ListView listView;
+    private SearchView searchView;
+    private Button addButton;
+    private Button settingButton;
+    private Button likeButton;
+    private Button dislikeButton;
+    private TextView titleWishList;
 
-    boolean canInit = true;
-    ContentDAO contentDAO ;
-    WishListDAO wishListDAO;
-    String wishListNb ;
+    private boolean canInit = true;
+    private ContentDAO contentDAO ;
+    private WishListDAO wishListDAO;
+    private String nameWishList;
+    private String nameWishListReload;
+    private String wishListNb ;
+    private String wishListNbReload ;
+    private String login;
+    private String loginReload;
 
 
     @Override
@@ -46,14 +51,22 @@ public class PageProduits extends AppCompatActivity {
         this.dislikeButton=(Button) findViewById(R.id.dislikeButton);
         this.titleWishList =(TextView) findViewById(R.id.titleWishlist);
 
+        this.login = getIntent().getStringExtra("LOGIN_PRODUITS");
+        this.loginReload = getIntent().getStringExtra("LOGIN_PRODUITS_RELOAD");
         this.contentDAO = new ContentDAO(this);
         this.wishListDAO = new WishListDAO(this);
         this.wishListNb = getIntent().getStringExtra("WISHLISTNUMBER1");
-        String nameWishList = getIntent().getStringExtra("WISHLISTNAME1");
-        this.titleWishList.setText(nameWishList);
+        this.wishListNbReload = getIntent().getStringExtra("WISHLISTNUMBER3");
+        this.nameWishList = getIntent().getStringExtra("WISHLISTNAME1");
+        this.nameWishListReload = getIntent().getStringExtra("WISHLISTNAME3");
+        if (nameWishListReload == null){
+            this.titleWishList.setText(nameWishList);
+        }
+        else{
+            this.titleWishList.setText(nameWishListReload);
+        }
 
-
-        showToast(this.wishListNb);
+        showToast(login);
 
         if(canInit){
             initList();
@@ -84,9 +97,14 @@ public class PageProduits extends AppCompatActivity {
 
     private void initList(){
         WishList wishList = new WishList(this.wishListDAO.getName(this.wishListNb), this.wishListDAO.getAccess(this.wishListNb),this);
-        this.products = wishList.getProducts();
+        if(wishListNbReload == null){
+            this.products = wishList.getProducts(wishListNb, this);
+        }
+        else{
+            this.products = wishList.getProducts(wishListNbReload, this);
+        }
         adapter=new CustomAdapterProducts(this,
-                R.layout.row_products, products,wishListNb);
+                R.layout.row_products, products,wishListNb, login);
         listView.setAdapter(adapter);
     }
 
@@ -95,6 +113,17 @@ public class PageProduits extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(PageProduits.this, PagePourAjouterUnProduit.class) ;
+                if (wishListNbReload == null){
+                    intent.putExtra("WISHLISTNUMBER2", wishListNb);
+                    intent.putExtra("WISHLISTNAME2", nameWishList);
+                    intent.putExtra("LOGIN_AJOUT_PRODUIT", login);
+                }
+                else {
+                    intent.putExtra("WISHLISTNUMBER2", wishListNbReload);
+                    intent.putExtra("WISHLISTNAME2", nameWishListReload);
+                    intent.putExtra("LOGIN_AJOUT_PRODUIT", loginReload);
+                }
+
                 startActivityForResult(intent, 1);
             }
         });

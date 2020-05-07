@@ -5,14 +5,14 @@ import android.content.Context;
 public class Product {
     private String productNb ;
     private String name ;
-    private double price ;
+    private int price;
     private String info ;
     private String category ;
     private String website ;
     private int likes ;
     private ProductDAO productDAO;
 
-    public Product(String n, Double p, String i, String c, String w, Context context) {
+    public Product(String n, int p, String i, String c, String w, Context context) {
         this.productDAO = new ProductDAO(context);
         this.productNb = this.setProductNumber();
         this.name = n ;
@@ -32,12 +32,12 @@ public class Product {
     }
 
 
-    public double getPrice() {
+    public int getPrice() {
         return this.price ;
     }
 
     public String getProductNb(){
-        return this.productNb;
+        return this.productDAO.getProductNumber(this.name);
     }
 
     public String getName(){
