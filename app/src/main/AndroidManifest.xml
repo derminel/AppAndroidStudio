@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".PagePourModifierUnProduit"></activity>
+        <activity android:name=".PagePourModifierUnProduit"/>
         <activity android:name=".PageDetailProduits" />
         <activity android:name=".PagePourAjouterUnProduit" />
         <activity android:name=".PageProduits" />
@@ -24,6 +24,7 @@
         <activity android:name=".PageAccueil" />
         <activity android:name=".PageModifierWishList" />
         <activity android:name=".PageModifierWishListUpdate" />
+        <activity android:name=".PageCreationProfil"/>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

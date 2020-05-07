@@ -45,27 +45,41 @@ public class PageCreationAccount extends AppCompatActivity {
         this.password2 = findViewById(R.id.password2CreateAccount);
 
         configureNextButtonCreate();
+        configureGoBackAccount();
     }
 
     private void showToast(String msg) {
         Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
     }
 
+    private void configureGoBackAccount(){
+        final Button goBackButton = (Button) findViewById(R.id.GoBackAccount);
+        goBackButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(PageCreationAccount.this, MainActivity.class));
+            }
+        });
+    }
+
     private void configureNextButtonCreate() {
-        final Button nextButton = (Button) findViewById(R.id.Create);
+        final Button nextButton = (Button) findViewById(R.id.CreateAccount);
         nextButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 configureUser();
-                if (user.exist(login.getText().toString())){
+                if (login.getText().toString().equals("") || password1.getText().toString().equals("") || password2.getText().toString().equals("")){
+                    showToast("Please fill in all fields");
+                }
+                else if (user.exist(login.getText().toString())){
                     showToast("This login is already taken");
                 }
                 else if (!(password1.getText().toString().equals(password2.getText().toString()))){
                     showToast("You've written 2 differents password");
                 }
                 else{
-                    userDAO.addUser("", "", login.getText().toString(), password1.getText().toString(), null, "", "");
-                    Intent intent = new Intent(PageCreationAccount.this, PageProfil.class);
+                    Intent intent = new Intent(PageCreationAccount.this, PageCreationProfil.class);
                     intent.putExtra("LOGIN_PROFIL", login.getText().toString());
+                    intent.putExtra("PASSWORD_PROFIL", password1.getText().toString());
                     startActivity(intent);
                 }
             }

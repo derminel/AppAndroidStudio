@@ -6,61 +6,111 @@
     android:layout_height="match_parent"
     android:gravity="center"
     tools:context="PageCreationAccount"
-    android:orientation="vertical">
-
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="New Account"
-        android:textSize="36sp"
-        android:translationY="-130dp" />
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="309dp"
-        android:layout_height="wrap_content">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/loginCreateAccount"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Enter a login"
-            android:translationY="-20dp" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="309dp"
-        android:layout_height="wrap_content">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/password1CreateAccount"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Password"
-            android:inputType="textPassword"
-            android:translationY="-10dp"/>
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="309dp"
-        android:layout_height="wrap_content">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/password2CreateAccount"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Confirm the password"
-            android:inputType="textPassword"/>
-    </com.google.android.material.textfield.TextInputLayout>
+    android:background="#87cefa"
+    android:orientation="vertical"
+    android:padding="20sp">
 
     <Button
-        android:id="@+id/Create"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:text="Create"
-        android:translationY="30dp" />
+        android:id="@+id/GoBackAccount"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="left"
+        android:background="@drawable/ic_navigate_before_black_24dp"/>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="-50dp"
+        android:layout_weight="1">
+
+
+        <TextView
+            android:id="@+id/textNewAccount"
+            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="New account"
+            android:textColor="#FFFFFF"
+            android:textSize="40sp"
+            android:textStyle="bold|italic" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="8"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/loginCreateAccount"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textColor="#000000"
+                android:hint="Enter a login"
+                android:background="#FFFFFF"
+                android:textSize="23sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/password1CreateAccount"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textColor="#000000"
+                android:hint="Enter a password"
+                android:background="#FFFFFF"
+                android:textSize="23sp"
+                android:inputType="textPassword"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp">
+
+            <EditText
+                android:id="@+id/password2CreateAccount"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textColor="#000000"
+                android:hint="Confirm the password"
+                android:background="#FFFFFF"
+                android:textSize="23sp"
+                android:inputType="textPassword"/>
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_weight="1">
+
+        <Button
+            android:id="@+id/CreateAccount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Continue the creation"
+            android:textColor="#FFFFFF"
+            android:background="@drawable/confirm_button"/>
+
+    </LinearLayout>
 
 </LinearLayout>

@@ -46,6 +46,7 @@ package com.example.secondtest;
 
         import static com.example.secondtest.DatabaseContract.COLUMN_CONTENT_LISTNB;
         import static com.example.secondtest.DatabaseContract.COLUMN_CONTENT_PRODUCTNB;
+        import static com.example.secondtest.DatabaseContract.COLUMN_FRIENDS_LOGIN1;
         import static com.example.secondtest.DatabaseContract.COLUMN_LISTS_CREATOR;
         import static com.example.secondtest.DatabaseContract.COLUMN_LISTS_DESCRIPTION;
         import static com.example.secondtest.DatabaseContract.COLUMN_LISTS_LISTNB;
@@ -57,6 +58,7 @@ package com.example.secondtest;
         import static com.example.secondtest.DatabaseContract.COLUMN_MODIFIER_STATUS;
         import static com.example.secondtest.DatabaseContract.COLUMN_USERS_LOGIN;
         import static com.example.secondtest.DatabaseContract.TABLE_CONTENT;
+        import static com.example.secondtest.DatabaseContract.TABLE_FRIENDS;
         import static com.example.secondtest.DatabaseContract.TABLE_LISTS;
         import static com.example.secondtest.DatabaseContract.TABLE_MODIFIER;
         import static com.example.secondtest.DatabaseContract.TABLE_USERS;
@@ -64,10 +66,12 @@ package com.example.secondtest;
 public class WishListDAO {
     private Cursor wishlists;
     private DatabaseHelper dbh ;
+    private FriendsDAO friendsDAO;
 
     public WishListDAO (Context activePage){
         this.dbh = new DatabaseHelper(activePage);
         this.wishlists = dbh.getDb().rawQuery(String.format("SELECT * FROM %s", TABLE_LISTS),null);
+        this.friendsDAO = new FriendsDAO(activePage);
     }
 
     public ArrayList<String> getWishListsNameDb (){
@@ -192,6 +196,33 @@ public class WishListDAO {
         contentValues.put(COLUMN_LISTS_RECIPIENT, recipient);
         contentValues.put(COLUMN_LISTS_CREATOR, creator);
         long result = this.dbh.getDb().insert(TABLE_LISTS,null ,contentValues);
+        ContentValues contentValuesModifier = new ContentValues();
+        contentValuesModifier.put(COLUMN_MODIFIER_LISTNB, listNb);
+        contentValuesModifier.put(COLUMN_MODIFIER_LOGIN, creator);
+        contentValuesModifier.put(COLUMN_MODIFIER_STATUS, "Admin");
+        this.dbh.getDb().insert(TABLE_MODIFIER,null ,contentValuesModifier);
+        Cursor cursor = this.dbh.getDb().rawQuery(String.format("SELECT * FROM %s WHERE %s = ?", TABLE_FRIENDS,
+                COLUMN_FRIENDS_LOGIN1) ,new String[] {creator});
+        if ((cursor.getCount()) > 0 && (access)){ //ajoute tous les amis du créateur comme reader de la liste si elle est publique
+            cursor.moveToFirst();
+            while (!(cursor.isLast())){
+                if(friendsDAO.areFriends(creator,cursor.getString(1))){
+                    contentValuesModifier = new ContentValues();
+                    contentValuesModifier.put(COLUMN_MODIFIER_LISTNB, listNb);
+                    contentValuesModifier.put(COLUMN_MODIFIER_LOGIN, cursor.getString(1));
+                    contentValuesModifier.put(COLUMN_MODIFIER_STATUS, "Reader");
+                    this.dbh.getDb().insert(TABLE_MODIFIER,null ,contentValuesModifier);
+                }
+                cursor.moveToNext();
+            }
+            if(friendsDAO.areFriends(creator,cursor.getString(1))){
+                contentValuesModifier = new ContentValues();
+                contentValuesModifier.put(COLUMN_MODIFIER_LISTNB, listNb);
+                contentValuesModifier.put(COLUMN_MODIFIER_LOGIN, cursor.getString(1));
+                contentValuesModifier.put(COLUMN_MODIFIER_STATUS, "Reader");
+                this.dbh.getDb().insert(TABLE_MODIFIER,null ,contentValuesModifier);
+            }
+        }
         return result != -1;
     }
 
@@ -209,4 +240,23 @@ public class WishListDAO {
         return true;
     }
 
+    public ArrayList<String> getWishLists(String login){
+        Cursor cursor = this.dbh.getDb().rawQuery(String.format("SELECT * FROM %s WHERE %s = ?", TABLE_MODIFIER,
+                COLUMN_MODIFIER_LOGIN) ,new String[] {login});
+        ArrayList<String> wishlists = new ArrayList<String>();
+        if (cursor.getCount() <= 0){
+            return wishlists;
+        }
+        cursor.moveToFirst();
+        while (!(cursor.isLast())){
+            if (!(cursor.getString(0).equals("Invisible"))){
+                wishlists.add(cursor.getString(2));
+            }
+            cursor.moveToNext();
+        }
+        if (!(cursor.getString(0).equals("Invisible"))){
+            wishlists.add(cursor.getString(2));
+        }
+        return wishlists;
+    }
 }

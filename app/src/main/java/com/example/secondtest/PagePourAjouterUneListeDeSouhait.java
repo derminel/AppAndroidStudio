@@ -21,6 +21,7 @@ public class PagePourAjouterUneListeDeSouhait extends AppCompatActivity {
     private boolean publicAccess;//
     private EditText inputText;//
     private Button Back;
+    private String login;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +31,7 @@ public class PagePourAjouterUneListeDeSouhait extends AppCompatActivity {
         this.wishListDAO = new WishListDAO(this);
         this.publicAccess = false ;
         this.inputText = findViewById(R.id.nameNewList);
+        this.login = getIntent().getStringExtra("LOGIN_AJOUT_LISTE_DE_SOUHAITS");
 
         Switch switchButton = findViewById(R.id.switchAccess);
         Button buttonConfirm = findViewById(R.id.ConfirmAddWishlist);
@@ -47,6 +49,9 @@ public class PagePourAjouterUneListeDeSouhait extends AppCompatActivity {
                 if(isChecked){
                     publicAccess = true;
                 }
+                else {
+                    publicAccess = false;
+                }
             }
         });
 
@@ -54,9 +59,11 @@ public class PagePourAjouterUneListeDeSouhait extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 WishList newList = configureWishList();
-                wishListDAO.addList(newList.getName(), publicAccess, newList.getListNb(), null, null, null);
+                wishListDAO.addList(newList.getName(), publicAccess, newList.getListNb(), null, null, login);
                 showToast("WishList has been created");
-                startActivity(new Intent(PagePourAjouterUneListeDeSouhait.this, PagesListesDeSouhaits.class));
+                Intent intent = new Intent(PagePourAjouterUneListeDeSouhait.this, PagesListesDeSouhaits.class);
+                intent.putExtra("LOGIN_LISTE_DE_SOUHAITS_RELOAD", login);
+                startActivity(intent);
             }
         });
     }

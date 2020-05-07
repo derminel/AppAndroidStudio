@@ -37,6 +37,7 @@ public class PagesListesDeSouhaits extends AppCompatActivity {
     private boolean canInit = true;//
     private WishListDAO wishListDAO;//
     private String login;//
+    private String loginReload;
     private Button Back;
 
 
@@ -51,6 +52,7 @@ public class PagesListesDeSouhaits extends AppCompatActivity {
 
         this.wishListDAO = new WishListDAO(this);
         this.login = getIntent().getStringExtra("LOGIN_LISTES_DE_SOUHAITS");
+        this.loginReload = getIntent().getStringExtra("LOGIN_LISTE_DE_SOUHAITS_RELOAD");
         Back = (Button)findViewById(R.id.button4);
         Back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,6 +60,10 @@ public class PagesListesDeSouhaits extends AppCompatActivity {
                 activityretour1();
             }
         });
+
+        if(loginReload != null){
+            login = loginReload;
+        }
 
         if(canInit){
             initList();
@@ -90,8 +96,8 @@ public class PagesListesDeSouhaits extends AppCompatActivity {
 
     private void initList(){
         this.wishLists = new ArrayList<WishList>();
-        for (String elem : this.wishListDAO.getWishListsNameDb()){
-            WishList newList = new WishList(elem, true, this);
+        for (String listNb : this.wishListDAO.getWishLists(login)){
+            WishList newList = new WishList(wishListDAO.getName(listNb), true, this); //mis a true juste pour la création
             this.wishLists.add(newList);
         }
         adapter=new CustomAdapterWishLists(this,
@@ -103,7 +109,8 @@ public class PagesListesDeSouhaits extends AppCompatActivity {
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(PagesListesDeSouhaits.this, PagePourAjouterUneListeDeSouhait.class) ;
+                Intent intent = new Intent(PagesListesDeSouhaits.this, PagePourAjouterUneListeDeSouhait.class);
+                intent.putExtra("LOGIN_AJOUT_LISTE_DE_SOUHAITS", login);
                 startActivityForResult(intent, 1);
             }
         });

@@ -19,7 +19,7 @@ public class PageProfil extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_page_profil);
+        setContentView(R.layout.activity_page_creation_profil);
         this.login = getIntent().getStringExtra("LOGIN_PROFIL");
         this.profile = new Profile(login, this);
 
@@ -53,7 +53,7 @@ public class PageProfil extends AppCompatActivity {
     }
 
     private void configureNextButtonBackToMenu() {
-        Button retourAcceuil = (Button) findViewById(R.id.buttonRetourAccueuil);
+        Button retourAcceuil = (Button) findViewById(R.id.GoBackProfile);
         retourAcceuil.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view){
                 Intent intent = new Intent(PageProfil.this, PageAccueil.class);

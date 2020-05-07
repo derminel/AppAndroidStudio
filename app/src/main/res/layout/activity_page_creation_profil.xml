@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
-    tools:context=".PageProfil"
+    tools:context=".PageCreationProfil"
     android:background="#87cefa"
     android:orientation="vertical"
     android:padding="20sp">
@@ -130,7 +130,7 @@
         android:layout_marginTop="20dp">
 
         <Button
-            android:id="@+id/buttonChangeProfile"
+            android:id="@+id/buttonCreateProfile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Create account"
