@@ -38,6 +38,7 @@ public class PageAmis extends AppCompatActivity {
     private UserDAO userDAO;
     private User user;
     private String login;
+    private Button Back;
 
 
     @Override
@@ -52,7 +53,13 @@ public class PageAmis extends AppCompatActivity {
         this.login = getIntent().getStringExtra("LOGIN_AMIS");
         this.user = new User(null,login,this);
         this.userDAO = new UserDAO(this);
-
+        Back = (Button)findViewById(R.id.button45);
+        Back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                activityretour4();
+            }
+        });
         if(canInit){
             initList();
             canInit = false;
@@ -85,7 +92,10 @@ public class PageAmis extends AppCompatActivity {
     private void showToast(String msg) {
         Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
     }
-
+    public void activityretour4(){
+        Intent intent = new Intent(this, PageAccueil.class);
+        startActivity(intent);
+    }
     private void initList(){
         this.friends = this.user.getFriends(this);
         adapter=new CustomAdapterFriends(this,

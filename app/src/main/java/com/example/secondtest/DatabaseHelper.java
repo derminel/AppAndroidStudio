@@ -18,7 +18,7 @@ import static com.example.secondtest.DatabaseContract.TABLE_USERS;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "WishlistApp.db";
-    SQLiteDatabase db;
+    private SQLiteDatabase db;//
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DatabaseContract.VERSION);

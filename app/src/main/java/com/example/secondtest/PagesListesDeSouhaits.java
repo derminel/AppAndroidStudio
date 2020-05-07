@@ -28,15 +28,16 @@ import java.util.Arrays;
 
 public class PagesListesDeSouhaits extends AppCompatActivity {
 
-    ArrayList<WishList> wishLists;
-    CustomAdapterWishLists adapter;
-    ListView listView;
-    SearchView searchView;
-    Button addButton;
+    private ArrayList<WishList> wishLists; //
+    private CustomAdapterWishLists adapter;//
+    private ListView listView;//
+    private SearchView searchView;//
+    private Button addButton;//
 
-    boolean canInit = true;
-    WishListDAO wishListDAO;
-    String login;
+    private boolean canInit = true;//
+    private WishListDAO wishListDAO;//
+    private String login;//
+    private Button Back;
 
 
     @Override
@@ -50,6 +51,13 @@ public class PagesListesDeSouhaits extends AppCompatActivity {
 
         this.wishListDAO = new WishListDAO(this);
         this.login = getIntent().getStringExtra("LOGIN_LISTES_DE_SOUHAITS");
+        Back = (Button)findViewById(R.id.button4);
+        Back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                activityretour1();
+            }
+        });
 
         if(canInit){
             initList();
@@ -70,6 +78,10 @@ public class PagesListesDeSouhaits extends AppCompatActivity {
         });
 
         configureAddButton();
+    }
+    public void activityretour1(){
+        Intent intent = new Intent(this, PageAccueil.class);
+        startActivity(intent);
     }
 
     private void showToast(String msg) {

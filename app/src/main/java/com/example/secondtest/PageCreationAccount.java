@@ -23,7 +23,7 @@ import static com.example.secondtest.DatabaseContract.TABLE_LISTS;
 import static com.example.secondtest.DatabaseContract.TABLE_USERS;
 
 public class PageCreationAccount extends AppCompatActivity {
-
+    //
     private DatabaseHelper myDb ;
     private User user;
     private UserDAO userDAO;

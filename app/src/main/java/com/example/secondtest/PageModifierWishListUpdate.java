@@ -11,11 +11,11 @@ import android.widget.Switch;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class PageModifierWishListUpdate extends AppCompatActivity {
-    WishListDAO wishListDAO;
-    String wishlistNb;
-    EditText name;
-    EditText recipient;
-    boolean publicAccess;
+    private WishListDAO wishListDAO;//
+    private String wishlistNb;//
+    private EditText name;//
+    private EditText recipient;//
+    private boolean publicAccess;//
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

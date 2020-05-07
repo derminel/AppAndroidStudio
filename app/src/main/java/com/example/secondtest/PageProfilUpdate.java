@@ -10,12 +10,12 @@ import android.widget.EditText;
 
 public class PageProfilUpdate extends AppCompatActivity {
     private DatabaseHelper myDb ;
-    EditText name;
-    EditText last_name;
-    EditText address;
-    EditText preferences;
-    ProfileDAO profile;
-    String login;
+    private EditText name;//
+    private EditText last_name;//
+    private EditText address; //
+    private EditText preferences;//
+    private ProfileDAO profile;//
+    private String login;//
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

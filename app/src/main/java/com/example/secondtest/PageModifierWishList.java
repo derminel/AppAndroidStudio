@@ -11,15 +11,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
 
 public class PageModifierWishList extends AppCompatActivity {
-    WishListDAO wishListDAO;
-    ModifierDAO modifierDAO;
-    String wishlistnb;
-    String name;
-    boolean publicList;
-    ArrayList<String> admins;
-    String[] Visibles;
-    String creator;
-    String recipient;
+    private WishListDAO wishListDAO;//
+    private ModifierDAO modifierDAO;//
+    private String wishlistnb;//
+    private String name;//
+    private boolean publicList;//
+    private ArrayList<String> admins;//
+    private String[] Visibles;//
+    private String creator;//
+    private String recipient;//
 
 
     @Override

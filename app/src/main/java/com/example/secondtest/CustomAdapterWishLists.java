@@ -21,15 +21,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CustomAdapterWishLists extends ArrayAdapter<WishList> {
-    ArrayList<WishList> wishLists;
+    private ArrayList<WishList> wishLists;//
 
     //activity context
-    Context context;
+    private Context context;//
 
     //the layout resource file for the list items
-    int resource;
+    private int resource;//
 
-    WishListDAO wishListDAO;
+    private WishListDAO wishListDAO;//
     private String login;
 
     //constructor initializing the values

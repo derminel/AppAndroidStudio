@@ -19,16 +19,16 @@ import java.util.List;
 
 public class CustomAdapterFriends extends ArrayAdapter<User> {
     //the list values in the List of type hero
-    ArrayList<User> friends;
+    private ArrayList<User> friends;//
 
     //activity context
-    Context context;
+    private Context context;//
 
     //the layout resource file for the list items
-    int resource;
+    private int resource;//
 
-    FriendsDAO friendsDAO;
-    String login;
+    private FriendsDAO friendsDAO;//
+    private String login;//
 
     //constructor initializing the values
     public CustomAdapterFriends(Context context, int resource, ArrayList<User> friends, String login) {

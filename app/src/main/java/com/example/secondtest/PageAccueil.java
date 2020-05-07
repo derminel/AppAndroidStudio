@@ -1,6 +1,7 @@
 package com.example.secondtest;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -11,10 +12,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-public class PageAccueil extends AppCompatActivity {
+public class PageAccueil extends AppCompatActivity implements View.OnClickListener {
 
     private String login;
     private User user;
+    private CardView wishlistsCardView;
+    private CardView friendsCardView;
+    private CardView profileCardView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +28,10 @@ public class PageAccueil extends AppCompatActivity {
         this.login = getIntent().getStringExtra("LOGIN_ACCUEIL");
         this.user = new User(null, login, this);
 
+        this.wishlistsCardView = (CardView) findViewById(R.id.wishlistCardView);
+        this.friendsCardView = (CardView) findViewById(R.id.friendsCardView);
+        this.profileCardView = (CardView) findViewById(R.id.profileCardView);
+
         LayoutInflater inflater = this.getLayoutInflater();
         View view = inflater.inflate(R.layout.layout_dialog, null);
 
@@ -31,42 +39,25 @@ public class PageAccueil extends AppCompatActivity {
             openDialog(view);
         }
 
-        configureNextButtonProfile();
-        configureNextButtonWishLists();
-        configureNextButtonFriends();
+        wishlistsCardView.setOnClickListener(this);
+        friendsCardView.setOnClickListener(this);
+        profileCardView.setOnClickListener(this);
 
     }
 
-    private void configureNextButtonProfile() {
-        Button nextButton = (Button)  findViewById(R.id.Profile);
-        nextButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view){
-                Intent intent = new Intent(PageAccueil.this, PageProfil.class);
-                intent.putExtra("LOGIN_PROFIL", login);
-                startActivity(intent);
-            }
-        });
-    }
+    @Override
+    public void onClick(View v){
+        Intent intent;
 
-    private void configureNextButtonWishLists() {
-        Button nextButton = (Button)  findViewById(R.id.Wishlists);
-        nextButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view){
-                Intent intent = new Intent(PageAccueil.this, PagesListesDeSouhaits.class);
-                intent.putExtra("LOGIN_LISTES_DE_SOUHAITS", login);
-                startActivity(intent);
-            }
-        });
-    }
-    private void configureNextButtonFriends() {
-        Button nextButton = (Button)  findViewById(R.id.Friends);
-        nextButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view){
-                Intent intent = new Intent(PageAccueil.this, PageAmis.class);
-                intent.putExtra("LOGIN_AMIS", login);
-                startActivity(intent);
-            }
-        });
+        switch (v.getId()){
+            case R.id.wishlistCardView : intent = new Intent(PageAccueil.this, PagesListesDeSouhaits.class);
+                intent.putExtra("LOGIN_LISTES_DE_SOUHAITS", login); startActivity(intent); break;
+            case R.id.friendsCardView : intent = new Intent(PageAccueil.this, PageAmis.class);
+                intent.putExtra("LOGIN_AMIS", login); startActivity(intent); break;
+            case R.id.profileCardView : intent = new Intent(PageAccueil.this, PageProfil.class);
+                intent.putExtra("LOGIN_PROFIL", login); startActivity(intent); break;
+            default:break;
+        }
     }
 
     public void openDialog(View view) {

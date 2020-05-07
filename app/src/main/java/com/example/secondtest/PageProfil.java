@@ -10,9 +10,9 @@ import android.widget.TextView;
 import android.os.Bundle;
 
 public class PageProfil extends AppCompatActivity {
-    Profile profile;
-    ProfileDAO profileDAO;
-    String login;
+    private Profile profile;//
+    private ProfileDAO profileDAO;//
+    private String login;//
 
 
 

@@ -17,9 +17,10 @@ import java.util.ArrayList;
 
 public class PagePourAjouterUneListeDeSouhait extends AppCompatActivity {
 
-    WishListDAO wishListDAO ;
-    boolean publicAccess;
-    EditText inputText;
+    private WishListDAO wishListDAO ;//
+    private boolean publicAccess;//
+    private EditText inputText;//
+    private Button Back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +33,13 @@ public class PagePourAjouterUneListeDeSouhait extends AppCompatActivity {
 
         Switch switchButton = findViewById(R.id.switchAccess);
         Button buttonConfirm = findViewById(R.id.ConfirmAddWishlist);
+        Back = (Button)findViewById(R.id.notification_background);
+        Back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                activityretour();
+            }
+        });
 
         switchButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -52,6 +60,11 @@ public class PagePourAjouterUneListeDeSouhait extends AppCompatActivity {
             }
         });
     }
+    public void activityretour(){
+        Intent intent = new Intent(this, PagesListesDeSouhaits.class);
+                startActivity(intent);
+    }
+
 
     private WishList configureWishList(){
         return new WishList(this.inputText.getText().toString(), this.publicAccess,this);
