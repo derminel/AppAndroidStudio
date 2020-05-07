@@ -136,6 +136,40 @@ public class WishListDAO {
         }
     }
 
+    public String getCreator(String listNb){
+        this.wishlists.moveToFirst() ;
+        try{
+            while (!(this.wishlists.isLast())){
+                if (this.wishlists.getString(2).equals(listNb)){
+                    return this.wishlists.getString(5) ;
+                }
+                this.wishlists.moveToNext();
+            }
+            return this.wishlists.getString(5) ;
+        }
+        catch (Exception e){
+            return null;
+        }
+    }
+
+    public String getRecipient(String listNb){
+        this.wishlists.moveToFirst() ;
+        try{
+            while (!(this.wishlists.isLast())){
+                if (this.wishlists.getString(2).equals(listNb)){
+                    return this.wishlists.getString(4) ;
+                }
+                this.wishlists.moveToNext();
+            }
+            return this.wishlists.getString(4) ;
+        }
+        catch (Exception e){
+            return null;
+        }
+    }
+
+
+
     public boolean addStatus (String status, String login, String listNb) {
         ContentValues contentValues = new ContentValues();
         contentValues.put(COLUMN_MODIFIER_STATUS, status);
@@ -163,6 +197,16 @@ public class WishListDAO {
 
     public Integer deleteList(String name) {
         return this.dbh.getDb().delete(TABLE_LISTS, COLUMN_LISTS_NAME + " = ?",new String[] {name});
+    }
+
+    public boolean updateWishlist(String listnb,String name,String Recipient, boolean PublicList) {
+        SQLiteDatabase db =  dbh.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COLUMN_LISTS_NAME,name);
+        contentValues.put(COLUMN_LISTS_RECIPIENT,Recipient);
+        contentValues.put(COLUMN_LISTS_PUBLIC, PublicList);
+        db.update(TABLE_LISTS, contentValues, "LISTNB = ?",new String[] {listnb});
+        return true;
     }
 
 }

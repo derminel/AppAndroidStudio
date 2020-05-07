@@ -75,6 +75,7 @@ public class PageProduits extends AppCompatActivity {
         });
 
         configureAddButton();
+        configureSettingButton();
     }
 
     private void showToast(String msg) {
@@ -95,6 +96,16 @@ public class PageProduits extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(PageProduits.this, PagePourAjouterUnProduit.class) ;
                 startActivityForResult(intent, 1);
+            }
+        });
+    }
+    private void configureSettingButton() {
+        Button buttonSettings = (Button)  findViewById(R.id.settings);
+        buttonSettings.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view){
+                Intent intent = new Intent(PageProduits.this, PageModifierWishList.class);
+                intent.putExtra("LISTNB_MODIFIER", wishListNb);
+                startActivity(intent);
             }
         });
     }
