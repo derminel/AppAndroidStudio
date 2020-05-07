@@ -22,6 +22,8 @@
         <activity android:name=".PageAmis" />
         <activity android:name=".PagePourAjouterUnAmi" />
         <activity android:name=".PageAccueil" />
+        <activity android:name=".PageModifierWishList"/>
+        <activity android:name=".PageModifierWishListUpdate"/>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
