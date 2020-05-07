@@ -46,11 +46,11 @@ public class ProductDAO {
         contentValues.put(COLUMN_PRODUCTS_WEBSITE, website);
         long result = this.dbh.getDb().insert(TABLE_PRODUCTS,null ,contentValues);
         ContentValues contentValuesLike = new ContentValues();
-        contentValuesLike.put(COLUMN_LIKE_COUNT, 0); //initialisé à 0
+        contentValuesLike.put(COLUMN_LIKE_COUNT, 0.0); //initialisé à 0
         contentValuesLike.put(COLUMN_LIKE_LISTNB, wishListNb);
         contentValuesLike.put(COLUMN_LIKE_PRODUCTNB, productNb);
         contentValuesLike.put(COLUMN_LIKE_LOGIN,login);
-        this.dbh.getDb().insert(TABLE_LIKE,null,contentValues);
+        this.dbh.getDb().insert(TABLE_LIKE,null,contentValuesLike);
         return result != -1;
     }
 
@@ -60,6 +60,13 @@ public class ProductDAO {
         long result = this.dbh.getDb().update(TABLE_LIKE,contentValues,COLUMN_LIKE_LOGIN + " = ? AND " + COLUMN_LIKE_LISTNB
                 + " = ? AND " + COLUMN_LIKE_PRODUCTNB + " = ?",new String[] {login, wishListNb, productNb});
         return result != -1;
+    }
+
+    public String getLikeStatus(String login, String wishListNb, String productNb){
+        Cursor cursor = this.dbh.getDb().rawQuery(String.format("SELECT * FROM %s WHERE %s = ? AND %s = ? AND %s = ?",TABLE_LIKE, COLUMN_LIKE_LOGIN, COLUMN_LIKE_LISTNB,
+                COLUMN_LIKE_PRODUCTNB),new String[] {login, wishListNb, productNb});
+        cursor.moveToFirst();
+        return cursor.getString(1);
     }
 
     public Cursor getAllColumn(String productNb){

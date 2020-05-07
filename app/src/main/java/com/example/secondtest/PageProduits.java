@@ -23,8 +23,6 @@ public class PageProduits extends AppCompatActivity {
     private SearchView searchView;
     private Button addButton;
     private Button settingButton;
-    private Button likeButton;
-    private Button dislikeButton;
     private TextView titleWishList;
 
     private boolean canInit = true;
@@ -47,8 +45,6 @@ public class PageProduits extends AppCompatActivity {
         this.searchView=(SearchView) findViewById(R.id.SearchbarProducts);
         this.addButton=(Button) findViewById(R.id.addProduct);
         this.settingButton=(Button) findViewById(R.id.settings);
-        this.likeButton=(Button) findViewById(R.id.likeButton);
-        this.dislikeButton=(Button) findViewById(R.id.dislikeButton);
         this.titleWishList =(TextView) findViewById(R.id.titleWishlist);
 
         this.login = getIntent().getStringExtra("LOGIN_PRODUITS");
@@ -66,7 +62,7 @@ public class PageProduits extends AppCompatActivity {
             this.titleWishList.setText(nameWishListReload);
         }
 
-        showToast(login);
+        showToast(wishListNb);
 
         if(canInit){
             initList();
@@ -98,12 +94,14 @@ public class PageProduits extends AppCompatActivity {
         WishList wishList = new WishList(this.wishListDAO.getName(this.wishListNb), this.wishListDAO.getAccess(this.wishListNb),this);
         if(wishListNbReload == null){
             this.products = wishList.getProducts(wishListNb, this);
+            adapter=new CustomAdapterProducts(this,
+                    R.layout.row_products, products,wishListNb, login);
         }
-        else{
+        else {
             this.products = wishList.getProducts(wishListNbReload, this);
+            adapter = new CustomAdapterProducts(this,
+                    R.layout.row_products, products, wishListNb, loginReload);
         }
-        adapter=new CustomAdapterProducts(this,
-                R.layout.row_products, products,wishListNb, login);
         listView.setAdapter(adapter);
     }
 

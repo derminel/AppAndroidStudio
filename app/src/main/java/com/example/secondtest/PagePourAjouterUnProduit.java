@@ -66,7 +66,9 @@ public class PagePourAjouterUnProduit extends AppCompatActivity {
                 else {
                     contentDAO.addProduct(wishListNb, productNb);
                     Intent intent = new Intent(PagePourAjouterUnProduit.this, PageProduits.class);
+                    intent.putExtra("WISHLISTNAME3", wishListName);
                     intent.putExtra("WISHLISTNUMBER3", wishListNb);
+                    intent.putExtra("LOGIN_PRODUIT_RELOAD", login);
                     startActivity(intent);
                 }
             }
