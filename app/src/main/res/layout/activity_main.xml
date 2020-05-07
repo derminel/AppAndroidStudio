@@ -9,62 +9,64 @@
     android:orientation="vertical"
     android:padding="20sp">
 
+
+    <ImageView
+            android:id="@+id/imageViewLogo"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_gravity="center"
+            android:layout_weight="5"
+            android:src = "@drawable/dreamlist_logo"/>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="5">
+
+            <EditText
+                android:id="@+id/login"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:hint="Login" />
+
+            <EditText
+                android:id="@+id/password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Password"
+                android:layout_marginBottom="20dp"
+                android:inputType="textPassword"/>
+
+            <Button
+                android:id="@+id/ConfirmConnection"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textColor="#FFFFFF"
+                android:background="#87cefa"
+                android:text="Confirm" />
+
+        </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="30dp">
+        android:orientation="vertical"
+        android:layout_weight="1">
 
-        <TextView
-            android:id="@+id/text"
+        <Button
+            android:id="@+id/CreateAccount"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="Menu"
+            android:layout_height="wrap_content"
+            android:text="Create an account"
+            android:layout_gravity="bottom"
             android:textColor="#FFFFFF"
-            android:textSize="40sp"
-            android:textStyle="bold|italic" />
+            android:background="@drawable/confirm_button"/>
 
     </LinearLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="309dp"
-        android:layout_height="wrap_content">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/login"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Login"
-            android:translationY="-10dp" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="309dp"
-        android:layout_height="wrap_content">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/password"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Password"
-            android:inputType="textPassword"/>
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <Button
-        android:id="@+id/ConfirmConnection"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:text="Confirm"
-        android:translationY="20dp" />
-        />
-
-    <Button
-        android:id="@+id/CreateAccount"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Create an account"
-        android:translationY="190dp" />
-
 
 </LinearLayout>
