@@ -71,9 +71,8 @@ public class PageDetailProduits extends AppCompatActivity {
         this.productCategory.setText(aboutProduct.getString(5));
         this.productWebsite.setText(aboutProduct.getString(6));
 
-        showToast(productNb);
         //Permet de récupérer la réaction qui avait déjà été définie auparavant pour le produit
-        /*byte likeStatus = Byte.parseByte(productDAO.getLikeStatus(login,wishListNb,productNb));
+        byte likeStatus = Byte.parseByte(productDAO.getLikeStatus(login,wishListNb,productNb));
         if (likeStatus == 1){
             fillLike.setVisibility(View.VISIBLE);
             unfillLike.setVisibility(View.GONE);
@@ -83,7 +82,7 @@ public class PageDetailProduits extends AppCompatActivity {
             fillDislike.setVisibility(View.VISIBLE);
             unfillDislike.setVisibility(View.GONE);
             checkLike = "fillDislike";
-        }*/
+        }
 
     }
 

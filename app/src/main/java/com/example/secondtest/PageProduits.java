@@ -48,7 +48,7 @@ public class PageProduits extends AppCompatActivity {
         this.titleWishList =(TextView) findViewById(R.id.titleWishlist);
 
         this.login = getIntent().getStringExtra("LOGIN_PRODUITS");
-        this.loginReload = getIntent().getStringExtra("LOGIN_PRODUITS_RELOAD");
+        this.loginReload = getIntent().getStringExtra("LOGIN_PRODUIT_RELOAD");
         this.contentDAO = new ContentDAO(this);
         this.wishListDAO = new WishListDAO(this);
         this.wishListNb = getIntent().getStringExtra("WISHLISTNUMBER1");
@@ -61,8 +61,6 @@ public class PageProduits extends AppCompatActivity {
         else{
             this.titleWishList.setText(nameWishListReload);
         }
-
-        showToast(wishListNb);
 
         if(canInit){
             initList();
@@ -101,7 +99,7 @@ public class PageProduits extends AppCompatActivity {
         else {
             this.products = wishList.getProducts(wishListNbReload, this);
             adapter = new CustomAdapterProducts(this,
-                    R.layout.row_products, products, wishListNb, loginReload);
+                    R.layout.row_products, products, wishListNbReload, loginReload);
         }
         listView.setAdapter(adapter);
     }
