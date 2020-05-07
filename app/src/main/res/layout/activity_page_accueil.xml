@@ -16,7 +16,7 @@
         android:paddingBottom="30dp">
 
         <TextView
-            android:id="@+id/textEditProduct"
+            android:id="@+id/textMenu"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
