@@ -108,6 +108,22 @@ public class UserDAO {
             return usersLogin;
         }
     }
+
+    public boolean isALogin(String login) {
+        this.users.moveToFirst();
+        try{
+            while (!(this.users.isLast())){
+                if (users.getString(0).equals(login)) {
+                    return true;
+                }
+                this.users.moveToNext();
+            }
+            return users.getString(0).equals(login);
+        }
+        catch (Exception e){
+            return false;
+        }
+    }
 }
 
 
