@@ -10,12 +10,37 @@
     android:orientation="vertical"
     android:padding="20sp">
 
-    <Button
-        android:id="@+id/GoBackProfile"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_gravity="left"
-        android:background="@drawable/ic_navigate_before_black_24dp"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="start">
+
+            <Button
+                android:id="@+id/GoBackProfile"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/ic_navigate_before_black_24dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="end">
+
+            <Button
+                android:id="@+id/editProfile"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/ic_edit_white_24dp"/>
+        </LinearLayout>
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -31,7 +56,7 @@
             android:layout_width="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="New profile"
+            android:text="My profile"
             android:textColor="#FFFFFF"
             android:textSize="40sp"
             android:textStyle="bold|italic" />
@@ -54,8 +79,8 @@
             android:orientation="horizontal"
             android:layout_weight="1">
 
-            <EditText
-                android:id="@+id/NameDB"
+            <TextView
+                android:id="@+id/NameDBMyProfil"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:textColor="#000000"
@@ -71,8 +96,8 @@
             android:orientation="horizontal"
             android:layout_weight="1">
 
-            <EditText
-                android:id="@+id/LastNameDB"
+            <TextView
+                android:id="@+id/LastNameDBMyProfil"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:textColor="#000000"
@@ -89,8 +114,8 @@
             android:layout_marginTop="20dp"
             android:layout_weight="20">
 
-            <EditText
-                android:id="@+id/AddressDB"
+            <TextView
+                android:id="@+id/AddressDBMyProfil"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:textColor="#000000"
@@ -108,8 +133,8 @@
             android:layout_marginTop="20dp"
             android:layout_weight="100">
 
-            <EditText
-                android:id="@+id/PreferencesDB"
+            <TextView
+                android:id="@+id/PreferencesDBMyProfil"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:textColor="#000000"
@@ -128,15 +153,6 @@
         android:orientation="vertical"
         android:layout_weight="1"
         android:layout_marginTop="20dp">
-
-        <Button
-            android:id="@+id/buttonChangeProfile"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Create account"
-            android:textColor="#FFFFFF"
-            android:background="@drawable/confirm_button"/>
-
     </LinearLayout>
 
 

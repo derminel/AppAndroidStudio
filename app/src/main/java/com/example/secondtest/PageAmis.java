@@ -53,7 +53,7 @@ public class PageAmis extends AppCompatActivity {
         this.login = getIntent().getStringExtra("LOGIN_AMIS");
         this.user = new User(null,login,this);
         this.userDAO = new UserDAO(this);
-        Back = (Button)findViewById(R.id.button45);
+        Back = (Button)findViewById(R.id.GoBackFriends);
         Back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -94,6 +94,7 @@ public class PageAmis extends AppCompatActivity {
     }
     public void activityretour4(){
         Intent intent = new Intent(this, PageAccueil.class);
+        intent.putExtra("LOGIN_ACCEUIL_APRES_VISITE_LISTES", login);
         startActivity(intent);
     }
     private void initList(){

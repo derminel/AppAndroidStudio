@@ -41,7 +41,7 @@ public class PageCreationProfil extends AppCompatActivity {
     }
 
     private void configureGoBackProfile(){
-        final Button goBackButton = (Button) findViewById(R.id.GoBackProfile);
+        final Button goBackButton = (Button) findViewById(R.id.GoBackProfileCreate);
         goBackButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

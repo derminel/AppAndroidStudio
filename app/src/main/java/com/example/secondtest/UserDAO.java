@@ -108,6 +108,21 @@ public class UserDAO {
             return usersLogin;
         }
     }
+
+    public Cursor getAllColumn(String login){
+        return this.dbh.getDb().rawQuery(String.format("SELECT * FROM %s WHERE %s = ?", TABLE_USERS,
+                COLUMN_USERS_LOGIN) ,new String[] {login});
+    }
+
+    public boolean updateProfile(String login, String name, String lastname, String address, String preferences){
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COLUMN_USERS_NAME, name);
+        contentValues.put(COLUMN_USERS_LASTNAME, lastname);
+        contentValues.put(COLUMN_USERS_ADDRESS, address);
+        contentValues.put(COLUMN_USERS_PREFERENCES, preferences);
+        long result = this.dbh.getDb().update(TABLE_USERS,contentValues,COLUMN_USERS_LOGIN + " = ?",new String[] {login});
+        return result != -1;
+    }
 }
 
 
