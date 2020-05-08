@@ -23,15 +23,13 @@ public class UserDAO {
     private Cursor users;
     private DatabaseHelper dbh ;
 
+    // Constructeur
     public UserDAO (Context activePage){
         this.dbh = new DatabaseHelper(activePage);
         this.users = dbh.getDb().rawQuery(String.format("SELECT * FROM %s", TABLE_USERS),null);
     }
 
-    public String lineCounter (){
-        return String.valueOf(DatabaseUtils.queryNumEntries(this.dbh.getDb(), TABLE_USERS));
-    }
-
+    // Renvoie true si le login existe et false sinon
     public boolean exist(String login){
         this.users.moveToFirst() ;
         try {
@@ -48,6 +46,7 @@ public class UserDAO {
         }
     }
 
+    // Renvoie le mot de passe d'un certain login
     public String getPassword(String login){
         this.users.moveToFirst() ;
         try{
@@ -64,6 +63,7 @@ public class UserDAO {
         }
     }
 
+    // Ajoute un nouveau utilisateur à la base de données
     public boolean addUser(String name, String lastname, String login, String password, byte[] photo, String address, String preferences){
         ContentValues contentValues = new ContentValues();
         contentValues.put(COLUMN_USERS_NAME, name);
@@ -77,22 +77,8 @@ public class UserDAO {
         return result != -1;
     }
 
-    public void setList(String name, String lastname, String login, String password, byte[] photo, String address, String preferences){
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(COLUMN_USERS_NAME, name);
-        contentValues.put(COLUMN_USERS_LASTNAME, lastname);
-        contentValues.put(COLUMN_USERS_LOGIN, login);
-        contentValues.put(COLUMN_USERS_PASSWORD, password);
-        contentValues.put(COLUMN_USERS_PHOTO, photo);
-        contentValues.put(COLUMN_USERS_ADDRESS, address);
-        contentValues.put(COLUMN_USERS_PREFERENCES, preferences);
-        this.dbh.getDb().update(TABLE_USERS, contentValues, "Login = ?",new String[] {login});
-    }
 
-    public Integer deleteUser(String login) {
-        return this.dbh.getDb().delete(TABLE_USERS, COLUMN_USERS_LOGIN + " = ?",new String[] {login});
-    }
-
+    // Renvoie une liste de tous les login présents dans la base de données
     public ArrayList<String> getUserLoginDb (){
         ArrayList<String> usersLogin = new ArrayList<String>();
         this.users.moveToFirst() ;
@@ -109,11 +95,13 @@ public class UserDAO {
         }
     }
 
+    // Renvoie toutes les propriétés d'un User avec un certain login.
     public Cursor getAllColumn(String login){
         return this.dbh.getDb().rawQuery(String.format("SELECT * FROM %s WHERE %s = ?", TABLE_USERS,
                 COLUMN_USERS_LOGIN) ,new String[] {login});
     }
 
+    // Met le profil à jour
     public boolean updateProfile(String login, String name, String lastname, String address, String preferences){
         ContentValues contentValues = new ContentValues();
         contentValues.put(COLUMN_USERS_NAME, name);

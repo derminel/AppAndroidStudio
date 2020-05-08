@@ -17,11 +17,13 @@ public class ProfileDAO {
     private Cursor profile ;
     private DatabaseHelper dbh ;
 
+    //Constructeur
     public ProfileDAO(Context activePage){
         this.dbh = new DatabaseHelper(activePage);
         this.profile = dbh.getDb().rawQuery(String.format("SELECT * FROM %s", TABLE_USERS),null);
     }
 
+    // Renvoie le prénom d'un certain login
     public String findName (String login) {
         this.profile.moveToFirst() ;
         try{
@@ -40,6 +42,7 @@ public class ProfileDAO {
         }
     }
 
+    // Renvoie le nom de famille d'un certain login
     public String findLastName (String login) {
         this.profile.moveToFirst() ;
         try{
@@ -60,6 +63,7 @@ public class ProfileDAO {
 
     }
 
+    // Renvoie l'adresse d'un certain login
     public String findAddress (String login) {
         this.profile.moveToFirst() ;
         try{
@@ -78,7 +82,7 @@ public class ProfileDAO {
             return null;
         }
     }
-
+    // Renvoie les préférences d'un certain login
     public String findPreference (String login) {
         this.profile.moveToFirst() ;
         try{
@@ -98,29 +102,4 @@ public class ProfileDAO {
         }
     }
 
-    public boolean updateProfile(String login,String name,String lastName,String address, String preferences) {
-        SQLiteDatabase db =  dbh.getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(COLUMN_USERS_NAME,name);
-        contentValues.put(COLUMN_USERS_LASTNAME,lastName);
-        contentValues.put(COLUMN_USERS_ADDRESS, address);
-        contentValues.put(COLUMN_USERS_PREFERENCES, preferences);
-        db.update(TABLE_USERS, contentValues, "LOGIN = ?",new String[] {login});
-        return true;
-    }
-    /*public void updateProfile(String login, String Name, String LastName, String Address, String Preferences) {
-        dbh.db.execSQL("UPDATE " + TABLE_NAME_USERS +
-                "\nSET " + COLUMN_NAME_TITLE_USERS_2 + " = " + Name +
-                "\nWHERE LOGIN = " + login);
-
-        dbh.db.execSQL("UPDATE " + TABLE_NAME_USERS +
-                "\nSET " + COLUMN_NAME_TITLE_USERS_3 + " = " + LastName +
-                "\nWHERE LOGIN = " + login);
-        dbh.db.execSQL("UPDATE " + TABLE_NAME_USERS +
-                "\nSET " + COLUMN_NAME_TITLE_USERS_4 + " = " + Address +
-                "\nWHERE LOGIN = " + login);
-        dbh.db.execSQL("UPDATE " + TABLE_NAME_USERS +
-                "\nSET " + COLUMN_NAME_TITLE_USERS_6 + " = " + Preferences +
-                "\nWHERE LOGIN = " + login);
-    }*/
 }

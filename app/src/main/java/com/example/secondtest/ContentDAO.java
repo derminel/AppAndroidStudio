@@ -17,15 +17,19 @@ public class ContentDAO {
     private Cursor cursor;
     private DatabaseHelper dbh ;
 
+    // Constructeur
     public ContentDAO(Context activePage){
         this.dbh = new DatabaseHelper(activePage);
         this.cursor = dbh.getDb().rawQuery(String.format("SELECT * FROM %s", TABLE_CONTENT),null);
     }
 
+    // Enleve un produit (avec un certain productnumber) d'une certaine liste
     public Integer removeProduct(String listNb, String productNb) {
         return this.dbh.getDb().delete(TABLE_CONTENT, COLUMN_CONTENT_LISTNB + " = ? AND " + COLUMN_CONTENT_PRODUCTNB + " = ?",new String[] {listNb, productNb});
     }
-
+    /* PRE: la listnumber d'une liste
+       POST: Une Arraylist de tous les productnumbers des produits dans cette liste
+     */
     public ArrayList<String> getProductsOfAList(String listNb){
         ArrayList<String> products = new ArrayList<String>();
         Cursor cursor = this.dbh.getDb().rawQuery(String.format("SELECT * FROM %s WHERE %s = ?", TABLE_CONTENT,
@@ -42,12 +46,14 @@ public class ContentDAO {
         return products;
     }
 
+    // Chèque si un certain produit est déjà dans la liste
     public boolean alreadyInList(String listNb, String productNb){
         Cursor cursor = this.dbh.getDb().rawQuery(String.format("SELECT * FROM %s WHERE %s = ? AND %s = ?", TABLE_CONTENT,
                 COLUMN_CONTENT_LISTNB, COLUMN_CONTENT_PRODUCTNB) ,new String[] {listNb, productNb});
         return (cursor.getCount() > 0);
     }
 
+    // Ajoute un certain Produit à une certaine liste
     public boolean addProduct(String listNb, String productNb){
         ContentValues contentValues = new ContentValues();
         contentValues.put(COLUMN_CONTENT_LISTNB, listNb);
