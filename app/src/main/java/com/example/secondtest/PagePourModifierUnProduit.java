@@ -27,6 +27,7 @@ public class PagePourModifierUnProduit extends AppCompatActivity {
     private String login;
     private String productNb;
 
+    //Creation de la page pour modifier un produit
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
