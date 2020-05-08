@@ -33,6 +33,10 @@ public class User {
         return this.login;
     }
 
+    public String getPassword(){
+        return password;
+    }
+
     public void setProfile(String n, String l, byte[] photo, String a, String p) {
         this.profile.setName(n);
         this.profile.setLastname(l);
@@ -78,5 +82,10 @@ public class User {
             requests.add(new User(null,request,context));
         }
         return requests;
+    }
+
+    public void signIn(String login, String password){
+        this.login = login;
+        this.password = password;
     }
 }
