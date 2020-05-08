@@ -19,11 +19,15 @@ public class ModifierDAO {
     private DatabaseHelper dbh;
     private Cursor modifier;
 
+    // Constructeur
     public ModifierDAO(Context activePage) {
         this.dbh = new DatabaseHelper(activePage);
         this.modifier = dbh.getDb().rawQuery(String.format("SELECT * FROM %s", TABLE_MODIFIER), null);
     }
 
+    /* PRÉ: La Listnumber (Id de la liste) d'une liste
+       POST: Un Array de String contenant tous les admins de cette liste
+     */
     public ArrayList<String> getAdmin(String listNb) {
         try {
             this.modifier.moveToFirst();
@@ -41,10 +45,11 @@ public class ModifierDAO {
         } catch (Exception e) {
             return new ArrayList<String>();
         }
-
-
-
     }
+
+    /* PRÉ: La Listnumber (Id de la liste) d'une liste
+       POST: Un Array de String contenant tous les Readers de cette liste
+     */
     public ArrayList<String> getVisible(String listNb) {
         try {
             this.modifier.moveToFirst();
@@ -63,10 +68,18 @@ public class ModifierDAO {
 
     }
 
+    // Vérifie si la table est vide
     public boolean IsTableEmpty(Cursor cursor) {
         return !(cursor.getCount() > 0);
     }
 
+    /* PRE: La listnumber d'une liste, un login et le context d'une page
+       POST: Met le statut du login au titre d'Admin pour la liste avec la listnumber donnée.
+       Il renvoit:
+               * 0 en cas de succès
+               * -1 si le login est déjà Admin de cette liste
+               * -2 si le login n'existe pas
+     */
     public int updateAdmin(String listnb, String login, Context context) {
         if (alreadyAdmin(listnb, login)) {
             return -1;
@@ -79,9 +92,6 @@ public class ModifierDAO {
         }
         UserDAO userDAO = new UserDAO(context);
         if (!userDAO.exist(login)) {return -2;}
-
-        //UserDAO userDAO = new UserDAO(context);
-        //if (userDAO.isALogin(login)) {return false;}
         ContentValues contentValues = new ContentValues();
         contentValues.put(COLUMN_MODIFIER_STATUS, "Admin");
         contentValues.put(COLUMN_MODIFIER_LISTNB, listnb);
@@ -90,6 +100,14 @@ public class ModifierDAO {
         return 0;
     }
 
+    /* PRE: La listnumber d'une liste, un login et le context d'une page
+          POST: Met le statut du login au titre de Reader pour la liste avec la listnumber donnée.
+           Il renvoit:
+               * 0 en cas de succès
+               * -1 si le login est déjà Admin de cette liste
+               * -2 si le login n'existe pas
+
+        */
     public int updateVisible(String listnb, String login, Context context) {
         if (alreadyAdmin(listnb, login)) {
             return -1;
@@ -104,6 +122,7 @@ public class ModifierDAO {
         return 0;
     }
 
+    // Chèque si un login est admin d'une certaine liste
     public boolean alreadyAdmin(String listNb, String login) {
         try {
             this.modifier.moveToFirst();
@@ -118,6 +137,7 @@ public class ModifierDAO {
 
     }
 
+    // Chèque si un login est Reader d'une certaine liste
     public boolean alreadyVisible(String listNb, String login) {
         try {
             this.modifier.moveToFirst();
@@ -132,6 +152,10 @@ public class ModifierDAO {
 
     }
 
+    /* PRE: Une listnumber listNb, un login et le contexte d'une page
+       POST: Met le statut du login a Reader pour une certaine liste.
+       IL renvoit 0 en cas de succès et -3 si on essaye d'enlever le créateur des admins.
+     */
     public int deleteAdmin(String listNb, String login, Context context) {
         WishListDAO wishListDAO = new WishListDAO(context);
         if (login.equals(wishListDAO.getCreator(listNb))) {return -3;}
@@ -141,6 +165,7 @@ public class ModifierDAO {
         return 0;
     }
 
+    // Empeche le login de voir une certaine liste de souhait
     public void setInvisible(String listNb, String login) {
         dbh.getDb().delete(TABLE_MODIFIER, "LOGIN = ? AND LISTNB= ?", new String[] {login, listNb});
     }

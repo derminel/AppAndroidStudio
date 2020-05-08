@@ -26,8 +26,6 @@
         <activity android:name=".PageAjouterAdmin"/>
         <activity android:name=".PagePourModifierAdmins"/>
         <activity android:name=".PageCreationProfil"/>
-        <activity android:name=".PagePourModiferVisibles"/>
-        <activity android:name=".PageAjouterVisible"/>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

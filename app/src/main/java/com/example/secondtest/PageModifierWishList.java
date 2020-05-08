@@ -91,7 +91,7 @@ public class PageModifierWishList extends AppCompatActivity {
     }
 
     private void configureChangeAdminsButton() {
-        ImageButton nextButton = (ImageButton) findViewById(R.id.editAdmins);
+        Button nextButton = (Button) findViewById(R.id.editAdmins);
         nextButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view){
                 Intent intent = new Intent(PageModifierWishList.this, PagePourModifierAdmins.class);
@@ -103,7 +103,7 @@ public class PageModifierWishList extends AppCompatActivity {
     }
 
     private void configureChangeVisibleButton() {
-        ImageButton nextButton = (ImageButton) findViewById(R.id.editVisible);
+        Button nextButton = (Button) findViewById(R.id.editVisible);
         nextButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view){
                 Intent intent = new Intent(PageModifierWishList.this, PagePourModiferVisibles.class);
@@ -115,7 +115,7 @@ public class PageModifierWishList extends AppCompatActivity {
     }
 
     private void configureRetourDesParametres() {
-        ImageButton nextButton = findViewById(R.id.buttonRetourdesParametres);
+        Button nextButton = findViewById(R.id.buttonRetourdesParametres);
         nextButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view){
                 Intent intent = new Intent(PageModifierWishList.this, PageProduits.class);

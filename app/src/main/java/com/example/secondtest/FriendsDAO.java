@@ -14,16 +14,18 @@ public class FriendsDAO {
     private Cursor friends ;
     private DatabaseHelper dbh ;
 
+    // Créateur
     public FriendsDAO(Context activePage){
         this.dbh = new DatabaseHelper(activePage);
         this.friends = dbh.getDb().rawQuery(String.format("SELECT * FROM %s", TABLE_FRIENDS),null);
     }
 
-    //Il faut que les 2 soient amis l'un avec l'autre pour qu'ils soient réellement amis c'est ce que vérifie cette fonction
+    //Cette fonction vérifie que 2 utilisateurs soient amis (il faut que les 2 soient amis l'un avec l'autre pour qu'ils soient réellement amis)
     public boolean areFriends(String login1, String login2){
         return (areFriendsHelp(login1, login2) && areFriendsHelp(login2,login1));
     }
 
+    // Fonction utilsée par areFriends, elle vérifie si un ami a fait une demande d'ami à un autre ami.
     private boolean areFriendsHelp(String login1, String login2){
         this.friends.moveToFirst() ;
         try {
@@ -40,6 +42,7 @@ public class FriendsDAO {
         }
     }
 
+    // Ajoute login2 comme ami à login1
     public boolean addFriends(String login1, String login2){
         ContentValues contentValues = new ContentValues();
         contentValues.put(COLUMN_FRIENDS_LOGIN1, login1);
@@ -48,6 +51,7 @@ public class FriendsDAO {
         return result != -1;
     }
 
+    //Supprime la relation d'amitié entre de login1 et login2.
     public Integer deleteFriend(String login1, String login2) {
         Integer firstDelete = this.dbh.getDb().delete(TABLE_FRIENDS, COLUMN_FRIENDS_LOGIN1 + " = ? AND "
                 + COLUMN_FRIENDS_LOGIN2 + " = ?",new String[] {login1, login2});
@@ -56,12 +60,14 @@ public class FriendsDAO {
         return firstDelete + secondDelete;
     }
 
+    // Supprime la demande d'ami de login1 par rapport à login2
     public Integer refuseFriend(String login1, String login2){
         Integer refuse = this.dbh.getDb().delete(TABLE_FRIENDS, COLUMN_FRIENDS_LOGIN1 + " = ? AND "
                 + COLUMN_FRIENDS_LOGIN2 + " = ?",new String[] {login2, login1});
         return refuse;
     }
 
+    // Login1 accepte la demande d'ami de login2
     public boolean acceptFriend(String login1, String login2){
         ContentValues contentValues = new ContentValues();
         contentValues.put(COLUMN_FRIENDS_LOGIN1, login1);
@@ -98,6 +104,7 @@ public class FriendsDAO {
         return cleanRequests;
     }
 
+    // Fonction nécessaire à getRequests, renvoie toutes les demandes d'ami addressées à un login
     private ArrayList<String> getRequestsHelp(String login){
         ArrayList<String> requestsHelp = new ArrayList<String>();
         this.friends.moveToFirst() ;
@@ -117,6 +124,7 @@ public class FriendsDAO {
         return requestsHelp;
     }
 
+    // Retourne tous les amis d'un certain login
     public ArrayList<String> getFriends(String login){
         ArrayList<String> friends = new ArrayList<String>();
         this.friends.moveToFirst() ;

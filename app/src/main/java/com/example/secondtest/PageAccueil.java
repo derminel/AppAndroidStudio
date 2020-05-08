@@ -41,6 +41,17 @@ public class PageAccueil extends AppCompatActivity implements View.OnClickListen
         profileCardView.setOnClickListener(this);
 
         showToast(login);
+        exitButton();
+    }
+
+    private void exitButton() {
+        Button exitButton = findViewById(R.id.exitButton);;
+        exitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openDialogExitButton(v);
+            }
+        });
     }
 
     //Creation du message d'erreur
@@ -74,14 +85,39 @@ public class PageAccueil extends AppCompatActivity implements View.OnClickListen
 
     //Si une demande d'ami est en attente
     public void openDialog(View view) {
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        AlertDialog.Builder alertDialogBuilder = new android.app.AlertDialog.Builder(this,R.style.AlertDialog);
         alertDialogBuilder.setMessage("Do you want to go to friends' requests ?");
-        alertDialogBuilder.setPositiveButton("yes", new DialogInterface.OnClickListener() {
+
+        alertDialogBuilder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface arg0, int arg1) {
                 start(PagePourGererDmdAmis.class);
             }
         });
+
+        alertDialogBuilder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+            }
+        });
+
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
+    }
+
+    public void openDialogExitButton(View view) {
+        AlertDialog.Builder alertDialogBuilder = new android.app.AlertDialog.Builder(this,R.style.AlertDialog);
+        alertDialogBuilder.setMessage("Are you sure you want to log out ?");
+
+        alertDialogBuilder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface arg0, int arg1) {
+                Intent intent = new Intent(PageAccueil.this, MainActivity.class);
+                intent.putExtra("Login", login);
+                startActivity(intent);
+            }
+        });
+
         alertDialogBuilder.setNegativeButton("No", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
