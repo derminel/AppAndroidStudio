@@ -44,28 +44,25 @@ public class PageDetailProduits extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_page_detail_produits);
-
-        this.titleProduct = (TextView) findViewById(R.id.titleProduct);
-        this.productName = (TextView) findViewById(R.id.setName);
-        this.productCategory = (TextView) findViewById(R.id.setCategory);
-        this.productPrice = (TextView) findViewById(R.id.setPrice);
-        this.productWebsite = (TextView) findViewById(R.id.setWebsite);
-        this.productInfo = (TextView) findViewById(R.id.setInfo);
-        this.unfillLike = (ImageView) findViewById(R.id.unfillLike);
-        this.fillLike = (ImageView) findViewById(R.id.fillLike);
-        this.unfillDislike = (ImageView) findViewById(R.id.unfillDislike);
-        this.fillDislike = (ImageView) findViewById(R.id.fillDislike);
-        this.editProduct = (Button) findViewById(R.id.editProduct);
-
         this.productDAO = new ProductDAO(this);
         this.productNb = productDAO.getProductNumber(getIntent().getStringExtra("ProductName"));
-        this.wishListNb = getIntent().getStringExtra("WishlistNb");
         this.aboutProduct = productDAO.getAllColumn(productNb);
+        this.wishListNb = getIntent().getStringExtra("WishlistNb");
         this.login = getIntent().getStringExtra("Login");
-
         this.aboutProduct.moveToFirst();
 
+        setContentView(R.layout.activity_page_detail_produits);
+        this.titleProduct = findViewById(R.id.titleProduct);
+        this.productName = findViewById(R.id.setName);
+        this.productCategory = findViewById(R.id.setCategory);
+        this.productPrice = findViewById(R.id.setPrice);
+        this.productWebsite = findViewById(R.id.setWebsite);
+        this.productInfo = findViewById(R.id.setInfo);
+        this.unfillLike = findViewById(R.id.unfillLike);
+        this.fillLike = findViewById(R.id.fillLike);
+        this.unfillDislike = findViewById(R.id.unfillDislike);
+        this.fillDislike = findViewById(R.id.fillDislike);
+        this.editProduct = findViewById(R.id.editProduct);
         this.titleProduct.setText(aboutProduct.getString(1));
         this.productName.setText(aboutProduct.getString(1));
         this.productPrice.setText(aboutProduct.getString(3));
@@ -73,6 +70,19 @@ public class PageDetailProduits extends AppCompatActivity {
         this.productCategory.setText(aboutProduct.getString(5));
         this.productWebsite.setText(aboutProduct.getString(6));
 
+        configureEditProductButton();
+        editProduct();
+        configurelikestatus();
+    }
+
+    private void start(Class<?> cls){
+        Intent page = new Intent(PageDetailProduits.this, cls);
+        page.putExtra("Login", login);
+        page.putExtra("ProductNb", productNb);
+        page.putExtra("WishlistNb", wishListNb);
+        startActivity(page);
+    }
+    private void configurelikestatus(){
         //Permet de récupérer la réaction qui avait déjà été définie auparavant pour le produit
         byte likeStatus = Byte.parseByte(productDAO.getLikeStatus(login,wishListNb,productNb));
         if (likeStatus == 1){
@@ -85,23 +95,17 @@ public class PageDetailProduits extends AppCompatActivity {
             unfillDislike.setVisibility(View.GONE);
             checkLike = "fillDislike";
         }
-        configureEditProductButton();
-
     }
-
     private void editProduct(){
         editProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(PageDetailProduits.this, PagePourModifierUnProduit.class);
-                intent.putExtra("ProductNb", productNb);
-                startActivity(intent);
+                start(PagePourModifierUnProduit.class);
             }
         });
     }
-
     public void unfilledLike(View view){
-        if(checkDislike == "unfillDislike"){
+        if(checkDislike.equals("unfillDislike")){
             if (checkLike.equals("unfillLike")){
                 animation(fillLike);
                 fillLike.setVisibility(View.VISIBLE);
@@ -125,7 +129,7 @@ public class PageDetailProduits extends AppCompatActivity {
     }
 
     public void unfilledDislike(View view){
-        if(checkLike == "unfillLike") {
+        if(checkLike.equals("unfillLike")) {
             if (checkDislike.equals("unfillDislike")) {
                 animation(fillDislike);
                 fillDislike.setVisibility(View.VISIBLE);
@@ -177,11 +181,7 @@ public class PageDetailProduits extends AppCompatActivity {
         edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(PageDetailProduits.this, PagePourModifierUnProduit.class);
-                intent.putExtra("ProductNb", productNb);
-                intent.putExtra("WishlistNb", wishListNb);
-                intent.putExtra("Login", login);
-                startActivity(intent);
+                start(PagePourModifierUnProduit.class);
             }
         });
     }

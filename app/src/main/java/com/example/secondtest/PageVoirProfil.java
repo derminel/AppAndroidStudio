@@ -23,6 +23,8 @@ public class PageVoirProfil extends AppCompatActivity {
         userInfo.moveToFirst();
 
         setContentView(R.layout.activity_voir_un_ami);
+        TextView title = findViewById(R.id.textNewProfile);
+        title.setText(String.format("%s's profile",friend));
         TextView name = findViewById(R.id.NameDBMyProfil);
         TextView lastName = findViewById(R.id.LastNameDBMyProfil);
         TextView address = findViewById(R.id.AddressDBMyProfil);

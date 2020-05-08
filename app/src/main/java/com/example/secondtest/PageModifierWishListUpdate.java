@@ -16,20 +16,24 @@ public class PageModifierWishListUpdate extends AppCompatActivity {
     private EditText name;//
     private EditText recipient;//
     private boolean publicAccess;//
+    private String login;
 
     //Creation de la page pour determiner le nom, les recipients et si la liste est publique ou non
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_page_modifier_wishlist_update);
         this.wishListDAO = new WishListDAO(this);
         this.wishlistNb = getIntent().getStringExtra("WishlistNb");
+        this.login = getIntent().getStringExtra("Login");
+        this.publicAccess = false;
 
+        setContentView(R.layout.activity_page_modifier_wishlist_update);
         this.name = findViewById(R.id.list_nameDB);
         this.recipient = findViewById(R.id.recipient);
-        this.publicAccess = false ;
-
+        configureSwitch();
+        configureButtonSaveWishlist();
+    }
+    private void configureSwitch(){
         Switch switchButton = findViewById(R.id.switchpublic);
-
         switchButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -38,21 +42,19 @@ public class PageModifierWishListUpdate extends AppCompatActivity {
                 }
             }
         });
-
-
-        configureButtonSaveWishlist();
-
     }
-
+    private void start(Class<?> cls){
+        Intent page = new Intent(PageModifierWishListUpdate.this, cls);
+        page.putExtra("Login", login);
+        page.putExtra("WishlistNb", wishlistNb);
+        startActivity(page);
+    }
     private void configureButtonSaveWishlist() {
-        Button nextButton = (Button)  findViewById(R.id.buttonSaveList);
+        Button nextButton = findViewById(R.id.buttonSaveList);
         nextButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view){
-
                 wishListDAO.updateWishlist(wishlistNb, name.getText().toString(), recipient.getText().toString(), publicAccess);
-                Intent intent = new Intent(PageModifierWishListUpdate.this, PageModifierWishList.class);
-                intent.putExtra("WishlistNb", wishlistNb);
-                startActivity(intent);
+                start(PageModifierWishList.class);
             }
         });
     }

@@ -63,13 +63,16 @@ public class PagePourModifierUnProduit extends AppCompatActivity implements Adap
                 productDAO.updateProduct(productNb, productName.getText().toString(),
                         Integer.parseInt(productPrice.getText().toString()),productInfo.getText().toString(),
                         category,productWebsite.getText().toString());
-                Intent intent = new Intent(PagePourModifierUnProduit.this, PageDetailProduits.class);
-                intent.putExtra("ProductNb", productNb);
-                intent.putExtra("WishlistNb", wishListNb);
-                intent.putExtra("Login", login);
-                startActivity(intent);
+                start(PageDetailProduits.class);
             }
         });
+    }
+    private void start(Class<?> cls){
+        Intent page = new Intent(PagePourModifierUnProduit.this, cls);
+        page.putExtra("Login", login);
+        page.putExtra("ProductNb", productNb);
+        page.putExtra("WishlistNb", wishListNb);
+        startActivity(page);
     }
     @Override
     public void onItemSelected(AdapterView<?> arg0, View arg1, int position, long id) {

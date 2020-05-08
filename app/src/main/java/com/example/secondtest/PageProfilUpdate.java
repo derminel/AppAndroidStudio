@@ -61,7 +61,8 @@ public class PageProfilUpdate extends AppCompatActivity {
         Button buttonSaveProfile = findViewById(R.id.buttonSaveProfile);
         buttonSaveProfile.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view){
-                if (name.getText().toString().equals("") || lastName.getText().toString().equals("")){
+                if (name.getText().toString().equals("") ||
+                        lastName.getText().toString().equals("")){
                     showToast("Please fill in the 2 first fields");
                 }
                 else{

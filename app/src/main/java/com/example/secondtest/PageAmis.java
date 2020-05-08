@@ -62,7 +62,6 @@ public class PageAmis extends AppCompatActivity {
         page.putExtra("from", "Amis");
         startActivity(page);
     }
-
     //barre de recherche des amis
     private void configuresearchbar(){
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {

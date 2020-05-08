@@ -31,13 +31,25 @@ public class PagePourModiferVisibles extends AppCompatActivity {
         this.wishlistNb  = getIntent().getStringExtra("WishlistNb");
         this.login  = getIntent().getStringExtra("Login");
         modifierDAO = new ModifierDAO(this);
-
-        listViewVis=(ListView)findViewById(R.id.ListViewVisible);
-        searchView=(SearchView) findViewById(R.id.SearchbarVisibles);
-        addButton=(Button) findViewById(R.id.addVisblebutton);
-
+        listViewVis = findViewById(R.id.ListViewVisible);
         initList();
-
+        configureAddButton();
+        configureBackButton();
+        configureSearch();
+    }
+    private void start(Class<?> cls){
+        Intent page = new Intent(PagePourModiferVisibles.this, cls);
+        page.putExtra("Login", login);
+        page.putExtra("WishlistNb", wishlistNb);
+        startActivity(page);
+    }
+    private void initList(){
+        this.visibles = modifierDAO.getVisible(wishlistNb);
+        adapter=new CustomAdapterVisibles(this, R.layout.row_wishlists, visibles, wishlistNb);
+        listViewVis.setAdapter(adapter);
+    }
+    private void configureSearch(){
+        searchView = findViewById(R.id.SearchbarVisibles);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -50,17 +62,7 @@ public class PagePourModiferVisibles extends AppCompatActivity {
                 return false;
             }
         });
-
-        configureAddButton();
-        configureBackButton();
     }
-
-    private void initList(){
-        this.visibles = modifierDAO.getVisible(wishlistNb);
-        adapter=new CustomAdapterVisibles(this, R.layout.row_wishlists, visibles, wishlistNb);
-        listViewVis.setAdapter(adapter);
-    }
-
     //bouton pour ajouter des amis
     private void configureAddButton() {
         Button addFriend = findViewById(R.id.addVisblebutton);
@@ -87,16 +89,13 @@ public class PagePourModiferVisibles extends AppCompatActivity {
         BackButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(PagePourModiferVisibles.this, PageModifierWishList.class) ;
-                intent.putExtra("WishlistNb", wishlistNb);
-                intent.putExtra("Login", login);
-                startActivity(intent);
+                start(PageModifierWishList.class);
             }
         });
     }
 
     private int configureModifierDao(){
-        return modifierDAO.updateAdmin(wishlistNb, searchView.getQuery().toString(),this);
+        return modifierDAO.updateVisible(wishlistNb, searchView.getQuery().toString(),this);
     }
 
 

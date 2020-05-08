@@ -54,7 +54,12 @@ public class PagePourModifierAdmins extends AppCompatActivity {
         configureAddButton();
         configureBackButton();
     }
-
+    private void start(Class<?> cls){
+        Intent page = new Intent(PagePourModifierAdmins.this, cls);
+        page.putExtra("Login", login);
+        page.putExtra("WishlistNb", wishlistNb);
+        startActivity(page);
+    }
     private void initList(){
         this.admins = modifierDAO.getAdmin(wishlistNb);
         adapter=new CustomAdapterAdmins(this, R.layout.row_wishlists, admins, wishlistNb);
@@ -88,10 +93,7 @@ public class PagePourModifierAdmins extends AppCompatActivity {
         BackButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(PagePourModifierAdmins.this, PageModifierWishList.class) ;
-                intent.putExtra("WishlistNb", wishlistNb);
-                intent.putExtra("Login", login);
-                startActivity(intent);
+                start(PageModifierWishList.class);
             }
         });
     }

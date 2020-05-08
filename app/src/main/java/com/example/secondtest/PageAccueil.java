@@ -61,6 +61,7 @@ public class PageAccueil extends AppCompatActivity implements View.OnClickListen
     private void start(Class<?> cls){
         Intent page = new Intent(PageAccueil.this, cls);
         page.putExtra("Login", login);
+        page.putExtra("from","Accueil");
         startActivity(page);
     }
 
@@ -111,9 +112,7 @@ public class PageAccueil extends AppCompatActivity implements View.OnClickListen
         alertDialogBuilder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface arg0, int arg1) {
-                Intent intent = new Intent(PageAccueil.this, MainActivity.class);
-                intent.putExtra("Login", login);
-                startActivity(intent);
+                start(MainActivity.class);
             }
         });
 

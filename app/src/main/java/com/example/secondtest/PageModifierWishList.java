@@ -17,10 +17,6 @@ public class PageModifierWishList extends AppCompatActivity {
     private WishListDAO wishListDAO;//
     private ModifierDAO modifierDAO;//
     private String wishlistnb;//
-    private String name;//
-    private boolean publicList;//
-    private ArrayAdapter<String> admins;//
-    private String[] Visibles;//
     private String creator;//
     private String recipient;//
     private String login;
@@ -61,7 +57,6 @@ public class PageModifierWishList extends AppCompatActivity {
         ListView visibleDB = findViewById(R.id.ListViewVisible);
         ArrayList<String> visibles = modifierDAO.getVisible(wishlistnb);
 
-
         ArrayAdapter<String> adapterAdmin =
                 new ArrayAdapter<String>(this, R.layout.row_admins, admins);
         adminsDB.setAdapter(adapterAdmin);
@@ -77,28 +72,26 @@ public class PageModifierWishList extends AppCompatActivity {
         configureRetourDesParametres();
 
     }
-
+    private void start(Class<?> cls){
+        Intent page = new Intent(PageModifierWishList.this, cls);
+        page.putExtra("Login", login);
+        page.putExtra("WishlistNb", wishlistnb);
+        startActivity(page);
+    }
     private void configureChangeListButton() {
         Button nextButton = (Button) findViewById(R.id.buttonChangeList);
         nextButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view){
-                Intent intent = new Intent(PageModifierWishList.this, PageModifierWishListUpdate.class);
-                intent.putExtra("WishlistNb", wishlistnb);
-                intent.putExtra("Login", login);
-                startActivity(intent);
+                start(PageModifierWishListUpdate.class);
             }
         });
-
     }
 
     private void configureChangeAdminsButton() {
         Button nextButton = (Button) findViewById(R.id.editAdmins);
         nextButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view){
-                Intent intent = new Intent(PageModifierWishList.this, PagePourModifierAdmins.class);
-                intent.putExtra("WishlistNb", wishlistnb);
-                intent.putExtra("Login", login);
-                startActivity(intent);
+                start(PagePourModifierAdmins.class);
             }
         });
 
@@ -108,10 +101,7 @@ public class PageModifierWishList extends AppCompatActivity {
         Button nextButton = (Button) findViewById(R.id.editVisible);
         nextButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view){
-                Intent intent = new Intent(PageModifierWishList.this, PagePourModiferVisibles.class);
-                intent.putExtra("WishlistNb", wishlistnb);
-                intent.putExtra("Login", login);
-                startActivity(intent);
+                start(PagePourModiferVisibles.class);
             }
         });
 
@@ -121,10 +111,7 @@ public class PageModifierWishList extends AppCompatActivity {
         Button nextButton = findViewById(R.id.buttonRetourdesParametres);
         nextButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view){
-                Intent intent = new Intent(PageModifierWishList.this, PageProduits.class);
-                intent.putExtra("WishlistNb", wishlistnb);
-                intent.putExtra("Login", login);
-                startActivity(intent);
+                start(PageProduits.class);
             }
         });
 
