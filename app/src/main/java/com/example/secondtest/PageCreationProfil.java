@@ -24,8 +24,8 @@ public class PageCreationProfil extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_page_creation_profil);
-        this.login = getIntent().getStringExtra("LOGIN_PROFIL");
-        this.password = getIntent().getStringExtra("PASSWORD_PROFIL");
+        this.login = getIntent().getStringExtra("Login");
+        this.password = getIntent().getStringExtra("pswd");
 
         this.myDb = new DatabaseHelper(this);
         this.profile = new ProfileDAO(this);
@@ -40,18 +40,24 @@ public class PageCreationProfil extends AppCompatActivity {
         configureGoBackProfile();
     }
 
+    private void showToast(String msg) {
+        Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
+    }
+    private void start(Class<?> cls){
+        Intent page = new Intent(PageCreationProfil.this, cls);
+        page.putExtra("Login", login);
+        startActivity(page);
+    }
     private void configureGoBackProfile(){
-        final Button goBackButton = (Button) findViewById(R.id.GoBackProfileCreate);
+        final Button goBackButton = findViewById(R.id.GoBackProfileCreate);
         goBackButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                startActivity(new Intent(PageCreationProfil.this, PageCreationAccount.class));
+            public void onClick(View v) { start(PageCreationAccount.class);
             }
         });
     }
 
     private void configureButtonCreateProfile() {
-
         Button buttonSaveProfile = (Button) findViewById(R.id.buttonCreateProfile);
         buttonSaveProfile.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view){
@@ -61,17 +67,11 @@ public class PageCreationProfil extends AppCompatActivity {
                 else{
                     userDAO.addUser(name.getText().toString(), last_name.getText().toString(), login, password, null,
                             address.getText().toString(), preferences.getText().toString());
-                    Intent intent = new Intent(PageCreationProfil.this, PageAccueil.class);
-                    intent.putExtra("LOGIN_ACCUEIL_APRES_CREATION", login);
-                    startActivity(intent);
+                    start(PageAccueil.class);
                 }
 
             }
         });
-    }
-
-    private void showToast(String msg) {
-        Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
     }
 
 }

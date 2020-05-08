@@ -27,21 +27,21 @@ public class PagePourGererDmdAmis extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_page_pour_gerer_dmd_amis);
-
-        this.listView=(ListView)findViewById(R.id.ListViewFriendsRequests);
-        this.goBack = (Button) findViewById(R.id.GoBackFriendRequest);
-
-        this.login = getIntent().getStringExtra("LOGIN_DEMAMDES_AMIS");
-        this.loginPopUp = getIntent().getStringExtra("LOGIN_GERER_AMIS");
-        if(loginPopUp != null){
-            login = loginPopUp;
-        }
+        this.login = getIntent().getStringExtra("Login");
         this.user = new User(null, login, this);
 
-        showToast(login+"|"+loginPopUp);
+        setContentView(R.layout.activity_page_pour_gerer_dmd_amis);
+        this.listView = findViewById(R.id.ListViewFriendsRequests);
+        this.goBack = findViewById(R.id.GoBackFriendRequest);
+
         initList();
         goBack();
+
+        showToast("Login" + login);
+    }
+
+    private void showToast(String msg) {
+        Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
     }
 
     private void goBack() {
@@ -60,10 +60,6 @@ public class PagePourGererDmdAmis extends AppCompatActivity {
                 }
             }
         });
-    }
-
-    private void showToast(String msg) {
-        Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
     }
 
     private void initList(){

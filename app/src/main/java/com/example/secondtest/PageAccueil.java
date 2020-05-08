@@ -15,10 +15,6 @@ import android.widget.Toast;
 public class PageAccueil extends AppCompatActivity implements View.OnClickListener {
 
     private String login;
-    private String loginAfterCreate;
-    private String loginAfterSetProfile;
-    private String loginAfterSetFriend;
-    private String loginAfterFriendRequests;
     private User user;
     private CardView wishlistsCardView;
     private CardView friendsCardView;
@@ -31,6 +27,7 @@ public class PageAccueil extends AppCompatActivity implements View.OnClickListen
         setContentView(R.layout.activity_page_accueil);
 
         this.login = getIntent().getStringExtra("Login");
+        this.user = new User(null, login, this);
 
         this.wishlistsCardView = findViewById(R.id.wishlistCardView);
         this.friendsCardView = findViewById(R.id.friendsCardView);

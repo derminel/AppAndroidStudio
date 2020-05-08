@@ -72,6 +72,7 @@ public class PagePourAjouterUnAmi extends AppCompatActivity {
     private User configureUser(){
         return new User(null,this.login,this);
     }
+
     public void activityretour7(){
         Intent intent = new Intent(this, PageAmis.class);
         startActivity(intent);

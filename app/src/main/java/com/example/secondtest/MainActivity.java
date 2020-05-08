@@ -17,10 +17,6 @@ public class MainActivity extends AppCompatActivity {
     EditText login;
     EditText password;
 
-    //A supprimer si inutile
-    //private DatabaseHelper myDb ;
-    //private FriendsDAO friendsDAO;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,10 +25,6 @@ public class MainActivity extends AppCompatActivity {
 
         this.login = findViewById(R.id.login);
         this.password = findViewById(R.id.password);
-
-        //A supprimer si inutile
-        //this.myDb = new DatabaseHelper(this);
-        //this.friendsDAO = new FriendsDAO(this);
 
         configureButtonSignIn();
         configureButtonSignUp();

@@ -24,9 +24,6 @@ import static com.example.secondtest.DatabaseContract.TABLE_LISTS;
 import static com.example.secondtest.DatabaseContract.TABLE_USERS;
 
 public class PageCreationAccount extends AppCompatActivity {
-    //A supprimer si inutile
-    //private DatabaseHelper myDb ;
-    //private UserDAO userDAO;
 
     private User user;
     private EditText login;
@@ -37,16 +34,10 @@ public class PageCreationAccount extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //A supprimer si inutile
-        //this.myDb = new DatabaseHelper(this);
-        //this.userDAO = new UserDAO(this);
-
         setContentView(R.layout.activity_page_creation_account);
-
         this.login = findViewById(R.id.loginCreateAccount);
         this.password1 = findViewById(R.id.password1CreateAccount);
         this.password2 = findViewById(R.id.password2CreateAccount);
-
         this.login.setText(getIntent().getStringExtra("Login"), TextView.BufferType.EDITABLE);
 
         configureCreateAccount();
