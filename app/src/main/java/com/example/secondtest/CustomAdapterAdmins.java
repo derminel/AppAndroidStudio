@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -56,6 +57,9 @@ public class CustomAdapterAdmins extends ArrayAdapter<String> {
         return view;
 
     }
+    private void showToast(String msg) {
+        Toast.makeText(context.getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
+    }
 
     private void removeAdmin(final String login, final String listnb, final Context context) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
@@ -65,7 +69,11 @@ public class CustomAdapterAdmins extends ArrayAdapter<String> {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
 
-                modifierDAO.deleteAdmin(listnb, login);
+                int err = modifierDAO.deleteAdmin(listnb, login, context);
+                if (err == -3) {
+                    showToast("The creator of the list must remain an admin");
+                    return;
+                }
                 notifyDataSetChanged();
                 Intent intent = new Intent(context, PagePourModifierAdmins.class);
                 intent.putExtra("WishlistNb", listnb);

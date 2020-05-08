@@ -79,6 +79,7 @@ public class ModifierDAO {
         }
         UserDAO userDAO = new UserDAO(context);
         if (!userDAO.exist(login)) {return -2;}
+
         //UserDAO userDAO = new UserDAO(context);
         //if (userDAO.isALogin(login)) {return false;}
         ContentValues contentValues = new ContentValues();
@@ -131,16 +132,18 @@ public class ModifierDAO {
 
     }
 
-    public void deleteAdmin(String listNb, String login) {
+    public int deleteAdmin(String listNb, String login, Context context) {
+        WishListDAO wishListDAO = new WishListDAO(context);
+        if (login.equals(wishListDAO.getCreator(listNb))) {return -3;}
         ContentValues contentValues = new ContentValues();
         contentValues.put(COLUMN_MODIFIER_STATUS, "Reader");
         dbh.getDb().update(TABLE_MODIFIER, contentValues, "LOGIN = ? AND LISTNB = ?", new String[] {login, listNb});
+        return 0;
     }
 
     public void setInvisible(String listNb, String login) {
         dbh.getDb().delete(TABLE_MODIFIER, "LOGIN = ? AND LISTNB= ?", new String[] {login, listNb});
     }
-
 
 
 }

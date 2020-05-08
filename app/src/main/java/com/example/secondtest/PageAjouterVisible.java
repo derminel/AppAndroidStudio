@@ -43,6 +43,9 @@ public class PageAjouterVisible extends AppCompatActivity {
                 if (err == -1) {
                     showToast("This login is already an admin and can edit your list");
                 }
+                if (err == -3) {
+                    showToast("You can not ");
+                }
                 Intent intent = new Intent(PageAjouterVisible.this, PagePourModiferVisibles.class);
                 intent.putExtra("WishlistNb", wishlistnb);
                 startActivity(intent);
