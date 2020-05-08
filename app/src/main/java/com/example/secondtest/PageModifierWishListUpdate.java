@@ -16,6 +16,7 @@ public class PageModifierWishListUpdate extends AppCompatActivity {
     private String wishlistNb;//
     private EditText name;//
     private EditText recipient;//
+    private Button goBack;
     private boolean publicAccess;//
     UserDAO userDAO;
 
@@ -27,12 +28,17 @@ public class PageModifierWishListUpdate extends AppCompatActivity {
         this.wishlistNb = getIntent().getStringExtra("WishlistNb");
         this.userDAO = new UserDAO(this);
 
-
         this.name = findViewById(R.id.list_nameDB);
         this.recipient = findViewById(R.id.recipient);
-        this.publicAccess = false ;
+        this.publicAccess = wishListDAO.getAccess(wishlistNb) ;
+        this.goBack = findViewById(R.id.GoBackWishlistUpdate);
 
         Switch switchButton = findViewById(R.id.switchpublic);
+
+        name.setText(wishListDAO.getName(wishlistNb));
+        recipient.setText(wishListDAO.getRecipient(wishlistNb));
+        switchButton.setChecked(publicAccess);
+
 
         switchButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -40,11 +46,15 @@ public class PageModifierWishListUpdate extends AppCompatActivity {
                 if(isChecked){
                     publicAccess = true;
                 }
+                else{
+                    publicAccess = false;
+                }
             }
         });
 
 
         configureButtonSaveWishlist();
+        configureGoBack();
 
     }
     private void showToast(String msg) {
@@ -55,7 +65,7 @@ public class PageModifierWishListUpdate extends AppCompatActivity {
         Button nextButton = (Button)  findViewById(R.id.buttonSaveList);
         nextButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view){
-                if (!userDAO.exist(recipient.getText().toString())) {
+                if (!recipient.getText().toString().equals("") && !userDAO.exist(recipient.getText().toString())) {
                     showToast("The login of the recipient does not exist");
                 } else {
                     wishListDAO.updateWishlist(wishlistNb, name.getText().toString(), recipient.getText().toString(), publicAccess);
@@ -63,6 +73,16 @@ public class PageModifierWishListUpdate extends AppCompatActivity {
                     intent.putExtra("WishlistNb", wishlistNb);
                     startActivity(intent);
                 }
+            }
+        });
+    }
+
+    private void configureGoBack() {
+        goBack.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view){
+                Intent intent = new Intent(PageModifierWishListUpdate.this, PageModifierWishList.class);
+                intent.putExtra("WishlistNb", wishlistNb);
+                startActivity(intent);
             }
         });
     }

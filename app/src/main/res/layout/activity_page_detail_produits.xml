@@ -41,6 +41,13 @@
             android:textSize="45sp"
             android:textStyle="bold|italic" />
 
+            <Button
+                android:id="@+id/GoBackProductDetails"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/ic_navigate_before_blue_24dp"
+                style="?android:attr/borderlessButtonStyle"/>
+
         <Button
             android:id="@+id/editProduct"
             style="?android:attr/borderlessButtonStyle"

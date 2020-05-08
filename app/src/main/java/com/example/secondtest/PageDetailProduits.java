@@ -32,7 +32,7 @@ public class PageDetailProduits extends AppCompatActivity {
     private ImageView unfillDislike;
     private ImageView fillDislike;
     private String checkDislike = "unfillDislike";
-    private Button editProduct;
+    private Button goBack;
 
     ProductDAO productDAO;
     Cursor aboutProduct;
@@ -56,7 +56,7 @@ public class PageDetailProduits extends AppCompatActivity {
         this.fillLike = (ImageView) findViewById(R.id.fillLike);
         this.unfillDislike = (ImageView) findViewById(R.id.unfillDislike);
         this.fillDislike = (ImageView) findViewById(R.id.fillDislike);
-        this.editProduct = (Button) findViewById(R.id.editProduct);
+        this.goBack = (Button) findViewById(R.id.GoBackProductDetails);
 
         this.productDAO = new ProductDAO(this);
         this.productNb = getIntent().getStringExtra("ProductNb");
@@ -86,18 +86,7 @@ public class PageDetailProduits extends AppCompatActivity {
             checkLike = "fillDislike";
         }
         configureEditProductButton();
-
-    }
-
-    private void editProduct(){
-        editProduct.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(PageDetailProduits.this, PagePourModifierUnProduit.class);
-                intent.putExtra("ProductNb", productNb);
-                startActivity(intent);
-            }
-        });
+        configureGoBack();
     }
 
     public void unfilledLike(View view){
@@ -179,6 +168,18 @@ public class PageDetailProduits extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(PageDetailProduits.this, PagePourModifierUnProduit.class);
                 intent.putExtra("ProductNb", productNb);
+                intent.putExtra("WishlistNb", wishListNb);
+                intent.putExtra("Login", login);
+                startActivity(intent);
+            }
+        });
+    }
+
+    private void configureGoBack(){
+        goBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(PageDetailProduits.this, PageProduits.class);
                 intent.putExtra("WishlistNb", wishListNb);
                 intent.putExtra("Login", login);
                 startActivity(intent);
