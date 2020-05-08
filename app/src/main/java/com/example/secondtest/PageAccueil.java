@@ -40,12 +40,11 @@ public class PageAccueil extends AppCompatActivity implements View.OnClickListen
         friendsCardView.setOnClickListener(this);
         profileCardView.setOnClickListener(this);
 
-        showToast(login);
         exitButton();
     }
 
     private void exitButton() {
-        Button exitButton = findViewById(R.id.exitButton);;
+        Button exitButton = findViewById(R.id.exitButton);
         exitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
