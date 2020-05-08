@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">SecondTest</string>
+    <string name="insert_text">Insert text</string>
+    <string name="price">Price</string>
+    <string name="website">Website</string>
+    <string name="info">Info</string>
+    <string name="insert_title">Insert title</string>
+    <string name="name">Name</string>
+    <string name="category">Category</string>
+    <string name="SignUp">Create an account</string>
+    <string name="SignIn">SIGN IN</string>
+    <string name="new_account">New account</string>
 </resources>

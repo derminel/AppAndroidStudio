@@ -27,38 +27,18 @@ public class PageAccueil extends AppCompatActivity implements View.OnClickListen
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_page_accueil);
 
-        this.login = getIntent().getStringExtra("LOGIN_ACCUEIL");
-        this.loginAfterCreate = getIntent().getStringExtra("LOGIN_ACCUEIL_APRES_CREATION");
-        this.loginAfterSetProfile = getIntent().getStringExtra("LOGIN_ACCEUIL_APRES_VISITE_PROFIL");
-        this.loginAfterSetFriend = getIntent().getStringExtra("LOGIN_ACCEUIL_APRES_VISITE_AMIS");
-        this.loginAfterFriendRequests = getIntent().getStringExtra("LOGIN_AMIS_APRES_POP_UP_AMIS");
-        this.user = new User(null, login, this);
+        this.login = getIntent().getStringExtra("Login");
 
-        if (loginAfterCreate != null){
-            this.login = loginAfterCreate;
-        }
-        else if(loginAfterSetProfile != null){
-            login = loginAfterSetProfile;
-        }
-        else if(loginAfterSetFriend != null){
-            login = loginAfterSetFriend;
-        }
-        else if(loginAfterFriendRequests != null){
-            login = loginAfterFriendRequests;
-        }
-
-        this.wishlistsCardView = (CardView) findViewById(R.id.wishlistCardView);
-        this.friendsCardView = (CardView) findViewById(R.id.friendsCardView);
-        this.profileCardView = (CardView) findViewById(R.id.profileCardView);
+        this.wishlistsCardView = findViewById(R.id.wishlistCardView);
+        this.friendsCardView = findViewById(R.id.friendsCardView);
+        this.profileCardView = findViewById(R.id.profileCardView);
 
         LayoutInflater inflater = this.getLayoutInflater();
         View view = inflater.inflate(R.layout.layout_dialog, null);
-
-        if(user.getRequests(this).size() > 0){
-            openDialog(view);
-        }
+        if(user.getRequests(this).size() > 0){ openDialog(view); }
 
         wishlistsCardView.setOnClickListener(this);
         friendsCardView.setOnClickListener(this);
@@ -67,18 +47,27 @@ public class PageAccueil extends AppCompatActivity implements View.OnClickListen
         showToast(login);
     }
 
+    private void showToast(String msg) {
+        Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
+    }
+
+    private void start(Intent gotoapage){
+        gotoapage.putExtra("Login", login);
+        startActivity(gotoapage);
+    }
+
     @Override
     public void onClick(View v){
-        Intent intent;
-
         switch (v.getId()){
-            case R.id.wishlistCardView : intent = new Intent(PageAccueil.this, PagesListesDeSouhaits.class);
-                intent.putExtra("LOGIN_LISTES_DE_SOUHAITS", login); startActivity(intent); break;
-            case R.id.friendsCardView : intent = new Intent(PageAccueil.this, PageAmis.class);
-                intent.putExtra("LOGIN_AMIS", login); startActivity(intent); break;
-            case R.id.profileCardView : intent = new Intent(PageAccueil.this, PageProfil.class);
-                intent.putExtra("LOGIN_PROFIL", login); startActivity(intent); break;
-            default:break;
+            case R.id.wishlistCardView :
+                Intent gotoWishlist = new Intent(PageAccueil.this, PagesListesDeSouhaits.class);
+                start(gotoWishlist) ; break;
+            case R.id.friendsCardView :
+                Intent gotoFriends = new Intent(PageAccueil.this, PageAmis.class);
+                start(gotoFriends); break;
+            case R.id.profileCardView :
+                Intent gotoProfil = new Intent(PageAccueil.this, PageProfil.class);
+                start(gotoProfil); break;
         }
     }
 
@@ -90,7 +79,7 @@ public class PageAccueil extends AppCompatActivity implements View.OnClickListen
             @Override
             public void onClick(DialogInterface arg0, int arg1) {
                 Intent intent = new Intent(PageAccueil.this, PagePourGererDmdAmis.class);
-                intent.putExtra("LOGIN_GERER_AMIS", login);
+                intent.putExtra("Login", login);
                 startActivity(intent);
             }
         });
@@ -103,9 +92,5 @@ public class PageAccueil extends AppCompatActivity implements View.OnClickListen
 
         AlertDialog alertDialog = alertDialogBuilder.create();
         alertDialog.show();
-    }
-
-    private void showToast(String msg) {
-        Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
     }
 }

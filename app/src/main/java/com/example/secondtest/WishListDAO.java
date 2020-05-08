@@ -132,6 +132,7 @@ public class WishListDAO {
     }
 
     public boolean addList(String name, boolean access, String listNb, String description, String recipient, String creator){
+        //Ajouter à la table listes
         ContentValues contentValues = new ContentValues();
         contentValues.put(COLUMN_LISTS_NAME, name);
         contentValues.put(COLUMN_LISTS_PUBLIC, access);
@@ -140,13 +141,19 @@ public class WishListDAO {
         contentValues.put(COLUMN_LISTS_RECIPIENT, recipient);
         contentValues.put(COLUMN_LISTS_CREATOR, creator);
         long result = this.dbh.getDb().insert(TABLE_LISTS,null ,contentValues);
+
+        //Ajouter le créateur à la table modifier
         ContentValues contentValuesModifier = new ContentValues();
         contentValuesModifier.put(COLUMN_MODIFIER_LISTNB, listNb);
         contentValuesModifier.put(COLUMN_MODIFIER_LOGIN, creator);
         contentValuesModifier.put(COLUMN_MODIFIER_STATUS, "Admin");
         this.dbh.getDb().insert(TABLE_MODIFIER,null ,contentValuesModifier);
+
+        //récupère les amis de créateur
         Cursor cursor = this.dbh.getDb().rawQuery(String.format("SELECT * FROM %s WHERE %s = ?", TABLE_FRIENDS,
                 COLUMN_FRIENDS_LOGIN1) ,new String[] {creator});
+
+        //récupère la wishlist de
         if ((cursor.getCount()) > 0 && (access)){ //ajoute tous les amis du créateur comme reader de la liste si elle est publique
             cursor.moveToFirst();
             while (!(cursor.isLast())){

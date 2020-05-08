@@ -15,14 +15,13 @@ public class User {
     public User(String p, String l, Context context) {
         this.password = p ;
         this.login = l ;
-        this.friends = new ArrayList<User>() ;
+        this.friends = new ArrayList<User>();
         this.profile = new Profile(this.login, context);
         this.userDAO = new UserDAO(context);
         this.friendsDAO = new FriendsDAO(context);
     }
 
     public boolean exist(String login){
-
         return this.userDAO.exist(login);
     }
 

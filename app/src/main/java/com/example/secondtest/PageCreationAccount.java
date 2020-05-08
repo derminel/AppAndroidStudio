@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import static com.example.secondtest.DatabaseContract.COLUMN_LISTS_CREATOR;
@@ -23,11 +24,11 @@ import static com.example.secondtest.DatabaseContract.TABLE_LISTS;
 import static com.example.secondtest.DatabaseContract.TABLE_USERS;
 
 public class PageCreationAccount extends AppCompatActivity {
-    //
-    private DatabaseHelper myDb ;
-    private User user;
-    private UserDAO userDAO;
+    //A supprimer si inutile
+    //private DatabaseHelper myDb ;
+    //private UserDAO userDAO;
 
+    private User user;
     private EditText login;
     private EditText password1;
     private EditText password2;
@@ -35,16 +36,20 @@ public class PageCreationAccount extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_page_creation_account);
 
-        this.myDb = new DatabaseHelper(this);
-        this.userDAO = new UserDAO(this);
+        //A supprimer si inutile
+        //this.myDb = new DatabaseHelper(this);
+        //this.userDAO = new UserDAO(this);
+
+        setContentView(R.layout.activity_page_creation_account);
 
         this.login = findViewById(R.id.loginCreateAccount);
         this.password1 = findViewById(R.id.password1CreateAccount);
         this.password2 = findViewById(R.id.password2CreateAccount);
 
-        configureNextButtonCreate();
+        this.login.setText(getIntent().getStringExtra("Login"), TextView.BufferType.EDITABLE);
+
+        configureCreateAccount();
         configureGoBackAccount();
     }
 
@@ -52,8 +57,12 @@ public class PageCreationAccount extends AppCompatActivity {
         Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
     }
 
+    private void configureUser(){
+        this.user = new User(this.password1.getText().toString(), this.login.getText().toString(), this);
+    }
+
     private void configureGoBackAccount(){
-        final Button goBackButton = (Button) findViewById(R.id.GoBackAccount);
+        final Button goBackButton = findViewById(R.id.GoBackAccount);
         goBackButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -62,31 +71,29 @@ public class PageCreationAccount extends AppCompatActivity {
         });
     }
 
-    private void configureNextButtonCreate() {
-        final Button nextButton = (Button) findViewById(R.id.CreateAccount);
-        nextButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
+    private void configureCreateAccount() {
+        final Button CreateAccount = findViewById(R.id.CreateAccount);
+        CreateAccount.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
                 configureUser();
-                if (login.getText().toString().equals("") || password1.getText().toString().equals("") || password2.getText().toString().equals("")){
+                if (login.getText().toString().equals("") ||
+                        password1.getText().toString().equals("") ||
+                        password2.getText().toString().equals("")){
                     showToast("Please fill in all fields");
                 }
                 else if (user.exist(login.getText().toString())){
                     showToast("This login is already taken");
                 }
                 else if (!(password1.getText().toString().equals(password2.getText().toString()))){
-                    showToast("You've written 2 differents password");
+                    showToast("You've written 2 different password");
                 }
                 else{
-                    Intent intent = new Intent(PageCreationAccount.this, PageCreationProfil.class);
-                    intent.putExtra("LOGIN_PROFIL", login.getText().toString());
-                    intent.putExtra("PASSWORD_PROFIL", password1.getText().toString());
-                    startActivity(intent);
+                    Intent gotoProfil = new Intent(PageCreationAccount.this, PageCreationProfil.class);
+                    gotoProfil.putExtra("Login", login.getText().toString());
+                    gotoProfil.putExtra("pswd", password1.getText().toString());
+                    startActivity(gotoProfil);
                 }
             }
         });
-    }
-
-    private void configureUser(){
-        this.user = new User(this.password1.getText().toString(), this.login.getText().toString(), this);
     }
 }
