@@ -19,6 +19,7 @@ public class PageAccueil extends AppCompatActivity implements View.OnClickListen
     private CardView wishlistsCardView;
     private CardView friendsCardView;
     private CardView profileCardView;
+    private Button exitButton;
 
     //Creation de la page d'accueil
     @Override
@@ -33,6 +34,7 @@ public class PageAccueil extends AppCompatActivity implements View.OnClickListen
         this.wishlistsCardView = findViewById(R.id.wishlistCardView);
         this.friendsCardView = findViewById(R.id.friendsCardView);
         this.profileCardView = findViewById(R.id.profileCardView);
+        this.exitButton = findViewById(R.id.exitButton);
 
         LayoutInflater inflater = this.getLayoutInflater();
         View view = inflater.inflate(R.layout.layout_dialog, null);
@@ -43,6 +45,16 @@ public class PageAccueil extends AppCompatActivity implements View.OnClickListen
         profileCardView.setOnClickListener(this);
 
         showToast(login);
+        exitButton();
+    }
+
+    private void exitButton() {
+        exitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openDialogExitButton(v);
+            }
+        });
     }
 
     //Creation du message d'erreur
@@ -73,13 +85,36 @@ public class PageAccueil extends AppCompatActivity implements View.OnClickListen
 
     //Si une demande d'ami est en attente
     public void openDialog(View view) {
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        AlertDialog.Builder alertDialogBuilder = new android.app.AlertDialog.Builder(this,R.style.AlertDialog);
         alertDialogBuilder.setMessage("Do you want to go to friends' requests ?");
 
-        alertDialogBuilder.setPositiveButton("yes", new DialogInterface.OnClickListener() {
+        alertDialogBuilder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface arg0, int arg1) {
                 Intent intent = new Intent(PageAccueil.this, PagePourGererDmdAmis.class);
+                intent.putExtra("Login", login);
+                startActivity(intent);
+            }
+        });
+
+        alertDialogBuilder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+            }
+        });
+
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
+    }
+
+    public void openDialogExitButton(View view) {
+        AlertDialog.Builder alertDialogBuilder = new android.app.AlertDialog.Builder(this,R.style.AlertDialog);
+        alertDialogBuilder.setMessage("Are you sure you want to log out ?");
+
+        alertDialogBuilder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface arg0, int arg1) {
+                Intent intent = new Intent(PageAccueil.this, MainActivity.class);
                 intent.putExtra("Login", login);
                 startActivity(intent);
             }
