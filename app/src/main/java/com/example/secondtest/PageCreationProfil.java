@@ -55,12 +55,16 @@ public class PageCreationProfil extends AppCompatActivity {
         Button buttonSaveProfile = (Button) findViewById(R.id.buttonCreateProfile);
         buttonSaveProfile.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view){
+                User user =configureUser();
                 if (name.getText().toString().equals("") || last_name.getText().toString().equals("") || address.getText().toString().equals("")){
                     showToast("Please fill in the 3 first fields");
                 }
                 else{
-                    userDAO.addUser(name.getText().toString(), last_name.getText().toString(), login, password, null,
-                            address.getText().toString(), preferences.getText().toString());
+                    user.signIn(login, password);
+                    user.setProfile(name.getText().toString(), last_name.getText().toString(),
+                            null, address.getText().toString(), preferences.getText().toString());
+                    userDAO.addUser(user.getProfile().getName(),user.getProfile().getLastname(),user.getLogin(),user.getPassword(),
+                            null, user.getProfile().getAddress(), user.getProfile().getPreferences());
                     Intent intent = new Intent(PageCreationProfil.this, PageAccueil.class);
                     intent.putExtra("LOGIN_ACCUEIL_APRES_CREATION", login);
                     startActivity(intent);
@@ -68,6 +72,10 @@ public class PageCreationProfil extends AppCompatActivity {
 
             }
         });
+    }
+
+    private User configureUser(){
+        return new User(null, null, this);
     }
 
     private void showToast(String msg) {

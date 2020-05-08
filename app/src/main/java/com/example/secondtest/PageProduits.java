@@ -67,6 +67,8 @@ public class PageProduits extends AppCompatActivity {
             canInit = false;
         }
 
+        showToast(wishListNb);
+
         //Filter adapté pour les listes de Product
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override

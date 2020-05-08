@@ -29,6 +29,7 @@ import java.util.Arrays;
 public class PagesListesDeSouhaits extends AppCompatActivity {
 
     private ArrayList<WishList> wishLists; //
+    private ArrayList<String> wishlistsNb;
     private CustomAdapterWishLists adapter;//
     private ListView listView;//
     private SearchView searchView;//
@@ -92,12 +93,14 @@ public class PagesListesDeSouhaits extends AppCompatActivity {
 
     private void initList(){
         this.wishLists = new ArrayList<WishList>();
+        this.wishlistsNb = new ArrayList<String>();
         for (String listNb : this.wishListDAO.getWishLists(login)){
             WishList newList = new WishList(wishListDAO.getName(listNb), true, this); //mis a true juste pour la création
             this.wishLists.add(newList);
+            this.wishlistsNb.add(listNb);
         }
         adapter=new CustomAdapterWishLists(this,
-                R.layout.row_wishlists, wishLists, login);
+                R.layout.row_wishlists, wishLists, wishlistsNb, login);
         listView.setAdapter(adapter);
     }
 
