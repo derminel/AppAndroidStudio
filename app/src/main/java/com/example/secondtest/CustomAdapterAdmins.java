@@ -57,7 +57,7 @@ public class CustomAdapterAdmins extends ArrayAdapter<String> {
 
     }
 
-    private void removeAdmin(final String login, final String listnb, Context context) {
+    private void removeAdmin(final String login, final String listnb, final Context context) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle("Are you sure you want to delete this?");
 
@@ -66,8 +66,10 @@ public class CustomAdapterAdmins extends ArrayAdapter<String> {
             public void onClick(DialogInterface dialogInterface, int i) {
 
                 modifierDAO.deleteAdmin(listnb, login);
-
                 notifyDataSetChanged();
+                Intent intent = new Intent(context, PagePourModifierAdmins.class);
+                intent.putExtra("WishlistNb", listnb);
+                context.startActivity(intent);
             }
         });
 
