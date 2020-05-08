@@ -20,6 +20,7 @@ public class PageCreationProfil extends AppCompatActivity {
     private String login;//
     private String password;
 
+    //Creation de la page pour creer son nouveau profil
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +52,7 @@ public class PageCreationProfil extends AppCompatActivity {
     private User configureUser(){
         return new User(null, null, this);
     }
+    //bouton pour revenir a son profil
     private void configureGoBackProfile(){
         Button goBackButton = findViewById(R.id.GoBackProfileCreate);
         goBackButton.setOnClickListener(new View.OnClickListener() {
@@ -60,6 +62,7 @@ public class PageCreationProfil extends AppCompatActivity {
         });
     }
 
+    //bouton pour confirmer ses donnees rentrees
     private void configureButtonCreateProfile() {
         Button buttonSaveProfile = (Button) findViewById(R.id.buttonCreateProfile);
         buttonSaveProfile.setOnClickListener(new View.OnClickListener() {
