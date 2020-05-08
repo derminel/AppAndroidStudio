@@ -3,6 +3,7 @@ package com.example.secondtest;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,6 +40,12 @@ public class CustomAdapterFriends extends ArrayAdapter<User> {
         this.login = login;
         this.friendsDAO = new FriendsDAO(context);
     }
+    private void start(Class<?> cls, String friend){
+        Intent page = new Intent(context, cls);
+        page.putExtra("Login", login);
+        page.putExtra("from", friend);
+        context.startActivity(page);
+    }
 
     @NonNull
     @Override
@@ -62,6 +69,12 @@ public class CustomAdapterFriends extends ArrayAdapter<User> {
             @Override
             public void onClick(View view) {
                 removeFriend(friend);
+            }
+        });
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                start(PageVoirProfil.class, friend.getLogin());
             }
         });
         return view;
