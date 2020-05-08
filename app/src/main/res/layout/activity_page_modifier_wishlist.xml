@@ -22,7 +22,7 @@
             android:gravity="start">
 
             <Button
-                android:id="@+id/buttonRetour"
+                android:id="@+id/buttonRetourdesParametres"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:background="@drawable/ic_navigate_before_black_24dp"
@@ -107,7 +107,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/nom_liste"
+                android:id="@+id/ListNameDB"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:textColor="#000000"
@@ -240,7 +240,6 @@
                     android:id="@+id/ListViewAdmins"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:paddingTop="20dp"
                     android:choiceMode="multipleChoice"
                     android:background="#FFFFFF">
 
@@ -299,7 +298,6 @@
                     android:id="@+id/ListViewVisible"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:paddingTop="20dp"
                     android:choiceMode="multipleChoice"
                     android:background="#FFFFFF">
 

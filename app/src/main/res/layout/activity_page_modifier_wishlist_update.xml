@@ -8,7 +8,7 @@
     android:background="#87cefa"
     android:orientation="vertical"
     android:padding="20sp"
-    tools:context=".PageModifierWishListUpdate">
+    tools:context="com.example.secondtest.PageModifierWishListUpdate">
 
 
     <Button
@@ -43,149 +43,92 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="20dp"
-        android:orientation="horizontal">
+        android:orientation="vertical"
+        android:layout_weight="20">
 
-        <TextView
-            android:id="@+id/textName"
-            android:layout_height="match_parent"
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_weight="1"
-            android:text="Name"
-            android:textColor="#FFFFFF"
-            android:textSize="24sp"
-            android:textStyle="bold" />
+            android:layout_height="wrap_content"
+            android:layout_weight="8"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="20dp"
+                android:layout_gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textName"
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:text="Name"
+                    android:textColor="#FFFFFF"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:paddingTop="5dp"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/list_nameDB"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textColor="#000000"
+                    android:hint="Enter your name"
+                    android:background="#FFFFFF"
+                    android:textSize="23sp" />
+            </LinearLayout>
+
+            <Switch
+                android:id="@+id/switchpublic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:text="Public list "
+                android:textColor="#FFFFFF"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="20dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textLastname"
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:text="Recipient"
+                    android:textColor="#FFFFFF"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:paddingTop="5dp"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/recipient"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textColor="#000000"
+                    android:hint="Enter the recipient of the list"
+                    android:background="#FFFFFF"
+                    android:textSize="23sp" />
+            </LinearLayout>
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="8"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:orientation="vertical">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:paddingTop="5dp"
-            android:orientation="horizontal"
-            android:layout_weight="1">
-
-            <EditText
-                android:id="@+id/name_update"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textColor="#000000"
-                android:hint="Enter your name"
-                android:background="#FFFFFF"
-                android:textSize="23sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="20dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/textLastname"
-                android:layout_height="match_parent"
-                android:layout_width="match_parent"
-                android:layout_weight="1"
-                android:text="Lastname"
-                android:textColor="#FFFFFF"
-                android:textSize="24sp"
-                android:textStyle="bold" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:paddingTop="5dp"
-            android:orientation="horizontal"
-            android:layout_weight="1">
-
-            <EditText
-                android:id="@+id/last_name_update"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textColor="#000000"
-                android:hint="Enter your lastname"
-                android:background="#FFFFFF"
-                android:textSize="23sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="20dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/textAddress"
-                android:layout_height="match_parent"
-                android:layout_width="match_parent"
-                android:layout_weight="1"
-                android:text="Address"
-                android:textColor="#FFFFFF"
-                android:textSize="24sp"
-                android:textStyle="bold" />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="5dp"
-            android:orientation="horizontal"
-            android:layout_weight="35">
-
-            <EditText
-                android:id="@+id/address_update"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textColor="#000000"
-                android:hint="Enter your address"
-                android:background="#FFFFFF"
-                android:gravity="top"
-                android:textSize="23sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="20dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/textPeferences"
-                android:layout_height="match_parent"
-                android:layout_width="match_parent"
-                android:layout_weight="1"
-                android:text="Preferences"
-                android:textColor="#FFFFFF"
-                android:textSize="24sp"
-                android:textStyle="bold" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="5dp"
-            android:orientation="horizontal"
-            android:layout_weight="100">
-
-            <EditText
-                android:id="@+id/preferences_update"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textColor="#000000"
-                android:hint="Enter your preferences"
-                android:background="#FFFFFF"
-                android:gravity="top"
-                android:textSize="23sp" />
-        </LinearLayout>
-
-    </LinearLayout>
 
 
     <LinearLayout
@@ -196,68 +139,15 @@
         android:layout_marginTop="20dp">
 
         <Button
-            android:id="@+id/buttonSaveProfile"
+            android:id="@+id/buttonSaveList"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Update my profile"
+            android:text="Update my list"
             android:textColor="#FFFFFF"
             android:background="@drawable/confirm_button"
             style="?android:attr/borderlessButtonStyle"/>
 
     </LinearLayout>
-
-
-</LinearLayout>
-
-<!--
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="Update List"
-        android:textSize="36sp"
-        android:translationY="-130dp" />
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="309dp"
-        android:layout_height="wrap_content">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/list_nameDB"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Click to change the name of the list"
-            android:translationY="-20dp" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="309dp"
-        android:layout_height="wrap_content">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/recipient"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Click to change the recipient of the list"
-            android:inputType="textShortMessage"
-            android:translationY="-10dp" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <Button
-        android:id="@+id/buttonSaveList"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Save my parameters"
-        android:translationY="162dp" />
-
-    <Switch
-        android:id="@+id/switchpublic"
-        android:layout_width="308dp"
-        android:layout_height="wrap_content"
-        android:text="Make the list public"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:translationY="-30dp" />
-
+    </LinearLayout>
 
 </LinearLayout>
