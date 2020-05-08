@@ -57,6 +57,7 @@ public class CustomAdapterProducts extends ArrayAdapter<Product> {
         Button deleteButton = view.findViewById(R.id.deleteProduct);
 
         final Product product = products.get(position);
+        final ProductDAO productDAO = new ProductDAO(context);
 
         //adding values to the list item
         //imageView.setImageDrawable(context.getResources().getDrawable(hero.getImage()));
@@ -73,7 +74,7 @@ public class CustomAdapterProducts extends ArrayAdapter<Product> {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, PageDetailProduits.class);
-                intent.putExtra("ProductName", product.getName());
+                intent.putExtra("ProductNb", productDAO.getProductNumber(product.getName()));
                 intent.putExtra("Login", login);
                 intent.putExtra("WishlistNb", listNb);
                 context.startActivity(intent);

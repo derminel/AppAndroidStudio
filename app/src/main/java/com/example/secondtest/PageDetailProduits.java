@@ -59,7 +59,7 @@ public class PageDetailProduits extends AppCompatActivity {
         this.editProduct = (Button) findViewById(R.id.editProduct);
 
         this.productDAO = new ProductDAO(this);
-        this.productNb = productDAO.getProductNumber(getIntent().getStringExtra("ProductName"));
+        this.productNb = getIntent().getStringExtra("ProductNb");
         this.wishListNb = getIntent().getStringExtra("WishlistNb");
         this.aboutProduct = productDAO.getAllColumn(productNb);
         this.login = getIntent().getStringExtra("Login");
