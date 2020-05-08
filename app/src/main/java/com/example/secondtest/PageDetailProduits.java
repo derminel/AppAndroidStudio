@@ -85,6 +85,7 @@ public class PageDetailProduits extends AppCompatActivity {
             unfillDislike.setVisibility(View.GONE);
             checkLike = "fillDislike";
         }
+        configureEditProductButton();
 
     }
 
@@ -170,5 +171,18 @@ public class PageDetailProduits extends AppCompatActivity {
 
     private void showToast(String msg) {
         Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
+    }
+    private void configureEditProductButton() {
+        Button edit = findViewById(R.id.editProduct);
+        edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(PageDetailProduits.this, PagePourModifierUnProduit.class);
+                intent.putExtra("ProductNb", productNb);
+                intent.putExtra("WishlistNb", wishListNb);
+                intent.putExtra("Login", login);
+                startActivity(intent);
+            }
+        });
     }
 }
