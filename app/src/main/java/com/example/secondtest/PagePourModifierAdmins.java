@@ -53,6 +53,7 @@ public class PagePourModifierAdmins extends AppCompatActivity {
         });
 
         configureAddButton();
+        configureBackButton();
     }
 
     private void initList(){
@@ -70,4 +71,17 @@ public class PagePourModifierAdmins extends AppCompatActivity {
             }
         });
     }
+
+    private void configureBackButton(){
+        Button BackButton = findViewById(R.id.buttonRetourAdmin);
+        BackButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(PagePourModifierAdmins.this, PageModifierWishList.class) ;
+                intent.putExtra("WishlistNb", wishlistNb);
+                startActivity(intent);
+            }
+        });
+    }
+
 }
