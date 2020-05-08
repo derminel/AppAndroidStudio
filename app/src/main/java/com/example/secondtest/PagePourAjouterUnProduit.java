@@ -45,7 +45,7 @@ public class PagePourAjouterUnProduit extends AppCompatActivity implements Adapt
         this.contentDAO = new ContentDAO(this);
         this.productDAO = new ProductDAO(this);
 
-        Button buttonConfirm = findViewById(R.id.ConfirmAddProduct);
+        Button buttonConfirm = findViewById(R.id.buttonCreateProduct);
 
         Spinner spin = findViewById(R.id.setCategorySpinner);
         spin.setOnItemSelectedListener(this);

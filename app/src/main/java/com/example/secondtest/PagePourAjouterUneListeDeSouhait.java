@@ -19,7 +19,9 @@ public class PagePourAjouterUneListeDeSouhait extends AppCompatActivity {
 
     private WishListDAO wishListDAO ;//
     private boolean publicAccess;//
-    private EditText inputText;//
+    private EditText name;//
+    private EditText recipient;
+    private EditText description;
     private Button Back;
     private String login;
 
@@ -30,12 +32,14 @@ public class PagePourAjouterUneListeDeSouhait extends AppCompatActivity {
 
         this.wishListDAO = new WishListDAO(this);
         this.publicAccess = false ;
-        this.inputText = findViewById(R.id.nameNewList);
+        this.name = findViewById(R.id.setNameNewWishlist);
+        this.recipient = findViewById(R.id.setRecipientNewWishlist);
+        this.description = findViewById(R.id.setDescriptionNewWishlist);
         this.login = getIntent().getStringExtra("LOGIN_AJOUT_LISTE_DE_SOUHAITS");
 
         Switch switchButton = findViewById(R.id.switchAccess);
         Button buttonConfirm = findViewById(R.id.ConfirmAddWishlist);
-        Back = (Button)findViewById(R.id.notification_background);
+        Back = (Button)findViewById(R.id.GoBackAddWishlist);
         Back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -58,12 +62,17 @@ public class PagePourAjouterUneListeDeSouhait extends AppCompatActivity {
         buttonConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                WishList newList = configureWishList();
-                wishListDAO.addList(newList.getName(), publicAccess, newList.getListNb(), null, null, login);
-                showToast("WishList has been created");
-                Intent intent = new Intent(PagePourAjouterUneListeDeSouhait.this, PagesListesDeSouhaits.class);
-                intent.putExtra("LOGIN_LISTE_DE_SOUHAITS_RELOAD", login);
-                startActivity(intent);
+                if (name.getText().toString().equals("") || recipient.getText().toString().equals("")){
+                    showToast("Please fill in the 2 first fields");
+                }
+                else{
+                    WishList newList = configureWishList();
+                    wishListDAO.addList(newList.getName(), publicAccess, newList.getListNb(), description.getText().toString(), recipient.getText().toString(), login);
+                    showToast("WishList has been created");
+                    Intent intent = new Intent(PagePourAjouterUneListeDeSouhait.this, PagesListesDeSouhaits.class);
+                    intent.putExtra("LOGIN_LISTE_DE_SOUHAITS_RELOAD", login);
+                    startActivity(intent);
+                }
             }
         });
     }
@@ -74,7 +83,7 @@ public class PagePourAjouterUneListeDeSouhait extends AppCompatActivity {
 
 
     private WishList configureWishList(){
-        return new WishList(this.inputText.getText().toString(), this.publicAccess,this);
+        return new WishList(this.name.getText().toString(), this.publicAccess,this);
     }
 
     private void showToast(String msg) {

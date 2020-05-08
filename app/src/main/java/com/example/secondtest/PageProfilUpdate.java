@@ -63,11 +63,17 @@ public class PageProfilUpdate extends AppCompatActivity {
         Button buttonSaveProfile = (Button) findViewById(R.id.buttonSaveProfile);
         buttonSaveProfile.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view){
-                userDAO.updateProfile(login, name.getText().toString(), lastName.getText().toString(),
-                        address.getText().toString(), preferences.getText().toString());
-                Intent intent = new Intent(PageProfilUpdate.this, PageProfil.class);
-                intent.putExtra("LOGIN_PROFIL_RELOAD", login);
-                startActivity(intent);
+                if (name.getText().toString().equals("") || lastName.getText().toString().equals("") || address.getText().toString().equals("")){
+                    showToast("Please fill in the 3 first fields");
+                }
+                else{
+                    userDAO.updateProfile(login, name.getText().toString(), lastName.getText().toString(),
+                            address.getText().toString(), preferences.getText().toString());
+                    Intent intent = new Intent(PageProfilUpdate.this, PageProfil.class);
+                    intent.putExtra("LOGIN_PROFIL_RELOAD", login);
+                    startActivity(intent);
+                }
+
             }
         });
     }
