@@ -52,7 +52,6 @@ public class PagesListesDeSouhaits extends AppCompatActivity {
 
         this.wishListDAO = new WishListDAO(this);
         this.login = getIntent().getStringExtra("LOGIN_LISTES_DE_SOUHAITS");
-        this.loginReload = getIntent().getStringExtra("LOGIN_LISTE_DE_SOUHAITS_RELOAD");
         Back = (Button)findViewById(R.id.GoBackWishlists);
         Back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,10 +59,6 @@ public class PagesListesDeSouhaits extends AppCompatActivity {
                 activityretour1();
             }
         });
-
-        if(loginReload != null){
-            login = loginReload;
-        }
 
         if(canInit){
             initList();
@@ -87,6 +82,7 @@ public class PagesListesDeSouhaits extends AppCompatActivity {
     }
     public void activityretour1(){
         Intent intent = new Intent(this, PageAccueil.class);
+        intent.putExtra("LOGIN_ACCUEIL", login);
         startActivity(intent);
     }
 
