@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-android:layout_width="match_parent"
-android:layout_height="wrap_content"
-android:padding="16dp"
-android:orientation="horizontal"
-android:layout_weight="2" >
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp"
+    android:orientation="horizontal"
+    android:layout_weight="2" >
 
         <TextView
             android:id="@+id/friendRequestName"
-            android:layout_width="300dp"
+            android:layout_width="1000dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
             android:text="Main Title"
             android:textColor="#000"
-            android:textSize="30dp"
-            android:layout_weight="1.5"/>
+            android:layout_gravity="center"
+            android:layout_weight="1.5"
+            android:textSize="30dp"/>
 
         <Button
             android:id="@+id/acceptButton"
@@ -25,7 +25,6 @@ android:layout_weight="2" >
             android:text="V"
             android:textSize="25sp"
             android:textStyle="bold"
-            android:layout_weight="0.25"
             android:layout_marginRight="20dp"/>
 
         <Button
@@ -36,7 +35,5 @@ android:layout_weight="2" >
             android:text="x"
             android:textSize="25sp"
             android:textStyle="bold"
-            android:layout_weight="0.25"
             android:background="@drawable/refuse_button"/>
-
 </LinearLayout>

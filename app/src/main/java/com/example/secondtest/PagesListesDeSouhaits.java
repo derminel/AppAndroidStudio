@@ -53,7 +53,7 @@ public class PagesListesDeSouhaits extends AppCompatActivity {
         this.wishListDAO = new WishListDAO(this);
         this.login = getIntent().getStringExtra("LOGIN_LISTES_DE_SOUHAITS");
         this.loginReload = getIntent().getStringExtra("LOGIN_LISTE_DE_SOUHAITS_RELOAD");
-        Back = (Button)findViewById(R.id.button4);
+        Back = (Button)findViewById(R.id.GoBackWishlists);
         Back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

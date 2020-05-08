@@ -33,12 +33,14 @@ public class PageAmis extends AppCompatActivity {
     private ListView listView;
     private SearchView searchView;
     private Button addButton;
+    private Button friendsRequestsButton;
+    private Button goBackButton;
 
     private boolean canInit = true;
     private UserDAO userDAO;
     private User user;
     private String login;
-    private Button Back;
+    private String loginAfterFriendRequests;
 
 
     @Override
@@ -46,24 +48,26 @@ public class PageAmis extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_page_amis);
 
-        listView=(ListView)findViewById(R.id.ListViewFriends);
-        searchView=(SearchView) findViewById(R.id.SearchbarFriends);
-        addButton=(Button) findViewById(R.id.addFriendButton);
+        this.listView=(ListView)findViewById(R.id.ListViewFriends);
+        this.searchView=(SearchView) findViewById(R.id.SearchbarFriends);
+        this.addButton=(Button) findViewById(R.id.addFriendButton);
+        this.friendsRequestsButton = (Button) findViewById(R.id.friendsRequestsButton);
+        this.goBackButton = (Button) findViewById(R.id.GoBackFriends);
 
         this.login = getIntent().getStringExtra("LOGIN_AMIS");
+        this.loginAfterFriendRequests = getIntent().getStringExtra("LOGIN_AMIS_APRES_DMD_AMIS");
+        if(loginAfterFriendRequests != null){
+            login = loginAfterFriendRequests;
+        }
+
         this.user = new User(null,login,this);
         this.userDAO = new UserDAO(this);
-        Back = (Button)findViewById(R.id.GoBackFriends);
-        Back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                activityretour4();
-            }
-        });
+
         if(canInit){
             initList();
             canInit = false;
         }
+        showToast(login);
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -87,20 +91,42 @@ public class PageAmis extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        goBack();
+        friendsRequests();
     }
 
     private void showToast(String msg) {
         Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
     }
-    public void activityretour4(){
-        Intent intent = new Intent(this, PageAccueil.class);
-        intent.putExtra("LOGIN_ACCEUIL_APRES_VISITE_AMIS", login);
-        startActivity(intent);
+
+    private void friendsRequests(){
+        friendsRequestsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showToast("Login" + login);
+                Intent intent = new Intent(PageAmis.this, PagePourGererDmdAmis.class);
+                intent.putExtra("LOGIN_DEMAMDES_AMIS", login);
+                startActivity(intent);
+            }
+        });
     }
+
     private void initList(){
         this.friends = this.user.getFriends(this);
         adapter=new CustomAdapterFriends(this,
                 R.layout.row_friends, friends, login);
         listView.setAdapter(adapter);
+    }
+
+    private void goBack(){
+        goBackButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(PageAmis.this, PageAccueil.class);
+                intent.putExtra("LOGIN_ACCEUIL_APRES_VISITE_AMIS", login);
+                startActivity(intent);
+            }
+        });
     }
 }

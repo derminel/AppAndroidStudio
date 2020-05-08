@@ -25,7 +25,8 @@
                 android:id="@+id/GoBackProfile"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:background="@drawable/ic_navigate_before_black_24dp"/>
+                android:background="@drawable/ic_navigate_before_black_24dp"
+                style="?android:attr/borderlessButtonStyle"/>
         </LinearLayout>
 
         <LinearLayout
@@ -38,7 +39,8 @@
                 android:id="@+id/editProfile"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:background="@drawable/ic_edit_white_24dp"/>
+                android:background="@drawable/ic_edit_white_24dp"
+                style="?android:attr/borderlessButtonStyle"/>
         </LinearLayout>
     </LinearLayout>
 

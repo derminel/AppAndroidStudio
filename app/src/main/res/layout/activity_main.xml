@@ -23,6 +23,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             android:layout_weight="5">
 
             <EditText
@@ -48,8 +50,8 @@
                 android:gravity="center"
                 android:textColor="#FFFFFF"
                 android:background="#87cefa"
-                android:text="Confirm"
-                android:textAllCaps="false"/>
+                android:text="Connexion"
+                style="?android:attr/borderlessButtonStyle"/>
 
         </LinearLayout>
 
@@ -67,7 +69,8 @@
             android:text="Create an account"
             android:layout_gravity="bottom"
             android:textColor="#FFFFFF"
-            android:background="@drawable/confirm_button"/>
+            android:background="@drawable/confirm_button"
+            style="?android:attr/borderlessButtonStyle"/>
 
     </LinearLayout>
 

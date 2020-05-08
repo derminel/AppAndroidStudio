@@ -17,9 +17,10 @@ public class PagePourGererDmdAmis extends AppCompatActivity {
     private ArrayList<User> friendsRequests;
     private CustomAdapterFriendsRequests adapter;
     private ListView listView;
+    private Button goBack;
 
-    private boolean canInit = true;
     private String login;
+    private String loginPopUp;
     private User user;
 
 
@@ -28,15 +29,37 @@ public class PagePourGererDmdAmis extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_page_pour_gerer_dmd_amis);
 
-        listView=(ListView)findViewById(R.id.ListViewFriendsRequests);
+        this.listView=(ListView)findViewById(R.id.ListViewFriendsRequests);
+        this.goBack = (Button) findViewById(R.id.GoBackFriendRequest);
 
-        this.login = getIntent().getStringExtra("LOGIN_GERER_AMIS");
+        this.login = getIntent().getStringExtra("LOGIN_DEMAMDES_AMIS");
+        this.loginPopUp = getIntent().getStringExtra("LOGIN_GERER_AMIS");
+        if(loginPopUp != null){
+            login = loginPopUp;
+        }
         this.user = new User(null, login, this);
 
-        if(canInit){
-            initList();
-            canInit = false;
-        }
+        showToast(login+"|"+loginPopUp);
+        initList();
+        goBack();
+    }
+
+    private void goBack() {
+        goBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (loginPopUp == null){
+                    Intent intent = new Intent(PagePourGererDmdAmis.this, PageAmis.class);
+                    intent.putExtra("LOGIN_AMIS_APRES_DMD_AMIS", login);
+                    startActivity(intent);
+                }
+                else{
+                    Intent intent = new Intent(PagePourGererDmdAmis.this, PageAccueil.class);
+                    intent.putExtra("LOGIN_AMIS_APRES_POP_UP_AMIS", login);
+                    startActivity(intent);
+                }
+            }
+        });
     }
 
     private void showToast(String msg) {

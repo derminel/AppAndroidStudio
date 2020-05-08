@@ -43,8 +43,8 @@ public class PageProduits extends AppCompatActivity {
 
         this.listView=(ListView)findViewById(R.id.ListViewProducts);
         this.searchView=(SearchView) findViewById(R.id.SearchbarProducts);
-        this.addButton=(Button) findViewById(R.id.addProduct);
-        this.settingButton=(Button) findViewById(R.id.settings);
+        this.addButton=(Button) findViewById(R.id.addProductButton);
+        this.settingButton=(Button) findViewById(R.id.editWishlist);
         this.titleWishList =(TextView) findViewById(R.id.titleWishlist);
 
         this.login = getIntent().getStringExtra("LOGIN_PRODUITS");
@@ -125,8 +125,7 @@ public class PageProduits extends AppCompatActivity {
         });
     }
     private void configureSettingButton() {
-        Button buttonSettings = (Button)  findViewById(R.id.settings);
-        buttonSettings.setOnClickListener(new View.OnClickListener() {
+        settingButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view){
                 Intent intent = new Intent(PageProduits.this, PageModifierWishList.class);
                 intent.putExtra("LISTNB_MODIFIER", wishListNb);

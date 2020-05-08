@@ -34,10 +34,6 @@ public class WishList {
         this.products = new ArrayList<Product>();
     }
 
-    public ArrayList<String> getWishListsName (){
-        return this.wishlistDAO.getWishListsNameDb();
-    }
-
     public void addProduct(Product p) {
         //this.wishlistDAO.addProduct(this.listNumber, p);
         this.products.add(p) ;

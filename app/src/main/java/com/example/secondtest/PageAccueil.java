@@ -18,6 +18,7 @@ public class PageAccueil extends AppCompatActivity implements View.OnClickListen
     private String loginAfterCreate;
     private String loginAfterSetProfile;
     private String loginAfterSetFriend;
+    private String loginAfterFriendRequests;
     private User user;
     private CardView wishlistsCardView;
     private CardView friendsCardView;
@@ -32,6 +33,7 @@ public class PageAccueil extends AppCompatActivity implements View.OnClickListen
         this.loginAfterCreate = getIntent().getStringExtra("LOGIN_ACCUEIL_APRES_CREATION");
         this.loginAfterSetProfile = getIntent().getStringExtra("LOGIN_ACCEUIL_APRES_VISITE_PROFIL");
         this.loginAfterSetFriend = getIntent().getStringExtra("LOGIN_ACCEUIL_APRES_VISITE_AMIS");
+        this.loginAfterFriendRequests = getIntent().getStringExtra("LOGIN_AMIS_APRES_POP_UP_AMIS");
         this.user = new User(null, login, this);
 
         if (loginAfterCreate != null){
@@ -42,6 +44,9 @@ public class PageAccueil extends AppCompatActivity implements View.OnClickListen
         }
         else if(loginAfterSetFriend != null){
             login = loginAfterSetFriend;
+        }
+        else if(loginAfterFriendRequests != null){
+            login = loginAfterFriendRequests;
         }
 
         this.wishlistsCardView = (CardView) findViewById(R.id.wishlistCardView);

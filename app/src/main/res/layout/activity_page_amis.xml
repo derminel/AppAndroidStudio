@@ -9,12 +9,40 @@
     android:padding="20sp"
     tools:context=".PageAmis">
 
-    <Button
-        android:id="@+id/GoBackFriends"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_gravity="left"
-        android:background="@drawable/ic_navigate_before_black_24dp"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="start">
+
+            <Button
+                android:id="@+id/GoBackFriends"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="left"
+                android:background="@drawable/ic_navigate_before_black_24dp"
+                style="?android:attr/borderlessButtonStyle"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="end">
+
+            <Button
+                android:id="@+id/friendsRequestsButton"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/ic_person_add_black_24dp"
+                style="?android:attr/borderlessButtonStyle"/>
+        </LinearLayout>
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -58,7 +86,8 @@
             android:gravity="center"
             android:textSize="30sp"
             android:textStyle="bold"
-            android:background="@drawable/ic_add_box_black_24dp"/>
+            android:background="@drawable/ic_add_box_black_24dp"
+            style="?android:attr/borderlessButtonStyle"/>
     </LinearLayout>
 
 

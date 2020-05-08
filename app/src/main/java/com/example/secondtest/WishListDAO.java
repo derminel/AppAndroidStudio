@@ -74,105 +74,49 @@ public class WishListDAO {
         this.friendsDAO = new FriendsDAO(activePage);
     }
 
-    public ArrayList<String> getWishListsNameDb (){
-        ArrayList<String> wishListsName = new ArrayList<String>();
-        this.wishlists.moveToFirst() ;
-        try{
-            while (!(this.wishlists.isLast())){
-                wishListsName.add(this.wishlists.getString(0));
-                this.wishlists.moveToNext();
-            }
-            wishListsName.add(this.wishlists.getString(0));
-            return wishListsName;
-        }
-        catch (Exception e){
-            return wishListsName;
-        }
-    }
-
     //pre: recoit un listNb du wishList qui figure deja dans la base de données
     //post: retourne le nom de cette liste
     public String getName(String listNb){
-        this.wishlists.moveToFirst() ;
-        try{
-            while (!(this.wishlists.isLast())){
-                if (this.wishlists.getString(2).equals(listNb)){
-                    return this.wishlists.getString(0) ;
-                }
-                this.wishlists.moveToNext();
-            }
-            return this.wishlists.getString(0) ;
-        }
-        catch (Exception e){
+        Cursor cursor = this.dbh.getDb().rawQuery(String.format("SELECT * FROM %s WHERE %s = ?", TABLE_LISTS,
+                COLUMN_LISTS_LISTNB) ,new String[] {listNb});
+        if (cursor.getCount() <= 0){
             return null;
         }
+        cursor.moveToFirst();
+        return cursor.getString(0);
     }
 
     //pre: recoit un listNb du wishList qui figure deja dans la base de données
     //post: retourne si son accès est public ou non
     public boolean getAccess(String listNb){
-        String access = null;
-        this.wishlists.moveToFirst() ;
-        while (!(this.wishlists.isLast())){
-            if (this.wishlists.getString(2).equals(listNb)){
-                access = this.wishlists.getString(1) ;
-                return access.equals("1");
-            }
-            this.wishlists.moveToNext();
+        Cursor cursor = this.dbh.getDb().rawQuery(String.format("SELECT * FROM %s WHERE %s = ?", TABLE_LISTS,
+                COLUMN_LISTS_LISTNB) ,new String[] {listNb});
+        if (cursor.getCount() <= 0){
+            return false;
         }
-        access = this.wishlists.getString(1) ;
-        return access.equals("1");
-    }
-
-    public String getPassword(String login){
-        this.wishlists.moveToFirst() ;
-        try{
-            while (!(this.wishlists.isLast())){
-                if (this.wishlists.getString(0).equals(login)){
-                    return this.wishlists.getString(6) ;
-                }
-                this.wishlists.moveToNext();
-            }
-            return this.wishlists.getString(6) ;
-        }
-        catch (Exception e){
-            return null;
-        }
+        cursor.moveToFirst();
+        return (cursor.getString(1).equals("1"));
     }
 
     public String getCreator(String listNb){
-        this.wishlists.moveToFirst() ;
-        try{
-            while (!(this.wishlists.isLast())){
-                if (this.wishlists.getString(2).equals(listNb)){
-                    return this.wishlists.getString(5) ;
-                }
-                this.wishlists.moveToNext();
-            }
-            return this.wishlists.getString(5) ;
-        }
-        catch (Exception e){
+        Cursor cursor = this.dbh.getDb().rawQuery(String.format("SELECT * FROM %s WHERE %s = ?", TABLE_LISTS,
+                COLUMN_LISTS_LISTNB) ,new String[] {listNb});
+        if (cursor.getCount() <= 0){
             return null;
         }
+        cursor.moveToFirst();
+        return cursor.getString(5);
     }
 
     public String getRecipient(String listNb){
-        this.wishlists.moveToFirst() ;
-        try{
-            while (!(this.wishlists.isLast())){
-                if (this.wishlists.getString(2).equals(listNb)){
-                    return this.wishlists.getString(4) ;
-                }
-                this.wishlists.moveToNext();
-            }
-            return this.wishlists.getString(4) ;
-        }
-        catch (Exception e){
+        Cursor cursor = this.dbh.getDb().rawQuery(String.format("SELECT * FROM %s WHERE %s = ?", TABLE_LISTS,
+                COLUMN_LISTS_LISTNB) ,new String[] {listNb});
+        if (cursor.getCount() <= 0){
             return null;
         }
+        cursor.moveToFirst();
+        return cursor.getString(4);
     }
-
-
 
     public boolean addStatus (String status, String login, String listNb) {
         ContentValues contentValues = new ContentValues();
