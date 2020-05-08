@@ -73,6 +73,7 @@ public class PageModifierWishList extends AppCompatActivity {
         configureChangeListButton();
         configureChangeAdminsButton();
         configureChangeVisibleButton();
+        configureRetourDesParametres();
 
     }
 
@@ -111,6 +112,19 @@ public class PageModifierWishList extends AppCompatActivity {
         });
 
     }
+
+    private void configureRetourDesParametres() {
+        ImageButton nextButton = findViewById(R.id.buttonRetourdesParametres);
+        nextButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view){
+                Intent intent = new Intent(PageModifierWishList.this, PageProduits.class);
+                intent.putExtra("WishlistNb", wishlistnb);
+                startActivity(intent);
+            }
+        });
+
+    }
+
 
 
 

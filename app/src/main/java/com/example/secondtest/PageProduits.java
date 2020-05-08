@@ -49,7 +49,8 @@ public class PageProduits extends AppCompatActivity {
         this.login = getIntent().getStringExtra("Login");
         this.wishListDAO = new WishListDAO(this);
         this.wishListNb = getIntent().getStringExtra("WishlistNb");
-        this.nameWishList = getIntent().getStringExtra("WishlistName");
+        this.nameWishList = wishListDAO.getName(wishListNb);
+        //this.nameWishList = getIntent().getStringExtra("WishlistName");
         this.titleWishList.setText(nameWishList);
 
         if(canInit){

@@ -53,11 +53,12 @@ public class PagePourModiferVisibles extends AppCompatActivity {
         });
 
         configureAddButton();
+        configureBackButton();
     }
 
     private void initList(){
         this.visibles = modifierDAO.getVisible(wishlistNb);
-        adapter=new CustomAdapterAdmins(this, R.layout.row_wishlists, visibles, wishlistNb);
+        adapter=new CustomAdapterVisibles(this, R.layout.row_wishlists, visibles, wishlistNb);
         listViewVis.setAdapter(adapter);
     }
     private void configureAddButton(){
@@ -65,6 +66,17 @@ public class PagePourModiferVisibles extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(PagePourModiferVisibles.this, PageAjouterVisible.class) ;
+                intent.putExtra("WishlistNb", wishlistNb);
+                startActivity(intent);
+            }
+        });
+    }
+    private void configureBackButton(){
+        Button BackButton = findViewById(R.id.buttonRetourVisible);
+        BackButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(PagePourModiferVisibles.this, PageModifierWishList.class) ;
                 intent.putExtra("WishlistNb", wishlistNb);
                 startActivity(intent);
             }

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.view.View;
 
+import java.security.spec.ECField;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,33 +25,41 @@ public class ModifierDAO {
     }
 
     public ArrayList<String> getAdmin(String listNb) {
-        this.modifier.moveToFirst();
-        ArrayList<String> admins = new ArrayList<>();
-        while (!(this.modifier.isLast()) && !IsTableEmpty(this.modifier)) {
-            if (this.modifier.getString(2).equals(listNb) && this.modifier.getString(0).equals("Admin")) {
+        try {
+            this.modifier.moveToFirst();
+            ArrayList<String> admins = new ArrayList<>();
+            while (!(this.modifier.isLast()) && !IsTableEmpty(this.modifier)) {
+                if (this.modifier.getString(2).equals(listNb) && this.modifier.getString(0).equals("Admin")) {
+                    admins.add(this.modifier.getString(1));
+                }
+                this.modifier.moveToNext();
+            }
+            if (!IsTableEmpty(this.modifier) && this.modifier.getString(2).equals(listNb) && this.modifier.getString(0).equals("Admin")) {
                 admins.add(this.modifier.getString(1));
             }
-            this.modifier.moveToNext();
+            return admins;
+        } catch (Exception e) {
+            return new ArrayList<String>();
         }
-        if (!IsTableEmpty(this.modifier) && this.modifier.getString(2).equals(listNb) && this.modifier.getString(0).equals("Admin")) {
-            admins.add(this.modifier.getString(1));
-        }
-        return admins;
+
+
 
     }
     public ArrayList<String> getVisible(String listNb) {
-        this.modifier.moveToFirst();
-        ArrayList<String> admins = new ArrayList<>();
-        while (!(this.modifier.isLast()) && !IsTableEmpty(this.modifier)) {
-            if (this.modifier.getString(2).equals(listNb) && this.modifier.getString(0).equals("Reader")) {
+        try {
+            this.modifier.moveToFirst();
+            ArrayList<String> admins = new ArrayList<>();
+            while (!IsTableEmpty(this.modifier) &&!(this.modifier.isLast())) {
+                if (this.modifier.getString(2).equals(listNb) && this.modifier.getString(0).equals("Reader")) {
+                    admins.add(this.modifier.getString(1));
+                }
+                this.modifier.moveToNext();
+            }
+            if (!IsTableEmpty(this.modifier) && this.modifier.getString(2).equals(listNb) && this.modifier.getString(0).equals("Reader")) {
                 admins.add(this.modifier.getString(1));
             }
-            this.modifier.moveToNext();
-        }
-        if (!IsTableEmpty(this.modifier) && this.modifier.getString(2).equals(listNb) && this.modifier.getString(0).equals("Reader")) {
-            admins.add(this.modifier.getString(1));
-        }
-        return admins;
+            return admins;
+        } catch (Exception e) {return new ArrayList<String>();}
 
     }
 
@@ -59,7 +68,7 @@ public class ModifierDAO {
     }
 
     public boolean updateAdmin(String listnb, String login) {
-        if (IsTableEmpty(modifier)||alreadyAdmin(listnb, login)) {
+        if (alreadyAdmin(listnb, login)) {
             return false;
         }
         if (alreadyVisible(listnb, login)) {
@@ -79,7 +88,7 @@ public class ModifierDAO {
     }
 
     public boolean updateVisible(String listnb, String login) {
-        if (IsTableEmpty(modifier)||alreadyAdmin(listnb, login)) {
+        if (alreadyAdmin(listnb, login)) {
             return false;
         }
         //UserDAO userDAO = new UserDAO(context);
@@ -93,25 +102,31 @@ public class ModifierDAO {
     }
 
     public boolean alreadyAdmin(String listNb, String login) {
-        this.modifier.moveToFirst();
-        while (!(this.modifier.isLast()) && !IsTableEmpty(this.modifier)) {
-            if (this.modifier.getString(2).equals(listNb) && this.modifier.getString(0).equals("Admin") && this.modifier.getString(1) .equals(login)) {
-                return true;
+        try {
+            this.modifier.moveToFirst();
+            while (!(this.modifier.isLast()) && !IsTableEmpty(this.modifier)) {
+                if (this.modifier.getString(2).equals(listNb) && this.modifier.getString(0).equals("Admin") && this.modifier.getString(1) .equals(login)) {
+                    return true;
+                }
+                this.modifier.moveToNext();
             }
-            this.modifier.moveToNext();
-        }
-        return this.modifier.getString(2).equals(listNb) && this.modifier.getString(0).equals("Admin") && this.modifier.getString(1).equals(login);
+            return this.modifier.getString(2).equals(listNb) && this.modifier.getString(0).equals("Admin") && this.modifier.getString(1).equals(login);
+        } catch (Exception e) { return false;}
+
     }
 
     public boolean alreadyVisible(String listNb, String login) {
-        this.modifier.moveToFirst();
-        while (!(this.modifier.isLast()) && !IsTableEmpty(this.modifier)) {
-            if (this.modifier.getString(2).equals(listNb) && this.modifier.getString(0).equals("Reader") && this.modifier.getString(1) .equals(login)) {
-                return true;
+        try {
+            this.modifier.moveToFirst();
+            while (!(this.modifier.isLast()) && !IsTableEmpty(this.modifier)) {
+                if (this.modifier.getString(2).equals(listNb) && this.modifier.getString(0).equals("Reader") && this.modifier.getString(1) .equals(login)) {
+                    return true;
+                }
+                this.modifier.moveToNext();
             }
-            this.modifier.moveToNext();
-        }
-        return this.modifier.getString(2).equals(listNb) && this.modifier.getString(0).equals("Reader") && this.modifier.getString(1).equals(login);
+            return this.modifier.getString(2).equals(listNb) && this.modifier.getString(0).equals("Reader") && this.modifier.getString(1).equals(login);
+        } catch (Exception e) {return false;}
+
     }
 
     public void deleteAdmin(String listNb, String login) {
@@ -123,5 +138,7 @@ public class ModifierDAO {
     public void setInvisible(String listNb, String login) {
         dbh.getDb().delete(TABLE_MODIFIER, "LOGIN = ? AND LISTNB= ?", new String[] {login, listNb});
     }
+
+
 
 }
