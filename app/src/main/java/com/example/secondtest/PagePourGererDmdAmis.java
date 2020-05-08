@@ -58,7 +58,7 @@ public class PagePourGererDmdAmis extends AppCompatActivity {
     private void initList(){
         this.friendsRequests = this.user.getRequests(this);
         if(this.friendsRequests.size()==0){
-            showToast("you have no friend requests");
+            showToast("You have no friend requests");
         }
         adapter=new CustomAdapterFriendsRequests(this, R.layout.row_friendrequest, friendsRequests, login);
         listView.setAdapter(adapter);
