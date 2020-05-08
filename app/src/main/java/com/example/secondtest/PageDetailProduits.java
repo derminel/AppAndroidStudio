@@ -45,7 +45,7 @@ public class PageDetailProduits extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.productDAO = new ProductDAO(this);
-        this.productNb = productDAO.getProductNumber(getIntent().getStringExtra("ProductName"));
+        this.productNb = getIntent().getStringExtra("ProductNb");
         this.aboutProduct = productDAO.getAllColumn(productNb);
         this.wishListNb = getIntent().getStringExtra("WishlistNb");
         this.login = getIntent().getStringExtra("Login");
