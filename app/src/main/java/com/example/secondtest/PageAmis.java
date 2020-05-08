@@ -40,6 +40,7 @@ public class PageAmis extends AppCompatActivity {
 
 
 
+    //Creation de la page pour voir ses amis
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         showToast(login);
@@ -71,6 +72,7 @@ public class PageAmis extends AppCompatActivity {
         startActivity(page);
     }
 
+    //barre de recherche des amis
     private void configuresearchbar(){
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -93,7 +95,7 @@ public class PageAmis extends AppCompatActivity {
                 R.layout.row_friends, friends, login);
         listView.setAdapter(adapter);
     }
-
+    
     private void configureFriendRequest(){
         Button friendsRequestsButton = findViewById(R.id.friendsRequestsButton);
         friendsRequestsButton.setOnClickListener(new View.OnClickListener() {
@@ -102,6 +104,7 @@ public class PageAmis extends AppCompatActivity {
         });
     }
 
+    //bouton pour ajouter des amis
     private void configureAddButton() {
         Button addFriend = findViewById(R.id.addFriendButton);
         addFriend.setOnClickListener(new View.OnClickListener() {

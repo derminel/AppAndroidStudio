@@ -16,7 +16,7 @@ public class PageAjouterVisible extends AppCompatActivity {
     String wishlistnb;
     Context context;
 
-
+    //Creation de la page pour ajouter des logins a la liste, en tant que personne pouvant voir la wishlist
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_page_pour_ajouter_visibles);

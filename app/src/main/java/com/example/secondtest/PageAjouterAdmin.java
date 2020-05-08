@@ -16,7 +16,7 @@ public class PageAjouterAdmin extends AppCompatActivity {
     String wishlistnb;
     Context context;
 
-
+    //creation de la page pour ajouter un administrateur a une liste
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_page_pour_ajouter_admins);
@@ -31,6 +31,8 @@ public class PageAjouterAdmin extends AppCompatActivity {
     private void showToast(String msg) {
         Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
     }
+
+    //Bouton pour modifier les administrateurs
     private void configureConfirmAdminButton() {
         Button nextButton = (Button) findViewById(R.id.ConfirmAddAdmin);
         nextButton.setOnClickListener(new View.OnClickListener() {
