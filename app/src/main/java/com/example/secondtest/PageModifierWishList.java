@@ -23,6 +23,7 @@ public class PageModifierWishList extends AppCompatActivity {
     private String[] Visibles;//
     private String creator;//
     private String recipient;//
+    private String login;
 
 
     @Override
@@ -35,6 +36,7 @@ public class PageModifierWishList extends AppCompatActivity {
         this.wishlistnb = getIntent().getStringExtra("WishlistNb");
         this.creator = wishListDAO.getCreator(wishlistnb);
         this.recipient = wishListDAO.getRecipient(wishlistnb);
+        this.login = getIntent().getStringExtra("LOGIN");
 
         TextView nameDB = findViewById(R.id.ListNameDB);
         nameDB.setText(wishListDAO.getName(wishlistnb));
@@ -55,15 +57,22 @@ public class PageModifierWishList extends AppCompatActivity {
         ListView adminsDB = findViewById(R.id.ListViewAdmins);
         ArrayList<String> admins = modifierDAO.getAdmin(wishlistnb);
 
+        ListView visibleDB = findViewById(R.id.ListViewVisible);
+        ArrayList<String> visibles = modifierDAO.getVisible(wishlistnb);
 
 
-        ArrayAdapter<String> adapter =
+        ArrayAdapter<String> adapterAdmin =
                 new ArrayAdapter<String>(this, R.layout.row_admins, admins);
-        adminsDB.setAdapter(adapter);
+        adminsDB.setAdapter(adapterAdmin);
+
+        ArrayAdapter<String> adapterVisible =
+                new ArrayAdapter<String>(this, R.layout.row_admins, visibles);
+        visibleDB.setAdapter(adapterVisible);
         //this.admins = adapter;
 
         configureChangeListButton();
         configureChangeAdminsButton();
+        configureChangeVisibleButton();
 
     }
 
@@ -90,6 +99,19 @@ public class PageModifierWishList extends AppCompatActivity {
         });
 
     }
+
+    private void configureChangeVisibleButton() {
+        ImageButton nextButton = (ImageButton) findViewById(R.id.editVisible);
+        nextButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view){
+                Intent intent = new Intent(PageModifierWishList.this, PagePourModiferVisibles.class);
+                intent.putExtra("WishlistNb", wishlistnb);
+                startActivity(intent);
+            }
+        });
+
+    }
+
 
 
 

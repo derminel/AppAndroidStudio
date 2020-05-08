@@ -101,7 +101,7 @@
         android:translationY="-290dp" />
 
     <ImageButton
-        android:id="@+id/buttonRetour"
+        android:id="@+id/buttonRetourdesParametres"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:translationX="-160dp"
@@ -109,6 +109,7 @@
         app:srcCompat="?attr/homeAsUpIndicator" />
 
     <ListView
+        android:id="@+id/ListViewVisible"
         android:layout_width="199dp"
         android:layout_height="108dp"
         android:translationX="80dp"
@@ -149,6 +150,15 @@
         android:tint="#121212"
         android:translationX="-50dp"
         android:translationY="-360dp"
+        app:srcCompat="@drawable/ic_edit_black_24dp" />
+
+    <ImageButton
+        android:id="@+id/editVisible"
+        android:layout_width="wrap_content"
+        android:layout_height="78dp"
+        android:tint="#000000"
+        android:translationX="-40dp"
+        android:translationY="-300dp"
         app:srcCompat="@drawable/ic_edit_black_24dp" />
 
 
