@@ -45,5 +45,5 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public SQLiteDatabase getDb() {
         return this.db ;
     }
-    
+
 }

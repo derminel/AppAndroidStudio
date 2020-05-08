@@ -20,6 +20,7 @@ public class PageAccueil extends AppCompatActivity implements View.OnClickListen
     private CardView friendsCardView;
     private CardView profileCardView;
 
+    //Creation de la page d'accueil
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +45,7 @@ public class PageAccueil extends AppCompatActivity implements View.OnClickListen
         showToast(login);
     }
 
+    //Creation du message d'erreur
     private void showToast(String msg) {
         Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
     }
@@ -53,6 +55,7 @@ public class PageAccueil extends AppCompatActivity implements View.OnClickListen
         startActivity(gotoapage);
     }
 
+    //Boutons pour selectionner soit profil, amis ou wishlist
     @Override
     public void onClick(View v){
         switch (v.getId()){
@@ -68,6 +71,7 @@ public class PageAccueil extends AppCompatActivity implements View.OnClickListen
         }
     }
 
+    //Si une demande d'ami est en attente
     public void openDialog(View view) {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
         alertDialogBuilder.setMessage("Do you want to go to friends' requests ?");
