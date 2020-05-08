@@ -24,6 +24,7 @@ public class PagePourGererDmdAmis extends AppCompatActivity {
     private User user;
 
 
+    //Creation de la page ou l ont peut consulter ses demandes d amis
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +45,7 @@ public class PagePourGererDmdAmis extends AppCompatActivity {
         Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
     }
 
+    //bouton retour
     private void goBack() {
         goBack.setOnClickListener(new View.OnClickListener() {
             @Override
