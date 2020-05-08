@@ -26,6 +26,7 @@ public class PageModifierWishList extends AppCompatActivity {
     private String login;
 
 
+    //Creation de la page pour modifier une wishlist
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

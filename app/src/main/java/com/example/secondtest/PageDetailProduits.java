@@ -40,6 +40,7 @@ public class PageDetailProduits extends AppCompatActivity {
     private String login;
     private String wishListNb;
 
+    //Creation de la page des details du produit
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
