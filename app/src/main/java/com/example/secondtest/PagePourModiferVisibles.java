@@ -22,7 +22,7 @@ public class PagePourModiferVisibles extends AppCompatActivity {
     ArrayAdapter<String> adapter;
     ModifierDAO modifierDAO;
 
-
+    //Creation de la page pour modifier les logins qui peuvent voir la wishlist ou non
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

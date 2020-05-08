@@ -17,6 +17,7 @@ public class PageModifierWishListUpdate extends AppCompatActivity {
     private EditText recipient;//
     private boolean publicAccess;//
 
+    //Creation de la page pour determiner le nom, les recipients et si la liste est publique ou non
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_page_modifier_wishlist_update);

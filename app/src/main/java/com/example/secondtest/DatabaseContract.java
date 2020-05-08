@@ -52,28 +52,34 @@ public class DatabaseContract {
     public static final String COLUMN_MODIFIER_LOGIN = "Login";
     public static final String COLUMN_MODIFIER_LISTNB = "ListNb";
 
-
+    // Creation de la table 'content'
     public static final String SQL_CREATE_CONTENT =
             "CREATE TABLE " + TABLE_CONTENT + " (" + COLUMN_CONTENT_LISTNB + " TEXT, " + COLUMN_CONTENT_PRODUCTNB + " TEXT)";
 
+    //Creation de la table 'users'
     public static final String SQL_CREATE_USERS =
             "CREATE TABLE " + TABLE_USERS + " (" + COLUMN_USERS_LOGIN + " TEXT, " + COLUMN_USERS_NAME  + " TEXT, " + COLUMN_USERS_LASTNAME + " TEXT, " + COLUMN_USERS_ADDRESS + " TEXT, " +
                     COLUMN_USERS_PHOTO + " BLOB, " + COLUMN_USERS_PREFERENCES + " TEXT, " + COLUMN_USERS_PASSWORD + " TEXT)";
 
+    //Creastion de la table 'friends'
     public static final String SQL_CREATE_FRIENDS =
             "CREATE TABLE " + TABLE_FRIENDS + " (" + COLUMN_FRIENDS_LOGIN1 + " TEXT, " + COLUMN_FRIENDS_LOGIN2 + " TEXT)";
 
+    //Creation de la table 'products'
     public static final String SQL_CREATE_PRODUCTS =
             "CREATE TABLE " + TABLE_PRODUCTS + " (" + COLUMN_PRODUCTS_PRODUCTNB + " TEXT, " + COLUMN_PRODUCTS_NAME  + " TEXT, " + COLUMN_PRODUCTS_PHOTO + " BLOB, " + COLUMN_PRODUCTS_PRICE + " INT, " +
                                     COLUMN_PRODUCTS_INFO + " TEXT, " + COLUMN_PRODUCTS_CATEGORY + " TEXT, " + COLUMN_PRODUCTS_WEBSITE + " TEXT)";
 
+    //Creation de la table 'lists'
     public static final String SQL_CREATE_LISTS =
             "CREATE TABLE " + TABLE_LISTS + " (" + COLUMN_LISTS_NAME + " TEXT, " + COLUMN_LISTS_PUBLIC  + " BOOL, " + COLUMN_LISTS_LISTNB + " TEXT, " + COLUMN_LISTS_DESCRIPTION + " TEXT, " +
                                     COLUMN_LISTS_RECIPIENT + " TEXT, " + COLUMN_LISTS_CREATOR + " TEXT)";
 
+    //Creation de la table 'likes'
     public static final String SQL_CREATE_LIKE =
             "CREATE TABLE " + TABLE_LIKE + " (" + COLUMN_LIKE_LISTNB + " TEXT, " + COLUMN_LIKE_COUNT  + " TINYINT, " + COLUMN_LIKE_PRODUCTNB + " TEXT, " + COLUMN_LIKE_LOGIN + " TEXT)";
 
+    //Creation de la table 'modifiers'
     public static final String SQL_CREATE_MODIFIER =
             "CREATE TABLE " + TABLE_MODIFIER + " (" + COLUMN_MODIFIER_STATUS + " TEXT, " + COLUMN_MODIFIER_LOGIN  + " TEXT, " + COLUMN_MODIFIER_LISTNB + " TEXT)";
 

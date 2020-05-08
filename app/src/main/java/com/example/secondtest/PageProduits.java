@@ -30,6 +30,7 @@ public class PageProduits extends AppCompatActivity {
     private String login;
     private String loginReload;
 
+    //Creation de la page de tous les produits deja crees par les utilisateurs de l application
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

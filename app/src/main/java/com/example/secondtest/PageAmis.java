@@ -34,6 +34,7 @@ public class PageAmis extends AppCompatActivity {
     private CustomAdapterFriends adapter;
     private SearchView searchView;
 
+    //Creation de la page pour voir ses amis
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +63,7 @@ public class PageAmis extends AppCompatActivity {
         startActivity(page);
     }
 
+    //barre de recherche des amis
     private void configuresearchbar(){
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -91,6 +93,7 @@ public class PageAmis extends AppCompatActivity {
         });
     }
 
+    //bouton pour ajouter des amis
     private void configureAddButton() {
         Button addFriend = findViewById(R.id.addFriendButton);
         addFriend.setOnClickListener(new View.OnClickListener() {

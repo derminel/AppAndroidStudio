@@ -31,6 +31,7 @@ public class PagePourModifierUnProduit extends AppCompatActivity implements Adap
     private Cursor infoProduct;
     private String[] categories= new String[]{"Other", "Sport", "Clothes", "Games", "Technology", "Jewellery", "Decoration"};
 
+    //Creation de la page pour modifier un produit
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

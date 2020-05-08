@@ -19,6 +19,7 @@ public class PageProfilUpdate extends AppCompatActivity {
     private UserDAO userDAO;
     private String login;
 
+    //Creation de la page pour modifier son profil
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

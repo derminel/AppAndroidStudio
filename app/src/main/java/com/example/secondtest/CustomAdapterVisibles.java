@@ -67,7 +67,7 @@ public class CustomAdapterVisibles extends ArrayAdapter<String> {
                 modifierDAO.setInvisible(listnb, login);
                 notifyDataSetChanged();
                 Intent intent = new Intent(context, PagePourModiferVisibles.class);
-                intent.putExtra("LISTNB", listnb);
+                intent.putExtra("WishlistNb", listnb);
                 context.startActivity(intent);
             }
         });

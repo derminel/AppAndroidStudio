@@ -25,6 +25,7 @@ public class PagePourAjouterUneListeDeSouhait extends AppCompatActivity {
     private Button Back;
     private String login;
 
+    //creation de la page pour ajouter une liste de souhait
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

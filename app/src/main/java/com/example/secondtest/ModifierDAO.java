@@ -67,16 +67,19 @@ public class ModifierDAO {
         return !(cursor.getCount() > 0);
     }
 
-    public boolean updateAdmin(String listnb, String login) {
+    public int updateAdmin(String listnb, String login, Context context) {
         if (alreadyAdmin(listnb, login)) {
-            return false;
+            return -1;
         }
         if (alreadyVisible(listnb, login)) {
             ContentValues contentValues = new ContentValues();
             contentValues.put(COLUMN_MODIFIER_STATUS, "Admin");
             this.dbh.getDb().update(TABLE_MODIFIER,  contentValues, "LOGIN =? AND LISTNB=?", new String[] {login, listnb});
-            return true;
+            return 0;
         }
+        UserDAO userDAO = new UserDAO(context);
+        if (!userDAO.exist(login)) {return -2;}
+
         //UserDAO userDAO = new UserDAO(context);
         //if (userDAO.isALogin(login)) {return false;}
         ContentValues contentValues = new ContentValues();
@@ -84,21 +87,21 @@ public class ModifierDAO {
         contentValues.put(COLUMN_MODIFIER_LISTNB, listnb);
         contentValues.put(COLUMN_MODIFIER_LOGIN, login);
         this.dbh.getDb().insert(TABLE_MODIFIER, null, contentValues);
-        return true;
+        return 0;
     }
 
-    public boolean updateVisible(String listnb, String login) {
+    public int updateVisible(String listnb, String login, Context context) {
         if (alreadyAdmin(listnb, login)) {
-            return false;
+            return -1;
         }
-        //UserDAO userDAO = new UserDAO(context);
-        //if (userDAO.isALogin(login)) {return false;}
+        UserDAO userDAO = new UserDAO(context);
+        if (!userDAO.exist(login)) {return -2;}
         ContentValues contentValues = new ContentValues();
         contentValues.put(COLUMN_MODIFIER_STATUS, "Reader");
         contentValues.put(COLUMN_MODIFIER_LISTNB, listnb);
         contentValues.put(COLUMN_MODIFIER_LOGIN, login);
         this.dbh.getDb().insert(TABLE_MODIFIER, null, contentValues);
-        return true;
+        return 0;
     }
 
     public boolean alreadyAdmin(String listNb, String login) {
@@ -129,16 +132,18 @@ public class ModifierDAO {
 
     }
 
-    public void deleteAdmin(String listNb, String login) {
+    public int deleteAdmin(String listNb, String login, Context context) {
+        WishListDAO wishListDAO = new WishListDAO(context);
+        if (login.equals(wishListDAO.getCreator(listNb))) {return -3;}
         ContentValues contentValues = new ContentValues();
         contentValues.put(COLUMN_MODIFIER_STATUS, "Reader");
         dbh.getDb().update(TABLE_MODIFIER, contentValues, "LOGIN = ? AND LISTNB = ?", new String[] {login, listNb});
+        return 0;
     }
 
     public void setInvisible(String listNb, String login) {
         dbh.getDb().delete(TABLE_MODIFIER, "LOGIN = ? AND LISTNB= ?", new String[] {login, listNb});
     }
-
 
 
 }

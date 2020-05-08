@@ -37,7 +37,7 @@ public class UserDAO {
         try {
             while (!(this.users.isLast())){
                 if (this.users.getString(0).equals(login)){
-                    return true ;
+                    return true;
                 }
                 this.users.moveToNext();
             }

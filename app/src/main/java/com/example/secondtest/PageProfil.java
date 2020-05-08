@@ -13,6 +13,7 @@ import android.os.Bundle;
 public class PageProfil extends AppCompatActivity {
     private String login;
 
+    //Creation de la page profil
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

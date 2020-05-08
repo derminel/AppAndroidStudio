@@ -16,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
     EditText login;
     EditText password;
 
+    //Creation de la page de connexion
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
         configureButtonSignIn();
         configureButtonSignUp();
     }
-
+    //Creation d'un message d'erreur
     private void showToast(String msg) {
         Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
     }
@@ -39,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
     private void configureUser(){
         this.user = new User(this.password.getText().toString(), this.login.getText().toString(), this);
     }
-
+    //bouton pour se connecter
     private void configureButtonSignIn() {
         Button SignIn = findViewById(R.id.ConfirmConnection);
         SignIn.setOnClickListener(new View.OnClickListener() {
@@ -58,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
+    //bouton pour s'enregistrer
     private void configureButtonSignUp() {
         Button SignUp = findViewById(R.id.CreateAccount);
         SignUp.setOnClickListener(new View.OnClickListener() {

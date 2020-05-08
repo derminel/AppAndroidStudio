@@ -23,6 +23,7 @@ public class PagePourModifierAdmins extends AppCompatActivity {
     ModifierDAO modifierDAO;
 
 
+    //Creation de la page pour modifier les logins qui sont administrateurs de la wishlist
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

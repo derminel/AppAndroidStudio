@@ -30,6 +30,7 @@ public class PageCreationAccount extends AppCompatActivity {
     private EditText password1;
     private EditText password2;
 
+    //creation de la page pour s inscrire
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,6 +58,7 @@ public class PageCreationAccount extends AppCompatActivity {
         this.user = new User(this.password1.getText().toString(), this.login.getText().toString(), this);
     }
 
+    //bouton pour revenir en arriere
     private void configureGoBackAccount(){
         final Button goBackButton = findViewById(R.id.GoBackAccount);
         goBackButton.setOnClickListener(new View.OnClickListener() {
@@ -66,7 +68,7 @@ public class PageCreationAccount extends AppCompatActivity {
             }
         });
     }
-
+    //Creation du compte
     private void configureCreateAccount() {
         final Button CreateAccount = findViewById(R.id.CreateAccount);
         CreateAccount.setOnClickListener(new View.OnClickListener() {

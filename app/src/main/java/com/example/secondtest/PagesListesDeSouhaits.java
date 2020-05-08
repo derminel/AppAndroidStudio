@@ -17,6 +17,7 @@ public class PagesListesDeSouhaits extends AppCompatActivity {
     private WishListDAO wishListDAO;
     private String login;
 
+    //Creation de la page ou l on peut consulter ses wishlists
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

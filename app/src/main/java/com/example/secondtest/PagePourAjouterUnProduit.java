@@ -27,6 +27,7 @@ public class PagePourAjouterUnProduit extends AppCompatActivity implements Adapt
     private EditText info;
     private String[] categories= new String[]{"Other", "Sport", "Clothes", "Games", "Technology", "Jewellery", "Decoration"};
 
+    //creation de la page pour ajouter un produit dans la wishlist, en le creant si il n'existe pas encore
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
