@@ -7,6 +7,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SearchView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -17,7 +18,7 @@ public class PagePourModifierAdmins extends AppCompatActivity {
     ListView listViewad;
     SearchView searchView;
     Button addButton;
-    private boolean canInit = true;
+    private String login;
     ArrayList<String> admins;
     ArrayAdapter<String> adapter;
     ModifierDAO modifierDAO;
@@ -34,12 +35,9 @@ public class PagePourModifierAdmins extends AppCompatActivity {
         listViewad=(ListView)findViewById(R.id.ListViewAdmins);
         searchView=(SearchView) findViewById(R.id.SearchbarAdmins);
         addButton=(Button) findViewById(R.id.addAdminbutton);
+        this.login  = getIntent().getStringExtra("Login");
 
         initList();
-        /*if(canInit){
-            initList();
-            canInit = false;
-        }*/
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -62,15 +60,27 @@ public class PagePourModifierAdmins extends AppCompatActivity {
         adapter=new CustomAdapterAdmins(this, R.layout.row_wishlists, admins, wishlistNb);
         listViewad.setAdapter(adapter);
     }
-    private void configureAddButton(){
-        addButton.setOnClickListener(new View.OnClickListener() {
+
+    //bouton pour ajouter des amis
+    private void configureAddButton() {
+        Button addFriend = findViewById(R.id.addAdminbutton);
+        addFriend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(PagePourModifierAdmins.this, PageAjouterAdmin.class) ;
-                intent.putExtra("WishlistNb", wishlistNb);
-                startActivity(intent);
+                int err = configureModifierDao();
+                if (err == -1) {
+                    showToast("This login is already an admin");
+                }
+                if (err == -2) {
+                    showToast("This login does not exist");
+                }
+                showToast(searchView.getQuery().toString() + " has been added as an admin");
             }
         });
+    }
+
+    private int configureModifierDao(){
+        return modifierDAO.updateAdmin(wishlistNb, searchView.getQuery().toString(),this);
     }
 
     private void configureBackButton(){
@@ -80,9 +90,13 @@ public class PagePourModifierAdmins extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(PagePourModifierAdmins.this, PageModifierWishList.class) ;
                 intent.putExtra("WishlistNb", wishlistNb);
+                intent.putExtra("Login", login);
                 startActivity(intent);
             }
         });
     }
 
+    private void showToast(String msg) {
+        Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
+    }
 }

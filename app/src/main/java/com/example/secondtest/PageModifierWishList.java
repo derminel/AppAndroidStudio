@@ -37,7 +37,7 @@ public class PageModifierWishList extends AppCompatActivity {
         this.wishlistnb = getIntent().getStringExtra("WishlistNb");
         this.creator = wishListDAO.getCreator(wishlistnb);
         this.recipient = wishListDAO.getRecipient(wishlistnb);
-        this.login = getIntent().getStringExtra("LOGIN");
+        this.login = getIntent().getStringExtra("Login");
 
         TextView nameDB = findViewById(R.id.ListNameDB);
         nameDB.setText(wishListDAO.getName(wishlistnb));
@@ -84,6 +84,7 @@ public class PageModifierWishList extends AppCompatActivity {
             public void onClick(View view){
                 Intent intent = new Intent(PageModifierWishList.this, PageModifierWishListUpdate.class);
                 intent.putExtra("WishlistNb", wishlistnb);
+                intent.putExtra("Login", login);
                 startActivity(intent);
             }
         });
@@ -96,6 +97,7 @@ public class PageModifierWishList extends AppCompatActivity {
             public void onClick(View view){
                 Intent intent = new Intent(PageModifierWishList.this, PagePourModifierAdmins.class);
                 intent.putExtra("WishlistNb", wishlistnb);
+                intent.putExtra("Login", login);
                 startActivity(intent);
             }
         });
@@ -108,6 +110,7 @@ public class PageModifierWishList extends AppCompatActivity {
             public void onClick(View view){
                 Intent intent = new Intent(PageModifierWishList.this, PagePourModiferVisibles.class);
                 intent.putExtra("WishlistNb", wishlistnb);
+                intent.putExtra("Login", login);
                 startActivity(intent);
             }
         });
@@ -120,15 +123,10 @@ public class PageModifierWishList extends AppCompatActivity {
             public void onClick(View view){
                 Intent intent = new Intent(PageModifierWishList.this, PageProduits.class);
                 intent.putExtra("WishlistNb", wishlistnb);
+                intent.putExtra("Login", login);
                 startActivity(intent);
             }
         });
 
     }
-
-
-
-
-
-
 }

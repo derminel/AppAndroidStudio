@@ -24,11 +24,8 @@ public class PageProduits extends AppCompatActivity {
 
     private WishListDAO wishListDAO;
     private String nameWishList;
-    private String nameWishListReload;
     private String wishListNb ;
-    private String wishListNbReload ;
     private String login;
-    private String loginReload;
 
     //Creation de la page de tous les produits deja crees par les utilisateurs de l application
     @Override
@@ -67,18 +64,13 @@ public class PageProduits extends AppCompatActivity {
     private void initList(){
         WishList wishList = new WishList(this.wishListDAO.getName(this.wishListNb),
                 this.wishListDAO.getAccess(this.wishListNb),this);
-        if(wishListNbReload == null){
-            this.products = wishList.getProducts(wishListNb, this);
-            adapter=new CustomAdapterProducts(this,
-                    R.layout.row_products, products,wishListNb, login);
-        }
-        else {
-            this.products = wishList.getProducts(wishListNbReload, this);
-            adapter = new CustomAdapterProducts(this,
-                    R.layout.row_products, products, wishListNbReload, loginReload);
-        }
+        this.products = wishList.getProducts(wishListNb, this);
+        adapter=new CustomAdapterProducts(this,
+                R.layout.row_products, products,wishListNb, login);
         listView.setAdapter(adapter);
     }
+
+
     private void configureBack(){
         Button back =  findViewById(R.id.GoBackWishlist);
         back.setOnClickListener(new View.OnClickListener() {
@@ -86,6 +78,7 @@ public class PageProduits extends AppCompatActivity {
             public void onClick(View v) { start(PagesListesDeSouhaits.class); }
         });
     }
+
     private void configureSearchView(){
         SearchView searchView = findViewById(R.id.SearchbarProducts);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
