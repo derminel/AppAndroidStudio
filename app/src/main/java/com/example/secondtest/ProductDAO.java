@@ -27,15 +27,18 @@ public class ProductDAO {
     private Cursor products;
     private DatabaseHelper dbh ;
 
+    // Constructeur
     public ProductDAO (Context activePage){
         this.dbh = new DatabaseHelper(activePage);
         this.products = dbh.getDb().rawQuery(String.format("SELECT * FROM %s", TABLE_PRODUCTS),null);
     }
 
+    // Compte le nombre de produits
     public String lineCounter (){
         return String.valueOf(DatabaseUtils.queryNumEntries(this.dbh.getDb(), TABLE_PRODUCTS));
     }
 
+    // Ajoute un produit
     public boolean addProduct(String login, String wishListNb, String productNb, String name, int price, String info, String category, String website){
         ContentValues contentValues = new ContentValues();
         contentValues.put(COLUMN_PRODUCTS_PRODUCTNB, productNb);
@@ -54,6 +57,7 @@ public class ProductDAO {
         return result != -1;
     }
 
+    // Modifie certaines propriétés d'un produit
     public boolean updateProduct(String productNb, String name, int price, String info, String category, String website){
         ContentValues contentValues = new ContentValues();
         contentValues.put(COLUMN_PRODUCTS_NAME, name);
@@ -65,6 +69,7 @@ public class ProductDAO {
         return result != -1;
     }
 
+    // Ajoute un like ou dislike de la part d'un login à un certain produit d'une certaine wishlist
     public boolean updateLike(String login, String wishListNb, String productNb, byte likeValue){
         ContentValues contentValues = new ContentValues();
         contentValues.put(COLUMN_LIKE_COUNT, likeValue); //initialisé à 0
@@ -73,6 +78,7 @@ public class ProductDAO {
         return result != -1;
     }
 
+    // Renvoie si un login a mis un like ou dislike a un certain produit d'une certaine liste
     public String getLikeStatus(String login, String wishListNb, String productNb){
         Cursor cursor = this.dbh.getDb().rawQuery(String.format("SELECT * FROM %s WHERE %s = ? AND %s = ? AND %s = ?",TABLE_LIKE, COLUMN_LIKE_LOGIN, COLUMN_LIKE_LISTNB,
                 COLUMN_LIKE_PRODUCTNB),new String[] {login, wishListNb, productNb});
@@ -80,11 +86,13 @@ public class ProductDAO {
         return cursor.getString(1);
     }
 
+    // Renvoie toutes les propriétés d'un certain produit
     public Cursor getAllColumn(String productNb){
         return this.dbh.getDb().rawQuery(String.format("SELECT * FROM %s WHERE %s = ?", TABLE_PRODUCTS,
                 COLUMN_PRODUCTS_PRODUCTNB) ,new String[] {productNb});
     }
 
+    // Renvoie le productnumber d'un produit
     public String getProductNumber(String name){
         Cursor cursor = this.dbh.getDb().rawQuery(String.format("SELECT * FROM %s WHERE %s = ?", TABLE_PRODUCTS,
                 COLUMN_PRODUCTS_NAME) ,new String[] {name});
@@ -95,6 +103,7 @@ public class ProductDAO {
         return cursor.getString(0);
     }
 
+    // Renvoie le nom d'un produit avec un certain productnumber
     public String getProductName(String productNb){
         Cursor cursor = this.dbh.getDb().rawQuery(String.format("SELECT * FROM %s WHERE %s = ?", TABLE_PRODUCTS,
                 COLUMN_PRODUCTS_PRODUCTNB) ,new String[] {productNb});
@@ -103,14 +112,5 @@ public class ProductDAO {
         }
         cursor.moveToFirst();
         return cursor.getString(1);
-    }
-
-    public boolean alreadyExist(String productName){
-        Cursor cursor = this.dbh.getDb().rawQuery(String.format("SELECT * FROM %s WHERE %s = ?", TABLE_PRODUCTS,
-                COLUMN_PRODUCTS_PRODUCTNB) ,new String[] {productName});
-        if (cursor.getCount() <= 0){
-            return false;
-        }
-        return true;
     }
 }

@@ -68,6 +68,7 @@ public class WishListDAO {
     private DatabaseHelper dbh ;
     private FriendsDAO friendsDAO;
 
+    // Constructeur
     public WishListDAO (Context activePage){
         this.dbh = new DatabaseHelper(activePage);
         this.wishlists = dbh.getDb().rawQuery(String.format("SELECT * FROM %s", TABLE_LISTS),null);
@@ -98,6 +99,7 @@ public class WishListDAO {
         return (cursor.getString(1).equals("1"));
     }
 
+    // Renvoie le créateur d'une certaine liste
     public String getCreator(String listNb){
         Cursor cursor = this.dbh.getDb().rawQuery(String.format("SELECT * FROM %s WHERE %s = ?", TABLE_LISTS,
                 COLUMN_LISTS_LISTNB) ,new String[] {listNb});
@@ -108,6 +110,7 @@ public class WishListDAO {
         return cursor.getString(5);
     }
 
+    // Renvoie le destinataire d'une certaine liste
     public String getRecipient(String listNb){
         Cursor cursor = this.dbh.getDb().rawQuery(String.format("SELECT * FROM %s WHERE %s = ?", TABLE_LISTS,
                 COLUMN_LISTS_LISTNB) ,new String[] {listNb});
@@ -118,6 +121,7 @@ public class WishListDAO {
         return cursor.getString(4);
     }
 
+    // Ajoute un statut à un certain login à une certaine liste
     public boolean addStatus (String status, String login, String listNb) {
         ContentValues contentValues = new ContentValues();
         contentValues.put(COLUMN_MODIFIER_STATUS, status);
@@ -127,10 +131,12 @@ public class WishListDAO {
         return result != -1;
     }
 
+    // Renvoie le nombre de wishlists
     public String lineCounter (){
         return String.valueOf(DatabaseUtils.queryNumEntries(this.dbh.getDb(), TABLE_LISTS));
     }
 
+    // Ajoute une wishlist à la base de données
     public boolean addList(String name, boolean access, String listNb, String description, String recipient, String creator){
         //Ajouter à la table listes
         ContentValues contentValues = new ContentValues();
@@ -177,10 +183,11 @@ public class WishListDAO {
         return result != -1;
     }
 
+    // Supprime une liste de la base de données
     public Integer deleteList(String name) {
         return this.dbh.getDb().delete(TABLE_LISTS, COLUMN_LISTS_NAME + " = ?",new String[] {name});
     }
-
+    // Modifier une liste de la base de données
     public boolean updateWishlist(String listnb,String name,String Recipient, boolean PublicList) {
         SQLiteDatabase db =  dbh.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -191,6 +198,7 @@ public class WishListDAO {
         return true;
     }
 
+    // Renvoie les listes de souhaits d'un certain login
     public ArrayList<String> getWishLists(String login){
         Cursor cursor = this.dbh.getDb().rawQuery(String.format("SELECT * FROM %s WHERE %s = ?", TABLE_MODIFIER,
                 COLUMN_MODIFIER_LOGIN) ,new String[] {login});
