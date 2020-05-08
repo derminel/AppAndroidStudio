@@ -15,14 +15,13 @@ public class User {
     public User(String p, String l, Context context) {
         this.password = p ;
         this.login = l ;
-        this.friends = new ArrayList<User>() ;
+        this.friends = new ArrayList<User>();
         this.profile = new Profile(this.login, context);
         this.userDAO = new UserDAO(context);
         this.friendsDAO = new FriendsDAO(context);
     }
 
     public boolean exist(String login){
-
         return this.userDAO.exist(login);
     }
 
@@ -32,6 +31,10 @@ public class User {
 
     public String getLogin() {
         return this.login;
+    }
+
+    public String getPassword(){
+        return password;
     }
 
     public void setProfile(String n, String l, byte[] photo, String a, String p) {
@@ -79,5 +82,10 @@ public class User {
             requests.add(new User(null,request,context));
         }
         return requests;
+    }
+
+    public void signIn(String login, String password){
+        this.login = login;
+        this.password = password;
     }
 }

@@ -12,7 +12,7 @@ public class WishList {
     private boolean publicAccess ;
     private String description ;
     private String recipient ;
-    private String creator ;  //recoit un login
+    private String creator ;
     private ArrayList<String> admins ;
     private ArrayList<String> invisibles ;
     private ArrayList<String> readers ;

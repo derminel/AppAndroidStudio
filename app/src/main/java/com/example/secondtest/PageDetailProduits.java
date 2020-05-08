@@ -2,6 +2,7 @@ package com.example.secondtest;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.drawable.Animatable;
 import android.os.Bundle;
@@ -25,14 +26,13 @@ public class PageDetailProduits extends AppCompatActivity {
     private TextView productPrice;//
     private TextView productWebsite;//
     private TextView productInfo;//
-    private Button likeButton;
-    private Button dislikeButton;
     private ImageView unfillLike;
     private ImageView fillLike;
     private String checkLike = "unfillLike";
     private ImageView unfillDislike;
     private ImageView fillDislike;
     private String checkDislike = "unfillDislike";
+    private Button editProduct;
 
     ProductDAO productDAO;
     Cursor aboutProduct;
@@ -55,12 +55,13 @@ public class PageDetailProduits extends AppCompatActivity {
         this.fillLike = (ImageView) findViewById(R.id.fillLike);
         this.unfillDislike = (ImageView) findViewById(R.id.unfillDislike);
         this.fillDislike = (ImageView) findViewById(R.id.fillDislike);
+        this.editProduct = (Button) findViewById(R.id.editProduct);
 
         this.productDAO = new ProductDAO(this);
-        this.productNb = productDAO.getProductNumber(getIntent().getStringExtra("PRODUCTNAME1"));
-        this.wishListNb = getIntent().getStringExtra("WISHLISTNB_DETAILS_PRODUIT");
+        this.productNb = productDAO.getProductNumber(getIntent().getStringExtra("ProductName"));
+        this.wishListNb = getIntent().getStringExtra("WishlistNb");
         this.aboutProduct = productDAO.getAllColumn(productNb);
-        this.login = getIntent().getStringExtra("LOGIN_DETAILS_PRODUIT");
+        this.login = getIntent().getStringExtra("Login");
 
         this.aboutProduct.moveToFirst();
 
@@ -84,6 +85,17 @@ public class PageDetailProduits extends AppCompatActivity {
             checkLike = "fillDislike";
         }
 
+    }
+
+    private void editProduct(){
+        editProduct.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(PageDetailProduits.this, PagePourModifierUnProduit.class);
+                intent.putExtra("ProductNb", productNb);
+                startActivity(intent);
+            }
+        });
     }
 
     public void unfilledLike(View view){

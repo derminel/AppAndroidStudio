@@ -12,7 +12,6 @@ import android.os.Bundle;
 
 public class PageProfil extends AppCompatActivity {
     private String login;//
-    private String loginReload;
     private Cursor userInfo;
     private TextView name;//
     private TextView lastName;//
@@ -24,11 +23,7 @@ public class PageProfil extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_page_profil);
-        this.login = getIntent().getStringExtra("LOGIN_PROFIL");
-        this.loginReload = getIntent().getStringExtra("LOGIN_PROFIL_RELOAD");
-        if(loginReload != null){
-            login = loginReload;
-        }
+        this.login = getIntent().getStringExtra("Login");
 
         this.name = (TextView) findViewById(R.id.NameDBMyProfil);
         this.lastName = (TextView) findViewById(R.id.LastNameDBMyProfil);
@@ -52,7 +47,7 @@ public class PageProfil extends AppCompatActivity {
         changeProfile.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view){
                 Intent intent = new Intent(PageProfil.this, PageProfilUpdate.class);
-                intent.putExtra("LOGIN_CHANGE", login);
+                intent.putExtra("Login", login);
                 startActivity(intent);
             }
         });
@@ -64,7 +59,7 @@ public class PageProfil extends AppCompatActivity {
         retourAcceuil.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view){
                 Intent intent = new Intent(PageProfil.this, PageAccueil.class);
-                intent.putExtra("LOGIN_ACCEUIL_APRES_VISITE_PROFIL", login);
+                intent.putExtra("Login", login);
                 startActivity(intent);
             }
         });

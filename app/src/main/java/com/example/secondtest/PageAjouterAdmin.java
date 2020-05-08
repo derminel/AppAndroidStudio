@@ -19,7 +19,7 @@ public class PageAjouterAdmin extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_page_pour_ajouter_admins);
-        wishlistnb = getIntent().getStringExtra("LISTNB_AJOUT_ADMIN");
+        wishlistnb = getIntent().getStringExtra("WishlistNb");
         modifierDAO = new ModifierDAO(this);
         context = this;
 
@@ -33,7 +33,7 @@ public class PageAjouterAdmin extends AppCompatActivity {
             public void onClick(View view){
                 modifierDAO.updateAdmin(wishlistnb, admin.getText().toString());
                 Intent intent = new Intent(PageAjouterAdmin.this, PagePourModifierAdmins.class);
-                intent.putExtra("LISTNB_ADMIN", wishlistnb);
+                intent.putExtra("WishlistNb", wishlistnb);
                 startActivity(intent);
             }
         });

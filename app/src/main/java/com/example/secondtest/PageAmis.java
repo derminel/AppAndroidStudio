@@ -28,47 +28,50 @@ import java.util.Arrays;
 
 public class PageAmis extends AppCompatActivity {
 
-    private ArrayList<User> friends;
+    private FriendsDAO friendsDAO;
+    private UserDAO userDAO;
+    private String login;
+    private User user;
+
     private CustomAdapterFriends adapter;
-    private ListView listView;
     private SearchView searchView;
-    private Button addButton;
-    private Button friendsRequestsButton;
-    private Button goBackButton;
 
     private boolean canInit = true;
-    private UserDAO userDAO;
-    private User user;
-    private String login;
-    private String loginAfterFriendRequests;
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        showToast(login);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_page_amis);
-
-        this.listView=(ListView)findViewById(R.id.ListViewFriends);
-        this.searchView=(SearchView) findViewById(R.id.SearchbarFriends);
-        this.addButton=(Button) findViewById(R.id.addFriendButton);
-        this.friendsRequestsButton = (Button) findViewById(R.id.friendsRequestsButton);
-        this.goBackButton = (Button) findViewById(R.id.GoBackFriends);
-
-        this.login = getIntent().getStringExtra("LOGIN_AMIS");
-        this.loginAfterFriendRequests = getIntent().getStringExtra("LOGIN_AMIS_APRES_DMD_AMIS");
-        if(loginAfterFriendRequests != null){
-            login = loginAfterFriendRequests;
-        }
-
+        this.login = getIntent().getStringExtra("Login");
         this.user = new User(null,login,this);
         this.userDAO = new UserDAO(this);
+        this.friendsDAO = new FriendsDAO(this);
 
+        setContentView(R.layout.activity_page_amis);
+        this.searchView = findViewById(R.id.SearchbarFriends);
         if(canInit){
             initList();
             canInit = false;
         }
-        showToast(login);
 
+        configuresearchbar();
+        configureAddButton();
+        configureBack();
+        configureFriendRequest();
+    }
+
+    private void showToast(String msg) {
+        Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
+    }
+    private void start(Class<?> cls){
+        Intent page = new Intent(PageAmis.this, cls);
+        page.putExtra("Login", login);
+        startActivity(page);
+    }
+
+    private void configuresearchbar(){
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -81,52 +84,48 @@ public class PageAmis extends AppCompatActivity {
                 return false;
             }
         });
-
-        addButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showToast(login);
-                Intent intent = new Intent(PageAmis.this, PagePourAjouterUnAmi.class) ;
-                intent.putExtra("LOGIN_AJOUT_AMI", login);
-                startActivity(intent);
-            }
-        });
-
-        goBack();
-        friendsRequests();
-    }
-
-    private void showToast(String msg) {
-        Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
-    }
-
-    private void friendsRequests(){
-        friendsRequestsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showToast("Login" + login);
-                Intent intent = new Intent(PageAmis.this, PagePourGererDmdAmis.class);
-                intent.putExtra("LOGIN_DEMAMDES_AMIS", login);
-                startActivity(intent);
-            }
-        });
     }
 
     private void initList(){
-        this.friends = this.user.getFriends(this);
+        ListView listView = findViewById(R.id.ListViewFriends);
+        ArrayList<User> friends = this.user.getFriends(this);
         adapter=new CustomAdapterFriends(this,
                 R.layout.row_friends, friends, login);
         listView.setAdapter(adapter);
     }
 
-    private void goBack(){
-        goBackButton.setOnClickListener(new View.OnClickListener() {
+    private void configureFriendRequest(){
+        Button friendsRequestsButton = findViewById(R.id.friendsRequestsButton);
+        friendsRequestsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) { start(PagePourGererDmdAmis.class); }
+        });
+    }
+
+    private void configureAddButton() {
+        Button addFriend = findViewById(R.id.addFriendButton);
+        addFriend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(PageAmis.this, PageAccueil.class);
-                intent.putExtra("LOGIN_ACCEUIL_APRES_VISITE_AMIS", login);
-                startActivity(intent);
+                if (user.getLogin().equals(searchView.getQuery().toString())) {
+                    showToast("You can't add yourself as friend");
+                } else if (!userDAO.getUserLoginDb().contains(searchView.getQuery().toString())) {
+                    showToast("This login doesn't exist");
+                } else if (friendsDAO.areFriends(user.getLogin(), searchView.getQuery().toString())) {
+                    showToast("You're already friends");
+                } else {
+                    if (user.friendRequest(searchView.getQuery().toString())) { showToast("Invitation has been sent");
+                    } else { showToast("Problem with your invitation, try again"); }
+                }
             }
+        });
+    }
+
+    private void configureBack(){
+        Button goBackButton = findViewById(R.id.GoBackFriends);
+        goBackButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) { start(PageAccueil.class); }
         });
     }
 }

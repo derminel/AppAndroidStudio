@@ -32,7 +32,7 @@ public class PageModifierWishList extends AppCompatActivity {
 
         wishListDAO = new WishListDAO(this);
         modifierDAO = new ModifierDAO(this);
-        this.wishlistnb = getIntent().getStringExtra("LISTNB_MODIFIER");
+        this.wishlistnb = getIntent().getStringExtra("WishlistNb");
         this.creator = wishListDAO.getCreator(wishlistnb);
         this.recipient = wishListDAO.getRecipient(wishlistnb);
 
@@ -72,7 +72,7 @@ public class PageModifierWishList extends AppCompatActivity {
         nextButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view){
                 Intent intent = new Intent(PageModifierWishList.this, PageModifierWishListUpdate.class);
-                intent.putExtra("LISTNB_UPDATE", wishlistnb);
+                intent.putExtra("WishlistNb", wishlistnb);
                 startActivity(intent);
             }
         });
@@ -84,7 +84,7 @@ public class PageModifierWishList extends AppCompatActivity {
         nextButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view){
                 Intent intent = new Intent(PageModifierWishList.this, PagePourModifierAdmins.class);
-                intent.putExtra("LISTNB_ADMIN", wishlistnb);
+                intent.putExtra("WishlistNb", wishlistnb);
                 startActivity(intent);
             }
         });

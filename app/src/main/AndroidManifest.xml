@@ -20,7 +20,6 @@
         <activity android:name=".PageProfil" />
         <activity android:name=".PageCreationAccount" />
         <activity android:name=".PageAmis" />
-        <activity android:name=".PagePourAjouterUnAmi" />
         <activity android:name=".PageAccueil" />
         <activity android:name=".PageModifierWishList" />
         <activity android:name=".PageModifierWishListUpdate" />

@@ -13,37 +13,34 @@ import android.widget.Toast;
 
 
 public class MainActivity extends AppCompatActivity {
-
-    private DatabaseHelper myDb ;
     private User user;
-    private FriendsDAO friendsDAO;
-
     EditText login;
     EditText password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
 
-        this.myDb = new DatabaseHelper(this);
+        setContentView(R.layout.activity_main);
 
         this.login = findViewById(R.id.login);
         this.password = findViewById(R.id.password);
 
-        this.friendsDAO = new FriendsDAO(this);
-
-        configureNextButtonCreateAccount();
-        configureNextButtonConnect();
+        configureButtonSignIn();
+        configureButtonSignUp();
     }
 
     private void showToast(String msg) {
         Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
     }
 
-    private void configureNextButtonConnect() {
-        Button nextButton = (Button) findViewById(R.id.ConfirmConnection);
-        nextButton.setOnClickListener(new View.OnClickListener() {
+    private void configureUser(){
+        this.user = new User(this.password.getText().toString(), this.login.getText().toString(), this);
+    }
+
+    private void configureButtonSignIn() {
+        Button SignIn = findViewById(R.id.ConfirmConnection);
+        SignIn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 configureUser();
                 if((login.getText().toString().equals("")) || (login.getText().toString().equals(""))) {
@@ -56,25 +53,22 @@ public class MainActivity extends AppCompatActivity {
                     showToast("You've made a mistake in your password");
                 }
                 else{
-                    Intent intent = new Intent(MainActivity.this, PageAccueil.class);
-                    intent.putExtra("LOGIN_ACCUEIL", login.getText().toString());
-                    startActivity(intent);
+                    Intent gotoSignIn = new Intent(MainActivity.this, PageAccueil.class);
+                    gotoSignIn.putExtra("Login", login.getText().toString());
+                    startActivity(gotoSignIn);
                 }
             }
         });
     }
 
-    private void configureNextButtonCreateAccount() {
-        Button nextButton = (Button) findViewById(R.id.CreateAccount);
-        nextButton.setOnClickListener(new View.OnClickListener() {
+    private void configureButtonSignUp() {
+        Button SignUp = findViewById(R.id.CreateAccount);
+        SignUp.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view){
-                startActivity(new Intent(MainActivity.this, PageCreationAccount.class));
+                Intent gotoSignup= new Intent(MainActivity.this, PageCreationAccount.class);
+                gotoSignup.putExtra("Login", login.getText().toString());
+                startActivity(gotoSignup);
             }
         });
     }
-
-    private void configureUser(){
-        this.user = new User(this.password.getText().toString(), this.login.getText().toString(), this);
-    }
-
 }

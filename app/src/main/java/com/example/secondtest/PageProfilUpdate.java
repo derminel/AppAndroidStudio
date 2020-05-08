@@ -26,7 +26,7 @@ public class PageProfilUpdate extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_page_profil_update);
 
-        this.login = getIntent().getStringExtra("LOGIN_CHANGE");
+        this.login = getIntent().getStringExtra("Login");
 
         this.myDb = new DatabaseHelper(this);
         this.userDAO = new UserDAO(this);
@@ -53,7 +53,7 @@ public class PageProfilUpdate extends AppCompatActivity {
         retourAcceuil.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view){
                 Intent intent = new Intent(PageProfilUpdate.this, PageProfil.class);
-                intent.putExtra("LOGIN_PROFIL_RELOAD", login);
+                intent.putExtra("Login", login);
                 startActivity(intent);
             }
         });
@@ -63,11 +63,17 @@ public class PageProfilUpdate extends AppCompatActivity {
         Button buttonSaveProfile = (Button) findViewById(R.id.buttonSaveProfile);
         buttonSaveProfile.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view){
-                userDAO.updateProfile(login, name.getText().toString(), lastName.getText().toString(),
-                        address.getText().toString(), preferences.getText().toString());
-                Intent intent = new Intent(PageProfilUpdate.this, PageProfil.class);
-                intent.putExtra("LOGIN_PROFIL_RELOAD", login);
-                startActivity(intent);
+                if (name.getText().toString().equals("") || lastName.getText().toString().equals("") || address.getText().toString().equals("")){
+                    showToast("Please fill in the 3 first fields");
+                }
+                else{
+                    userDAO.updateProfile(login, name.getText().toString(), lastName.getText().toString(),
+                            address.getText().toString(), preferences.getText().toString());
+                    Intent intent = new Intent(PageProfilUpdate.this, PageProfil.class);
+                    intent.putExtra("Login", login);
+                    startActivity(intent);
+                }
+
             }
         });
     }

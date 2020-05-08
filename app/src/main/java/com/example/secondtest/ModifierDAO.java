@@ -15,8 +15,8 @@ import static com.example.secondtest.DatabaseContract.COLUMN_MODIFIER_STATUS;
 import static com.example.secondtest.DatabaseContract.TABLE_MODIFIER;
 
 public class ModifierDAO {
-    private DatabaseHelper dbh;//
-    private Cursor modifier;//
+    private DatabaseHelper dbh;
+    private Cursor modifier;
 
     public ModifierDAO(Context activePage) {
         this.dbh = new DatabaseHelper(activePage);
@@ -25,7 +25,7 @@ public class ModifierDAO {
 
     public ArrayList<String> getAdmin(String listNb) {
         this.modifier.moveToFirst();
-        ArrayList<String> admins = new ArrayList<String>();
+        ArrayList<String> admins = new ArrayList<>();
         while (!(this.modifier.isLast()) && !IsTableEmpty(this.modifier)) {
             if (this.modifier.getString(2).equals(listNb) && this.modifier.getString(0).equals("1")) {
                 admins.add(this.modifier.getString(1));

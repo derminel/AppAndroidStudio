@@ -29,6 +29,7 @@ import java.util.Arrays;
 public class PagesListesDeSouhaits extends AppCompatActivity {
 
     private ArrayList<WishList> wishLists; //
+    private ArrayList<String> wishlistsNb;
     private CustomAdapterWishLists adapter;//
     private ListView listView;//
     private SearchView searchView;//
@@ -51,8 +52,7 @@ public class PagesListesDeSouhaits extends AppCompatActivity {
         addButton=(Button) findViewById(R.id.addwishlistbutton);
 
         this.wishListDAO = new WishListDAO(this);
-        this.login = getIntent().getStringExtra("LOGIN_LISTES_DE_SOUHAITS");
-        this.loginReload = getIntent().getStringExtra("LOGIN_LISTE_DE_SOUHAITS_RELOAD");
+        this.login = getIntent().getStringExtra("Login");
         Back = (Button)findViewById(R.id.GoBackWishlists);
         Back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,10 +60,6 @@ public class PagesListesDeSouhaits extends AppCompatActivity {
                 activityretour1();
             }
         });
-
-        if(loginReload != null){
-            login = loginReload;
-        }
 
         if(canInit){
             initList();
@@ -87,6 +83,7 @@ public class PagesListesDeSouhaits extends AppCompatActivity {
     }
     public void activityretour1(){
         Intent intent = new Intent(this, PageAccueil.class);
+        intent.putExtra("Login", login);
         startActivity(intent);
     }
 
@@ -96,12 +93,14 @@ public class PagesListesDeSouhaits extends AppCompatActivity {
 
     private void initList(){
         this.wishLists = new ArrayList<WishList>();
+        this.wishlistsNb = new ArrayList<String>();
         for (String listNb : this.wishListDAO.getWishLists(login)){
             WishList newList = new WishList(wishListDAO.getName(listNb), true, this); //mis a true juste pour la création
             this.wishLists.add(newList);
+            this.wishlistsNb.add(listNb);
         }
         adapter=new CustomAdapterWishLists(this,
-                R.layout.row_wishlists, wishLists, login);
+                R.layout.row_wishlists, wishLists, wishlistsNb, login);
         listView.setAdapter(adapter);
     }
 
@@ -110,7 +109,7 @@ public class PagesListesDeSouhaits extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(PagesListesDeSouhaits.this, PagePourAjouterUneListeDeSouhait.class);
-                intent.putExtra("LOGIN_AJOUT_LISTE_DE_SOUHAITS", login);
+                intent.putExtra("Login", login);
                 startActivityForResult(intent, 1);
             }
         });

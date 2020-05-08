@@ -22,6 +22,7 @@ import java.util.List;
 
 public class CustomAdapterWishLists extends ArrayAdapter<WishList> {
     private ArrayList<WishList> wishLists;//
+    private ArrayList<String> wishListsNb;//
 
     //activity context
     private Context context;//
@@ -33,11 +34,12 @@ public class CustomAdapterWishLists extends ArrayAdapter<WishList> {
     private String login;
 
     //constructor initializing the values
-    public CustomAdapterWishLists(Context context, int resource, ArrayList<WishList> wishLists,String login) {
+    public CustomAdapterWishLists(Context context, int resource, ArrayList<WishList> wishLists, ArrayList<String> wishListsNb, String login) {
         super(context, resource, wishLists);
         this.context = context;
         this.resource = resource;
         this.wishLists = wishLists;
+        this.wishListsNb = wishListsNb;
         this.login = login;
         this.wishListDAO = new WishListDAO(context);
     }
@@ -71,9 +73,9 @@ public class CustomAdapterWishLists extends ArrayAdapter<WishList> {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, PageProduits.class);
-                intent.putExtra("WISHLISTNAME1", wishList.getName());
-                intent.putExtra("WISHLISTNUMBER1", "List" + String.valueOf(position+1));
-                intent.putExtra("LOGIN_PRODUITS", login);
+                intent.putExtra("WishlistName", wishList.getName());
+                intent.putExtra("WishlistNb", wishListsNb.get(position));
+                intent.putExtra("Login", login);
                 context.startActivity(intent);
             }
         });

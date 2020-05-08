@@ -27,7 +27,7 @@ public class PagePourModifierAdmins extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_page_changer_admins);
-        this.wishlistNb  = getIntent().getStringExtra("LISTNB_ADMIN");
+        this.wishlistNb  = getIntent().getStringExtra("WishlistNb");
         modifierDAO = new ModifierDAO(this);
 
         listViewad=(ListView)findViewById(R.id.ListViewAdmins);
@@ -65,7 +65,7 @@ public class PagePourModifierAdmins extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(PagePourModifierAdmins.this, PageAjouterAdmin.class) ;
-                intent.putExtra("LISTNB_AJOUT_ADMIN", wishlistNb);
+                intent.putExtra("WishlistNb", wishlistNb);
                 startActivity(intent);
             }
         });
