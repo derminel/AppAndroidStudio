@@ -12,73 +12,63 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class PageProfilUpdate extends AppCompatActivity {
-    private DatabaseHelper myDb ;
-    private EditText name;//
-    private EditText lastName;//
-    private EditText address; //
-    private EditText preferences;//
-    private UserDAO userDAO;//
-    private String login;//
-    private Cursor userInfo;
+    private EditText name;
+    private EditText lastName;
+    private EditText address;
+    private EditText preferences;
+    private UserDAO userDAO;
+    private String login;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_page_profil_update);
-
         this.login = getIntent().getStringExtra("Login");
-
-        this.myDb = new DatabaseHelper(this);
         this.userDAO = new UserDAO(this);
-
-        this.name = (EditText) findViewById(R.id.name_update);
-        this.lastName = (EditText) findViewById(R.id.last_name_update);
-        this.address = (EditText) findViewById(R.id.address_update);
-        this.preferences = (EditText) findViewById(R.id.preferences_update);
-
-        this.userInfo = userDAO.getAllColumn(login);
+        Cursor userInfo = userDAO.getAllColumn(login);
         userInfo.moveToFirst();
 
+        setContentView(R.layout.activity_page_profil_update);
+        this.name = findViewById(R.id.name_update);
+        this.lastName = findViewById(R.id.last_name_update);
+        this.address = findViewById(R.id.address_update);
+        this.preferences = findViewById(R.id.preferences_update);
         name.setText(userInfo.getString(1));
         lastName.setText(userInfo.getString(2));
         address.setText(userInfo.getString(3));
         preferences.setText(userInfo.getString(5));
 
         configureButtonSaveProfile();
-        configureNextButtonBackToProfile();
+        configureBack();
+    }
+    private void showToast(String msg) {
+        Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
+    }
+    private void start(Class<?> cls){
+        Intent page = new Intent(PageProfilUpdate.this, cls);
+        page.putExtra("Login", login);
+        startActivity(page);
     }
 
-    private void configureNextButtonBackToProfile() {
-        Button retourAcceuil = (Button) findViewById(R.id.GoBackProfileUpdate);
+    private void configureBack() {
+        Button retourAcceuil = findViewById(R.id.GoBackProfileUpdate);
         retourAcceuil.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view){
-                Intent intent = new Intent(PageProfilUpdate.this, PageProfil.class);
-                intent.putExtra("Login", login);
-                startActivity(intent);
-            }
+            public void onClick(View view){ start(PageProfil.class); }
         });
     }
 
     private void configureButtonSaveProfile() {
-        Button buttonSaveProfile = (Button) findViewById(R.id.buttonSaveProfile);
+        Button buttonSaveProfile = findViewById(R.id.buttonSaveProfile);
         buttonSaveProfile.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view){
-                if (name.getText().toString().equals("") || lastName.getText().toString().equals("") || address.getText().toString().equals("")){
-                    showToast("Please fill in the 3 first fields");
+                if (name.getText().toString().equals("") || lastName.getText().toString().equals("")){
+                    showToast("Please fill in the 2 first fields");
                 }
                 else{
                     userDAO.updateProfile(login, name.getText().toString(), lastName.getText().toString(),
                             address.getText().toString(), preferences.getText().toString());
-                    Intent intent = new Intent(PageProfilUpdate.this, PageProfil.class);
-                    intent.putExtra("Login", login);
-                    startActivity(intent);
+                    start(PageProfil.class);
                 }
-
             }
         });
-    }
-
-    private void showToast(String msg) {
-        Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
     }
 }

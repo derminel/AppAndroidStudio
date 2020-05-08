@@ -20,12 +20,8 @@ public class PageProduits extends AppCompatActivity {
     private ArrayList<Product> products;
     private CustomAdapterProducts adapter;
     private ListView listView;
-    private SearchView searchView;
-    private Button addButton;
-    private Button settingButton;
     private TextView titleWishList;
 
-    private boolean canInit = true;
     private WishListDAO wishListDAO;
     private String nameWishList;
     private String nameWishListReload;
@@ -34,47 +30,23 @@ public class PageProduits extends AppCompatActivity {
     private String login;
     private String loginReload;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_page_produits);
-
-        this.listView = findViewById(R.id.ListViewProducts);
-        this.searchView = findViewById(R.id.SearchbarProducts);
-        this.addButton = findViewById(R.id.addProductButton);
-        this.settingButton = findViewById(R.id.editWishlist);
-        this.titleWishList = findViewById(R.id.titleWishlist);
-
-        this.login = getIntent().getStringExtra("Login");
         this.wishListDAO = new WishListDAO(this);
+        this.login = getIntent().getStringExtra("Login");
         this.wishListNb = getIntent().getStringExtra("WishlistNb");
         this.nameWishList = wishListDAO.getName(wishListNb);
-        //this.nameWishList = getIntent().getStringExtra("WishlistName");
+
+        setContentView(R.layout.activity_page_produits);
+        this.listView = findViewById(R.id.ListViewProducts);
+        this.titleWishList = findViewById(R.id.titleWishlist);
         this.titleWishList.setText(nameWishList);
 
-        if(canInit){
-            initList();
-            canInit = false;
-        }
-
-        showToast(wishListNb);
-
-        //Filter adapté pour les listes de Product
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                adapter.getFilter().filter(newText);
-                return false;
-            }
-        });
-
+        initList();
         configureAddButton();
+        configureBack();
+        configureSearchView();
         configureSettingButton();
     }
 
@@ -82,8 +54,18 @@ public class PageProduits extends AppCompatActivity {
         Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
     }
 
+    private void start(Class<?> cls){
+        Intent page = new Intent(PageProduits.this, cls);
+        page.putExtra("Login", login);
+        page.putExtra("WishlistNb", wishListNb);
+        page.putExtra("WishlistName", nameWishList);
+        page.putExtra("Login", login);
+        startActivity(page);
+    }
+
     private void initList(){
-        WishList wishList = new WishList(this.wishListDAO.getName(this.wishListNb), this.wishListDAO.getAccess(this.wishListNb),this);
+        WishList wishList = new WishList(this.wishListDAO.getName(this.wishListNb),
+                this.wishListDAO.getAccess(this.wishListNb),this);
         if(wishListNbReload == null){
             this.products = wishList.getProducts(wishListNb, this);
             adapter=new CustomAdapterProducts(this,
@@ -96,27 +78,38 @@ public class PageProduits extends AppCompatActivity {
         }
         listView.setAdapter(adapter);
     }
-
-    private void configureAddButton(){
-        addButton.setOnClickListener(new View.OnClickListener() {
+    private void configureBack(){
+        Button back =  findViewById(R.id.GoBackWishlist);
+        back.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(PageProduits.this, PagePourAjouterUnProduit.class) ;
-                intent.putExtra("WishlistNb", wishListNb);
-                intent.putExtra("WishlistName", nameWishList);
-                intent.putExtra("Login", login);
-                startActivityForResult(intent, 1);
+            public void onClick(View v) { start(PagesListesDeSouhaits.class); }
+        });
+    }
+    private void configureSearchView(){
+        SearchView searchView = findViewById(R.id.SearchbarProducts);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                adapter.getFilter().filter(newText);
+                return false;
             }
         });
     }
+    private void configureAddButton(){
+        Button addButton = findViewById(R.id.addProductButton);
+        addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) { start(PagePourAjouterUnProduit.class); }
+        });
+    }
     private void configureSettingButton() {
+        Button settingButton = findViewById(R.id.editWishlist);
         settingButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view){
-                Intent intent = new Intent(PageProduits.this, PageModifierWishList.class);
-                intent.putExtra("WishlistNb", wishListNb);
-                intent.putExtra("Login", login);
-                startActivity(intent);
-            }
+            public void onClick(View v){ start(PageModifierWishList.class);}
         });
     }
 }

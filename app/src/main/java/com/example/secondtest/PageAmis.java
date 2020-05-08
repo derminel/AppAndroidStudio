@@ -96,7 +96,9 @@ public class PageAmis extends AppCompatActivity {
         addFriend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (user.getLogin().equals(searchView.getQuery().toString())) {
+                if(searchView.getQuery().toString().equals("")){
+                    showToast("You must enter a login to add a friend");
+                }else if (user.getLogin().equals(searchView.getQuery().toString())) {
                     showToast("You can't add yourself as friend");
                 } else if (!userDAO.getUserLoginDb().contains(searchView.getQuery().toString())) {
                     showToast("This login doesn't exist");

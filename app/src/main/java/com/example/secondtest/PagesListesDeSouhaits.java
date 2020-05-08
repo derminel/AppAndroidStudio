@@ -37,6 +37,18 @@ public class PagesListesDeSouhaits extends AppCompatActivity {
         page.putExtra("Login", login);
         startActivity(page);
     }
+
+    private void initList(){
+        ArrayList<WishList> wishLists = new ArrayList<>();
+        ArrayList<String> wishlistsNb = new ArrayList<>();
+        for (String listNb : this.wishListDAO.getWishLists(login)){
+            wishLists.add(new WishList(wishListDAO.getName(listNb), true, this)); //mis a true juste pour la créationwishLists.add(newList);
+            wishlistsNb.add(listNb);
+        }
+        adapter=new CustomAdapterWishLists(this, R.layout.row_wishlists, wishLists, wishlistsNb, login);
+        listView.setAdapter(adapter);
+    }
+
     private void configureSearchView(){
         this.searchView= findViewById(R.id.SearchbarWishlists);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -51,16 +63,6 @@ public class PagesListesDeSouhaits extends AppCompatActivity {
                 return false;
             }
         });
-    }
-    private void initList(){
-        ArrayList<WishList> wishLists = new ArrayList<>();
-        ArrayList<String> wishlistsNb = new ArrayList<>();
-        for (String listNb : this.wishListDAO.getWishLists(login)){
-            wishLists.add(new WishList(wishListDAO.getName(listNb), true, this)); //mis a true juste pour la créationwishLists.add(newList);
-            wishlistsNb.add(listNb);
-        }
-        adapter=new CustomAdapterWishLists(this, R.layout.row_wishlists, wishLists, wishlistsNb, login);
-        listView.setAdapter(adapter);
     }
 
     private void configureBackButton(){

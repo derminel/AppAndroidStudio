@@ -17,7 +17,6 @@ public class PagePourAjouterUnProduit extends AppCompatActivity implements Adapt
 
     private ProductDAO productDAO;
     private ContentDAO contentDAO;
-    private boolean publicAccess;
     private String wishListNb;
     private String wishListName;
     private String login;
@@ -31,79 +30,72 @@ public class PagePourAjouterUnProduit extends AppCompatActivity implements Adapt
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_page_pour_ajouter_un_produit);
-
-        this.publicAccess = false ;
-        this.name = findViewById(R.id.setNameCreate);
-        this.category = "Other";
-        this.price = findViewById(R.id.setPriceCreate);
-        this.website = findViewById(R.id.setWebsiteCreate);
-        this.info = findViewById(R.id.setInfoCreate);
         this.wishListNb = getIntent().getStringExtra("WishlistNb");
         this.wishListName = getIntent().getStringExtra("WishlistName");
         this.login = getIntent().getStringExtra("Login");
         this.contentDAO = new ContentDAO(this);
         this.productDAO = new ProductDAO(this);
 
-        Button buttonConfirm = findViewById(R.id.buttonCreateProduct);
+        setContentView(R.layout.activity_page_pour_ajouter_un_produit);
+        this.category = "Other";
+        this.name = findViewById(R.id.setNameCreate);
+        this.price = findViewById(R.id.setPriceCreate);
+        this.website = findViewById(R.id.setWebsiteCreate);
+        this.info = findViewById(R.id.setInfoCreate);
 
+        configureSpinner();
+        configureCreate();
+    }
+
+    private int parseprice(){
+        int prix=-1;
+        if(!this.price.getText().toString().equals("")) { prix = Integer.parseInt(this.price.getText().toString()); }
+        return prix;
+    }
+    private void start(Class<?> cls){
+        Intent page = new Intent(PagePourAjouterUnProduit.this, cls);
+        page.putExtra("Login", login);
+        page.putExtra("WishlistName", wishListName);
+        page.putExtra("WishlistNb", wishListNb);
+        startActivity(page);
+    }
+    private void showToast(String msg) {
+        Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
+    }
+    @Override
+    public void onItemSelected(AdapterView<?> arg0, View arg1, int position, long id) {
+        this.category=this.categories[position];
+    }
+    @Override
+    public void onNothingSelected(AdapterView<?> arg0) {
+        showToast("you didn't choose a category" );
+    }
+
+    private void configureSpinner(){
         Spinner spin = findViewById(R.id.setCategorySpinner);
         spin.setOnItemSelectedListener(this);
         ArrayAdapter aa = new ArrayAdapter(this,android.R.layout.simple_spinner_item,categories);
         aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spin.setAdapter(aa);
-
+    }
+    private void configureCreate(){
+        Button buttonConfirm = findViewById(R.id.buttonCreateProduct);
+        final String productNb = "Product" + Integer.parseInt(productDAO.lineCounter())+1;
         buttonConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Product product = configureProduct();
-                String productNb = product.getProductNb();
-                if (productNb == null){
-                    productNb = "Product" + Integer.parseInt(productDAO.lineCounter())+1;
-                    productDAO.addProduct(login, wishListNb, productNb,name.getText().toString(),Integer.parseInt(price.getText().toString()),
-                            info.getText().toString(),category,website.getText().toString());
-                    contentDAO.addProduct(wishListNb, productNb);
-                    Intent intent = new Intent(PagePourAjouterUnProduit.this, PageProduits.class);
-                    intent.putExtra("WishlistName", wishListName);
-                    intent.putExtra("WishlistNb", wishListNb);
-                    intent.putExtra("Login", login);
-                    startActivity(intent);
-                }
-                else if (contentDAO.alreadyInList(wishListNb,product.getProductNb())){
-                    showToast("This product is already in the list");
-                }
-                else {
-                    contentDAO.addProduct(wishListNb, productNb);
-                    Intent intent = new Intent(PagePourAjouterUnProduit.this, PageProduits.class);
-                    intent.putExtra("WishlistName", wishListName);
-                    intent.putExtra("WishlistNb", wishListNb);
-                    intent.putExtra("Login", login);
-                    startActivity(intent);
-                }
+                try {
+                    int prix= parseprice();
+                    if(name.getText().toString().equals("")){
+                        showToast("You have to enter a product name");
+                    }else {
+                        productDAO.addProduct(login, wishListNb, productNb, name.getText().toString(),
+                                prix, info.getText().toString(), category, website.getText().toString());
+                        contentDAO.addProduct(wishListNb, productNb);
+                        start(PageProduits.class);
+                    }
+                }catch(Exception e) { showToast("Your price is not an integer");}
             }
         });
-    }
-
-    @Override
-    public void onItemSelected(AdapterView<?> arg0, View arg1, int position, long id) {
-        this.category=this.categories[position];
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> arg0) {
-        Toast.makeText(getApplicationContext(),"you didn't choose a category" , Toast.LENGTH_LONG).show();
-    }
-
-    private Product configureProduct(){
-        int price = -1;
-        if (!(this.price.getText().toString().equals(""))){
-            price = Integer.parseInt(this.price.getText().toString());
-        }
-        return new Product(this.name.getText().toString(), price,this.info.getText().toString(),
-                this.category,this.website.getText().toString(),this);
-    }
-
-    private void showToast(String msg) {
-        Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
     }
 }
