@@ -38,7 +38,6 @@ public class PagesListesDeSouhaits extends AppCompatActivity {
     private boolean canInit = true;//
     private WishListDAO wishListDAO;//
     private String login;//
-    private String loginReload;
     private Button Back;
 
 

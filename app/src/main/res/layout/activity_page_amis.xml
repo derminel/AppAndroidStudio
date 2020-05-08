@@ -74,9 +74,10 @@
 
         <SearchView
             android:id="@+id/SearchbarFriends"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:iconifiedByDefault="false"
+            android:layout_weight="10"
             android:queryHint="Search or add a friend" />
 
         <Button
@@ -86,6 +87,7 @@
             android:gravity="center"
             android:textSize="30sp"
             android:textStyle="bold"
+            android:layout_weight="1"
             android:background="@drawable/ic_add_box_black_24dp"
             style="?android:attr/borderlessButtonStyle"/>
     </LinearLayout>
