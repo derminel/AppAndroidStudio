@@ -23,18 +23,17 @@ public class PageCreationProfil extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_page_creation_profil);
-        this.login = getIntent().getStringExtra("Login");
-        this.password = getIntent().getStringExtra("Password");
-
         this.myDb = new DatabaseHelper(this);
         this.profile = new ProfileDAO(this);
         this.userDAO = new UserDAO(this);
+        this.login = getIntent().getStringExtra("Login");
+        this.password = getIntent().getStringExtra("Password");
 
-        this.name = (EditText) findViewById(R.id.NameDB);
-        this.last_name = (EditText) findViewById(R.id.LastNameDB);
-        this.address = (EditText) findViewById(R.id.AddressDB);
-        this.preferences = (EditText) findViewById(R.id.PreferencesDB);
+        setContentView(R.layout.activity_page_creation_profil);
+        this.name = findViewById(R.id.NameDB);
+        this.last_name = findViewById(R.id.LastNameDB);
+        this.address = findViewById(R.id.AddressDB);
+        this.preferences = findViewById(R.id.PreferencesDB);
 
         configureButtonCreateProfile();
         configureGoBackProfile();
@@ -61,12 +60,13 @@ public class PageCreationProfil extends AppCompatActivity {
     }
 
     private void configureButtonCreateProfile() {
-        Button buttonSaveProfile = (Button) findViewById(R.id.buttonCreateProfile);
+        Button buttonSaveProfile = findViewById(R.id.buttonCreateProfile);
         buttonSaveProfile.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view){
-                User user =configureUser();
-                if (name.getText().toString().equals("") || last_name.getText().toString().equals("") || address.getText().toString().equals("")){
-                    showToast("Please fill in the 3 first fields");
+                User user = configureUser();
+                if (name.getText().toString().equals("") ||
+                        last_name.getText().toString().equals("")){
+                    showToast("Please fill in the 2 first fields");
                 }
                 else{
                     user.signIn(login, password);

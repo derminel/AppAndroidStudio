@@ -27,22 +27,15 @@ import java.util.Arrays;
 
 
 public class PageAmis extends AppCompatActivity {
-
     private FriendsDAO friendsDAO;
     private UserDAO userDAO;
     private String login;
     private User user;
-
     private CustomAdapterFriends adapter;
     private SearchView searchView;
 
-    private boolean canInit = true;
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        showToast(login);
         super.onCreate(savedInstanceState);
         this.login = getIntent().getStringExtra("Login");
         this.user = new User(null,login,this);
@@ -51,11 +44,8 @@ public class PageAmis extends AppCompatActivity {
 
         setContentView(R.layout.activity_page_amis);
         this.searchView = findViewById(R.id.SearchbarFriends);
-        if(canInit){
-            initList();
-            canInit = false;
-        }
 
+        initList();
         configuresearchbar();
         configureAddButton();
         configureBack();
@@ -68,6 +58,7 @@ public class PageAmis extends AppCompatActivity {
     private void start(Class<?> cls){
         Intent page = new Intent(PageAmis.this, cls);
         page.putExtra("Login", login);
+        page.putExtra("from", "Amis");
         startActivity(page);
     }
 
@@ -77,7 +68,6 @@ public class PageAmis extends AppCompatActivity {
             public boolean onQueryTextSubmit(String query) {
                 return false;
             }
-
             @Override
             public boolean onQueryTextChange(String newText) {
                 adapter.getFilter().filter(newText);
@@ -89,8 +79,7 @@ public class PageAmis extends AppCompatActivity {
     private void initList(){
         ListView listView = findViewById(R.id.ListViewFriends);
         ArrayList<User> friends = this.user.getFriends(this);
-        adapter=new CustomAdapterFriends(this,
-                R.layout.row_friends, friends, login);
+        adapter=new CustomAdapterFriends(this, R.layout.row_friends, friends, login);
         listView.setAdapter(adapter);
     }
 

@@ -13,16 +13,11 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 public class PagePourGererDmdAmis extends AppCompatActivity {
-
     private ArrayList<User> friendsRequests;
     private CustomAdapterFriendsRequests adapter;
     private ListView listView;
-    private Button goBack;
-
     private String login;
-    private String loginPopUp;
     private User user;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,40 +27,31 @@ public class PagePourGererDmdAmis extends AppCompatActivity {
 
         setContentView(R.layout.activity_page_pour_gerer_dmd_amis);
         this.listView = findViewById(R.id.ListViewFriendsRequests);
-        this.goBack = findViewById(R.id.GoBackFriendRequest);
-
         initList();
         goBack();
-
-        showToast("Login" + login);
     }
 
-    private void showToast(String msg) {
-        Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
+    private void start(Class<?> cls){
+        Intent page = new Intent(PagePourGererDmdAmis.this, cls);
+        page.putExtra("Login", login);
+        startActivity(page);
     }
 
     private void goBack() {
+        Button goBack = findViewById(R.id.GoBackFriendRequest);
         goBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (loginPopUp == null){
-                    Intent intent = new Intent(PagePourGererDmdAmis.this, PageAmis.class);
-                    intent.putExtra("Login", login);
-                    startActivity(intent);
-                }
-                else{
-                    Intent intent = new Intent(PagePourGererDmdAmis.this, PageAccueil.class);
-                    intent.putExtra("Login", login);
-                    startActivity(intent);
-                }
+                if (getIntent().getStringExtra("from").equals("Amis")){
+                    start(PageAmis.class);
+                } else{ start(PageAccueil.class); }
             }
         });
     }
 
     private void initList(){
         this.friendsRequests = this.user.getRequests(this);
-        adapter=new CustomAdapterFriendsRequests(this,
-                R.layout.row_friendrequest, friendsRequests, login);
+        adapter=new CustomAdapterFriendsRequests(this, R.layout.row_friendrequest, friendsRequests, login);
         listView.setAdapter(adapter);
     }
 }

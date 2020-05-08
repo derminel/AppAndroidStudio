@@ -11,7 +11,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-
 public class MainActivity extends AppCompatActivity {
     private User user;
     EditText login;
@@ -22,7 +21,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
-
         this.login = findViewById(R.id.login);
         this.password = findViewById(R.id.password);
 
@@ -33,7 +31,11 @@ public class MainActivity extends AppCompatActivity {
     private void showToast(String msg) {
         Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
     }
-
+    private void start(Class<?> cls){
+        Intent page = new Intent(MainActivity.this, cls);
+        page.putExtra("Login", login.getText().toString());
+        startActivity(page);
+    }
     private void configureUser(){
         this.user = new User(this.password.getText().toString(), this.login.getText().toString(), this);
     }
@@ -52,11 +54,7 @@ public class MainActivity extends AppCompatActivity {
                 else if (!(user.connection(login.getText().toString(), password.getText().toString()))){
                     showToast("You've made a mistake in your password");
                 }
-                else{
-                    Intent gotoSignIn = new Intent(MainActivity.this, PageAccueil.class);
-                    gotoSignIn.putExtra("Login", login.getText().toString());
-                    startActivity(gotoSignIn);
-                }
+                else{ start(PageAccueil.class); }
             }
         });
     }
@@ -64,11 +62,7 @@ public class MainActivity extends AppCompatActivity {
     private void configureButtonSignUp() {
         Button SignUp = findViewById(R.id.CreateAccount);
         SignUp.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view){
-                Intent gotoSignup= new Intent(MainActivity.this, PageCreationAccount.class);
-                gotoSignup.putExtra("Login", login.getText().toString());
-                startActivity(gotoSignup);
-            }
+            public void onClick(View view){ start(PageCreationAccount.class); }
         });
     }
 }

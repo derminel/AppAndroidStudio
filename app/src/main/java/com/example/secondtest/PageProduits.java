@@ -26,7 +26,6 @@ public class PageProduits extends AppCompatActivity {
     private TextView titleWishList;
 
     private boolean canInit = true;
-    private ContentDAO contentDAO ;
     private WishListDAO wishListDAO;
     private String nameWishList;
     private String nameWishListReload;
@@ -41,14 +40,13 @@ public class PageProduits extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_page_produits);
 
-        this.listView=(ListView)findViewById(R.id.ListViewProducts);
-        this.searchView=(SearchView) findViewById(R.id.SearchbarProducts);
-        this.addButton=(Button) findViewById(R.id.addProductButton);
-        this.settingButton=(Button) findViewById(R.id.editWishlist);
-        this.titleWishList =(TextView) findViewById(R.id.titleWishlist);
+        this.listView = findViewById(R.id.ListViewProducts);
+        this.searchView = findViewById(R.id.SearchbarProducts);
+        this.addButton = findViewById(R.id.addProductButton);
+        this.settingButton = findViewById(R.id.editWishlist);
+        this.titleWishList = findViewById(R.id.titleWishlist);
 
         this.login = getIntent().getStringExtra("Login");
-        this.contentDAO = new ContentDAO(this);
         this.wishListDAO = new WishListDAO(this);
         this.wishListNb = getIntent().getStringExtra("WishlistNb");
         this.nameWishList = getIntent().getStringExtra("WishlistName");

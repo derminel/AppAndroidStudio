@@ -47,7 +47,12 @@ public class PageCreationAccount extends AppCompatActivity {
     private void showToast(String msg) {
         Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
     }
-
+    private void start(Class<?> cls){
+        Intent page = new Intent(PageCreationAccount.this, cls);
+        page.putExtra("Login", login.getText().toString());
+        page.putExtra("Password", password1.getText().toString());
+        startActivity(page);
+    }
     private void configureUser(){
         this.user = new User(this.password1.getText().toString(), this.login.getText().toString(), this);
     }
@@ -57,7 +62,7 @@ public class PageCreationAccount extends AppCompatActivity {
         goBackButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(PageCreationAccount.this, MainActivity.class));
+                start(MainActivity.class);
             }
         });
     }
@@ -79,10 +84,7 @@ public class PageCreationAccount extends AppCompatActivity {
                     showToast("You've written 2 different password");
                 }
                 else{
-                    Intent gotoProfil = new Intent(PageCreationAccount.this, PageCreationProfil.class);
-                    gotoProfil.putExtra("Login", login.getText().toString());
-                    gotoProfil.putExtra("Password", password1.getText().toString());
-                    startActivity(gotoProfil);
+                    start(PageCreationProfil.class);
                 }
             }
         });
