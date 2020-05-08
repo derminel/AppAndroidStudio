@@ -7,7 +7,7 @@ Les classes java du fichier sont divisées en 3 catégories :
           -Les classes DAO-DatabaseContract-Helper, qui permettent la transistion entre les objets java et la base de données via les requêtes SQL.
           -Les classes pages et adapters, qui représentent les différents écrans possible qu'affiche l'application sur le GSM.
 
-Les layouts activity pages
+Les layouts activity pages permettent de gérer l'affichage de l'application
   
           
           
