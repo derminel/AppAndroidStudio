@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -26,12 +27,22 @@ public class PageAjouterVisible extends AppCompatActivity {
         visible = findViewById(R.id.nameNewVisible);
         configureConfirmAdminButton();
     }
+    private void showToast(String msg) {
+        Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
+    }
+
 
     private void configureConfirmAdminButton() {
         Button nextButton = (Button) findViewById(R.id.ConfirmAddVisible);
         nextButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view){
-                modifierDAO.updateVisible(wishlistnb, visible.getText().toString());
+                int err = modifierDAO.updateVisible(wishlistnb, visible.getText().toString(), context);
+                if (err == -2) {
+                    showToast("This login does not exist");
+                }
+                if (err == -1) {
+                    showToast("This login is already an admin and can edit your list");
+                }
                 Intent intent = new Intent(PageAjouterVisible.this, PagePourModiferVisibles.class);
                 intent.putExtra("WishlistNb", wishlistnb);
                 startActivity(intent);
