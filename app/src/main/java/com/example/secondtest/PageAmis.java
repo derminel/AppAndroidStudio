@@ -95,7 +95,7 @@ public class PageAmis extends AppCompatActivity {
                 R.layout.row_friends, friends, login);
         listView.setAdapter(adapter);
     }
-    
+
     private void configureFriendRequest(){
         Button friendsRequestsButton = findViewById(R.id.friendsRequestsButton);
         friendsRequestsButton.setOnClickListener(new View.OnClickListener() {
