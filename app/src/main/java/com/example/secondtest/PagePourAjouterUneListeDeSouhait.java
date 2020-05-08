@@ -35,7 +35,7 @@ public class PagePourAjouterUneListeDeSouhait extends AppCompatActivity {
         this.name = findViewById(R.id.setNameNewWishlist);
         this.recipient = findViewById(R.id.setRecipientNewWishlist);
         this.description = findViewById(R.id.setDescriptionNewWishlist);
-        this.login = getIntent().getStringExtra("LOGIN_AJOUT_LISTE_DE_SOUHAITS");
+        this.login = getIntent().getStringExtra("Login");
 
         Switch switchButton = findViewById(R.id.switchAccess);
         Button buttonConfirm = findViewById(R.id.ConfirmAddWishlist);
@@ -70,7 +70,7 @@ public class PagePourAjouterUneListeDeSouhait extends AppCompatActivity {
                     wishListDAO.addList(newList.getName(), publicAccess, newList.getListNb(), description.getText().toString(), recipient.getText().toString(), login);
                     showToast("WishList has been created");
                     Intent intent = new Intent(PagePourAjouterUneListeDeSouhait.this, PagesListesDeSouhaits.class);
-                    intent.putExtra("LOGIN_LISTES_DE_SOUHAITS", login);
+                    intent.putExtra("Login", login);
                     startActivity(intent);
                 }
             }
@@ -78,7 +78,7 @@ public class PagePourAjouterUneListeDeSouhait extends AppCompatActivity {
     }
     public void activityretour(){
         Intent intent = new Intent(this, PagesListesDeSouhaits.class);
-        intent.putExtra("LOGIN_LISTES_DE_SOUHAITS", login);
+        intent.putExtra("Login", login);
         startActivity(intent);
     }
 

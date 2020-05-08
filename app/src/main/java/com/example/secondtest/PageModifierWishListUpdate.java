@@ -21,7 +21,7 @@ public class PageModifierWishListUpdate extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_page_modifier_wishlist_update);
         this.wishListDAO = new WishListDAO(this);
-        this.wishlistNb = getIntent().getStringExtra("LISTNB_UPDATE");
+        this.wishlistNb = getIntent().getStringExtra("WishlistNb");
 
         this.name = findViewById(R.id.list_nameDB);
         this.recipient = findViewById(R.id.recipient);
@@ -50,7 +50,7 @@ public class PageModifierWishListUpdate extends AppCompatActivity {
 
                 wishListDAO.updateWishlist(wishlistNb, name.getText().toString(), recipient.getText().toString(), publicAccess);
                 Intent intent = new Intent(PageModifierWishListUpdate.this, PageModifierWishList.class);
-                intent.putExtra("LISTNB_MODIFIER", wishlistNb);
+                intent.putExtra("WishlistNb", wishlistNb);
                 startActivity(intent);
             }
         });

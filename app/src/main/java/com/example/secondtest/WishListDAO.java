@@ -77,7 +77,7 @@ public class WishListDAO {
     //pre: recoit un listNb du wishList qui figure deja dans la base de données
     //post: retourne le nom de cette liste
     public String getName(String listNb){
-        Cursor cursor = this.dbh.getDb().rawQuery(String.format("SELECT * FROM %s WHERE %s = ?", TABLE_LISTS,
+         Cursor cursor = this.dbh.getDb().rawQuery(String.format("SELECT * FROM %s WHERE %s = ?", TABLE_LISTS,
                 COLUMN_LISTS_LISTNB) ,new String[] {listNb});
         if (cursor.getCount() <= 0){
             return null;

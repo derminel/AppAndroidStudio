@@ -73,9 +73,9 @@ public class CustomAdapterProducts extends ArrayAdapter<Product> {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, PageDetailProduits.class);
-                intent.putExtra("PRODUCTNAME1", product.getName());
-                intent.putExtra("LOGIN_DETAILS_PRODUIT", login);
-                intent.putExtra("WISHLISTNB_DETAILS_PRODUIT", listNb);
+                intent.putExtra("ProductName", product.getName());
+                intent.putExtra("Login", login);
+                intent.putExtra("WishlistNb", listNb);
                 context.startActivity(intent);
             }
         });

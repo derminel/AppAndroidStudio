@@ -81,7 +81,7 @@ public class PageCreationAccount extends AppCompatActivity {
                 else{
                     Intent gotoProfil = new Intent(PageCreationAccount.this, PageCreationProfil.class);
                     gotoProfil.putExtra("Login", login.getText().toString());
-                    gotoProfil.putExtra("pswd", password1.getText().toString());
+                    gotoProfil.putExtra("Password", password1.getText().toString());
                     startActivity(gotoProfil);
                 }
             }

@@ -47,20 +47,12 @@ public class PageProduits extends AppCompatActivity {
         this.settingButton=(Button) findViewById(R.id.editWishlist);
         this.titleWishList =(TextView) findViewById(R.id.titleWishlist);
 
-        this.login = getIntent().getStringExtra("LOGIN_PRODUITS");
-        this.loginReload = getIntent().getStringExtra("LOGIN_PRODUIT_RELOAD");
+        this.login = getIntent().getStringExtra("Login");
         this.contentDAO = new ContentDAO(this);
         this.wishListDAO = new WishListDAO(this);
-        this.wishListNb = getIntent().getStringExtra("WISHLISTNUMBER1");
-        this.wishListNbReload = getIntent().getStringExtra("WISHLISTNUMBER3");
-        this.nameWishList = getIntent().getStringExtra("WISHLISTNAME1");
-        this.nameWishListReload = getIntent().getStringExtra("WISHLISTNAME3");
-        if (nameWishListReload == null){
-            this.titleWishList.setText(nameWishList);
-        }
-        else{
-            this.titleWishList.setText(nameWishListReload);
-        }
+        this.wishListNb = getIntent().getStringExtra("WishlistNb");
+        this.nameWishList = getIntent().getStringExtra("WishlistName");
+        this.titleWishList.setText(nameWishList);
 
         if(canInit){
             initList();
@@ -111,17 +103,9 @@ public class PageProduits extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(PageProduits.this, PagePourAjouterUnProduit.class) ;
-                if (wishListNbReload == null){
-                    intent.putExtra("WISHLISTNUMBER2", wishListNb);
-                    intent.putExtra("WISHLISTNAME2", nameWishList);
-                    intent.putExtra("LOGIN_AJOUT_PRODUIT", login);
-                }
-                else {
-                    intent.putExtra("WISHLISTNUMBER2", wishListNbReload);
-                    intent.putExtra("WISHLISTNAME2", nameWishListReload);
-                    intent.putExtra("LOGIN_AJOUT_PRODUIT", loginReload);
-                }
-
+                intent.putExtra("WishlistNb", wishListNb);
+                intent.putExtra("WishlistName", nameWishList);
+                intent.putExtra("Login", login);
                 startActivityForResult(intent, 1);
             }
         });
@@ -130,7 +114,7 @@ public class PageProduits extends AppCompatActivity {
         settingButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view){
                 Intent intent = new Intent(PageProduits.this, PageModifierWishList.class);
-                intent.putExtra("LISTNB_MODIFIER", wishListNb);
+                intent.putExtra("WishlistNb", wishListNb);
                 startActivity(intent);
             }
         });

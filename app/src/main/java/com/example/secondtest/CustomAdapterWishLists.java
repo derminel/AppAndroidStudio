@@ -73,9 +73,9 @@ public class CustomAdapterWishLists extends ArrayAdapter<WishList> {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, PageProduits.class);
-                intent.putExtra("WISHLISTNAME1", wishList.getName());
-                intent.putExtra("WISHLISTNUMBER1", wishListsNb.get(position));
-                intent.putExtra("LOGIN_PRODUITS", login);
+                intent.putExtra("WishlistName", wishList.getName());
+                intent.putExtra("WishlistNb", wishListsNb.get(position));
+                intent.putExtra("Login", login);
                 context.startActivity(intent);
             }
         });

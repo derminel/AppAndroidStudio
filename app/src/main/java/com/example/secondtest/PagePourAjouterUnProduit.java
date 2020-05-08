@@ -39,9 +39,9 @@ public class PagePourAjouterUnProduit extends AppCompatActivity implements Adapt
         this.price = findViewById(R.id.setPriceCreate);
         this.website = findViewById(R.id.setWebsiteCreate);
         this.info = findViewById(R.id.setInfoCreate);
-        this.wishListNb = getIntent().getStringExtra("WISHLISTNUMBER2");
-        this.wishListName = getIntent().getStringExtra("WISHLISTNAME2");
-        this.login = getIntent().getStringExtra("LOGIN_AJOUT_PRODUIT");
+        this.wishListNb = getIntent().getStringExtra("WishlistNb");
+        this.wishListName = getIntent().getStringExtra("WishlistName");
+        this.login = getIntent().getStringExtra("Login");
         this.contentDAO = new ContentDAO(this);
         this.productDAO = new ProductDAO(this);
 
@@ -64,9 +64,9 @@ public class PagePourAjouterUnProduit extends AppCompatActivity implements Adapt
                             info.getText().toString(),category,website.getText().toString());
                     contentDAO.addProduct(wishListNb, productNb);
                     Intent intent = new Intent(PagePourAjouterUnProduit.this, PageProduits.class);
-                    intent.putExtra("WISHLISTNAME3", wishListName);
-                    intent.putExtra("WISHLISTNUMBER3", wishListNb);
-                    intent.putExtra("LOGIN_PRODUIT_RELOAD", login);
+                    intent.putExtra("WishlistName", wishListName);
+                    intent.putExtra("WishlistNb", wishListNb);
+                    intent.putExtra("Login", login);
                     startActivity(intent);
                 }
                 else if (contentDAO.alreadyInList(wishListNb,product.getProductNb())){
@@ -75,9 +75,9 @@ public class PagePourAjouterUnProduit extends AppCompatActivity implements Adapt
                 else {
                     contentDAO.addProduct(wishListNb, productNb);
                     Intent intent = new Intent(PagePourAjouterUnProduit.this, PageProduits.class);
-                    intent.putExtra("WISHLISTNAME3", wishListName);
-                    intent.putExtra("WISHLISTNUMBER3", wishListNb);
-                    intent.putExtra("LOGIN_PRODUIT_RELOAD", login);
+                    intent.putExtra("WishlistName", wishListName);
+                    intent.putExtra("WishlistNb", wishListNb);
+                    intent.putExtra("Login", login);
                     startActivity(intent);
                 }
             }

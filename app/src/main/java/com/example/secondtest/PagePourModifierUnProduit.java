@@ -38,9 +38,9 @@ public class PagePourModifierUnProduit extends AppCompatActivity {
         this.productWebsite = findViewById(R.id.setWebsiteEdit);
         this.productInfo = findViewById(R.id.setInfoEdit);
 
-        this.productNb = getIntent().getStringExtra("PRODUCTNB_MODIFIER_PRODUIT");
-        this.wishListNb = getIntent().getStringExtra("WISHLISTNB_MODIFIER_PRODUIT");
-        this.login = getIntent().getStringExtra("LOGIN_MODIFIER_PRODUIT");
+        this.productNb = getIntent().getStringExtra("ProductNb");
+        this.wishListNb = getIntent().getStringExtra("WishlistNb");
+        this.login = getIntent().getStringExtra("Login");
         this.productDAO = new ProductDAO(this);
         this.infoProduct = productDAO.getAllColumn(productNb);
         infoProduct.moveToFirst();
@@ -59,9 +59,9 @@ public class PagePourModifierUnProduit extends AppCompatActivity {
                         Integer.parseInt(productPrice.getText().toString()),productInfo.getText().toString(),
                         productCategory.getText().toString(),productWebsite.getText().toString());
                 Intent intent = new Intent(PagePourModifierUnProduit.this, PageDetailProduits.class);
-                intent.putExtra("PRODUCTNB_DETAILS_PRODUIT_RELOAD", productNb);
-                intent.putExtra("WISHLISTNUMBER_DETAILS_RELOAD", wishListNb);
-                intent.putExtra("LOGIN_DETAILS_PRODUIT_RELOAD", login);
+                intent.putExtra("ProductNb", productNb);
+                intent.putExtra("WishlistNb", wishListNb);
+                intent.putExtra("Login", login);
                 startActivity(intent);
             }
         });

@@ -42,6 +42,23 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingTop="20dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/textName"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:text="Name"
+            android:textColor="#FFFFFF"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_weight="8"
         android:layout_gravity="center"
         android:gravity="center"
@@ -51,7 +68,6 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:paddingTop="5dp"
-            android:layout_marginBottom="20dp"
             android:orientation="horizontal"
             android:layout_weight="1">
 
@@ -63,6 +79,23 @@
                 android:hint="Enter your name"
                 android:background="#FFFFFF"
                 android:textSize="23sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="20dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textLastname"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:text="Lastname"
+                android:textColor="#FFFFFF"
+                android:textSize="24sp"
+                android:textStyle="bold" />
         </LinearLayout>
 
         <LinearLayout
@@ -85,10 +118,25 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingTop="20dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textAddress"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:text="Address"
+                android:textColor="#FFFFFF"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:paddingTop="5dp"
             android:orientation="horizontal"
-            android:layout_marginTop="20dp"
-            android:layout_weight="20">
+            android:layout_weight="35">
 
             <EditText
                 android:id="@+id/address_update"
@@ -104,9 +152,25 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingTop="20dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textPeferences"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:text="Preferences"
+                android:textColor="#FFFFFF"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:paddingTop="5dp"
             android:orientation="horizontal"
-            android:layout_marginTop="20dp"
             android:layout_weight="100">
 
             <EditText

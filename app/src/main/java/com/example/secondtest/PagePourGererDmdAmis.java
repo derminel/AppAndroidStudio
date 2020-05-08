@@ -50,12 +50,12 @@ public class PagePourGererDmdAmis extends AppCompatActivity {
             public void onClick(View v) {
                 if (loginPopUp == null){
                     Intent intent = new Intent(PagePourGererDmdAmis.this, PageAmis.class);
-                    intent.putExtra("LOGIN_AMIS_APRES_DMD_AMIS", login);
+                    intent.putExtra("Login", login);
                     startActivity(intent);
                 }
                 else{
                     Intent intent = new Intent(PagePourGererDmdAmis.this, PageAccueil.class);
-                    intent.putExtra("LOGIN_AMIS_APRES_POP_UP_AMIS", login);
+                    intent.putExtra("Login", login);
                     startActivity(intent);
                 }
             }

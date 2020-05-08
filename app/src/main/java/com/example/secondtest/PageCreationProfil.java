@@ -25,7 +25,7 @@ public class PageCreationProfil extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_page_creation_profil);
         this.login = getIntent().getStringExtra("Login");
-        this.password = getIntent().getStringExtra("pswd");
+        this.password = getIntent().getStringExtra("Password");
 
         this.myDb = new DatabaseHelper(this);
         this.profile = new ProfileDAO(this);
