@@ -113,6 +113,7 @@ public class PageProduits extends AppCompatActivity {
             public void onClick(View view){
                 Intent intent = new Intent(PageProduits.this, PageModifierWishList.class);
                 intent.putExtra("WishlistNb", wishListNb);
+                intent.putExtra("Login", login);
                 startActivity(intent);
             }
         });

@@ -27,12 +27,27 @@ public class ModifierDAO {
         this.modifier.moveToFirst();
         ArrayList<String> admins = new ArrayList<>();
         while (!(this.modifier.isLast()) && !IsTableEmpty(this.modifier)) {
-            if (this.modifier.getString(2).equals(listNb) && this.modifier.getString(0).equals("1")) {
+            if (this.modifier.getString(2).equals(listNb) && this.modifier.getString(0).equals("Admin")) {
                 admins.add(this.modifier.getString(1));
             }
             this.modifier.moveToNext();
         }
-        if (!IsTableEmpty(this.modifier) && this.modifier.getString(2).equals(listNb) && this.modifier.getString(0).equals("1")) {
+        if (!IsTableEmpty(this.modifier) && this.modifier.getString(2).equals(listNb) && this.modifier.getString(0).equals("Admin")) {
+            admins.add(this.modifier.getString(1));
+        }
+        return admins;
+
+    }
+    public ArrayList<String> getVisible(String listNb) {
+        this.modifier.moveToFirst();
+        ArrayList<String> admins = new ArrayList<>();
+        while (!(this.modifier.isLast()) && !IsTableEmpty(this.modifier)) {
+            if (this.modifier.getString(2).equals(listNb) && this.modifier.getString(0).equals("Reader")) {
+                admins.add(this.modifier.getString(1));
+            }
+            this.modifier.moveToNext();
+        }
+        if (!IsTableEmpty(this.modifier) && this.modifier.getString(2).equals(listNb) && this.modifier.getString(0).equals("Reader")) {
             admins.add(this.modifier.getString(1));
         }
         return admins;
@@ -47,10 +62,30 @@ public class ModifierDAO {
         if (IsTableEmpty(modifier)||alreadyAdmin(listnb, login)) {
             return false;
         }
+        if (alreadyVisible(listnb, login)) {
+            ContentValues contentValues = new ContentValues();
+            contentValues.put(COLUMN_MODIFIER_STATUS, "Admin");
+            this.dbh.getDb().update(TABLE_MODIFIER,  contentValues, "LOGIN =? AND LISTNB=?", new String[] {login, listnb});
+            return true;
+        }
         //UserDAO userDAO = new UserDAO(context);
         //if (userDAO.isALogin(login)) {return false;}
         ContentValues contentValues = new ContentValues();
         contentValues.put(COLUMN_MODIFIER_STATUS, "Admin");
+        contentValues.put(COLUMN_MODIFIER_LISTNB, listnb);
+        contentValues.put(COLUMN_MODIFIER_LOGIN, login);
+        this.dbh.getDb().insert(TABLE_MODIFIER, null, contentValues);
+        return true;
+    }
+
+    public boolean updateVisible(String listnb, String login) {
+        if (IsTableEmpty(modifier)||alreadyAdmin(listnb, login)) {
+            return false;
+        }
+        //UserDAO userDAO = new UserDAO(context);
+        //if (userDAO.isALogin(login)) {return false;}
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COLUMN_MODIFIER_STATUS, "Reader");
         contentValues.put(COLUMN_MODIFIER_LISTNB, listnb);
         contentValues.put(COLUMN_MODIFIER_LOGIN, login);
         this.dbh.getDb().insert(TABLE_MODIFIER, null, contentValues);
@@ -66,6 +101,17 @@ public class ModifierDAO {
             this.modifier.moveToNext();
         }
         return this.modifier.getString(2).equals(listNb) && this.modifier.getString(0).equals("Admin") && this.modifier.getString(1).equals(login);
+    }
+
+    public boolean alreadyVisible(String listNb, String login) {
+        this.modifier.moveToFirst();
+        while (!(this.modifier.isLast()) && !IsTableEmpty(this.modifier)) {
+            if (this.modifier.getString(2).equals(listNb) && this.modifier.getString(0).equals("Reader") && this.modifier.getString(1) .equals(login)) {
+                return true;
+            }
+            this.modifier.moveToNext();
+        }
+        return this.modifier.getString(2).equals(listNb) && this.modifier.getString(0).equals("Reader") && this.modifier.getString(1).equals(login);
     }
 
     public void deleteAdmin(String listNb, String login) {
