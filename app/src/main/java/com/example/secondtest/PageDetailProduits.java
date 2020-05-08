@@ -71,7 +71,6 @@ public class PageDetailProduits extends AppCompatActivity {
         this.productWebsite.setText(aboutProduct.getString(6));
 
         configureEditProductButton();
-        editProduct();
         configurelikestatus();
     }
 
@@ -95,14 +94,8 @@ public class PageDetailProduits extends AppCompatActivity {
             unfillDislike.setVisibility(View.GONE);
             checkLike = "fillDislike";
         }
-    }
-    private void editProduct(){
-        editProduct.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                start(PagePourModifierUnProduit.class);
-            }
-        });
+        configureEditProductButton();
+        configureGoBack();
     }
     public void unfilledLike(View view){
         if(checkDislike.equals("unfillDislike")){
@@ -182,6 +175,16 @@ public class PageDetailProduits extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 start(PagePourModifierUnProduit.class);
+            }
+        });
+    }
+
+    private void configureGoBack(){
+        Button goBack = findViewById(R.id.GoBackProductDetails);
+        goBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                start(PageProduits.class);
             }
         });
     }

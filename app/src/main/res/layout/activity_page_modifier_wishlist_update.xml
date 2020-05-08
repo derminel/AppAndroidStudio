@@ -12,7 +12,7 @@
 
 
     <Button
-        android:id="@+id/GoBackProfileUpdate"
+        android:id="@+id/GoBackWishlistUpdate"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_gravity="left"

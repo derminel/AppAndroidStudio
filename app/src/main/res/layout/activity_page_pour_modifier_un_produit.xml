@@ -43,7 +43,7 @@
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
         android:paddingTop="5dp"
         android:orientation="horizontal">
 
@@ -166,35 +166,42 @@
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:paddingTop="5dp"
-        android:orientation="horizontal">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/setInfoEdit"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:hint="Insert informations about the product"
-            android:gravity="top"
-            android:background="#FFFFFF"
-            android:textSize="23sp" />
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:paddingTop="40dp">
-
-        <Button
-            android:id="@+id/saveProduct"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:background="@drawable/confirm_button"
-            android:textColor="#FFFFFF"
-            android:text="Save" />
+            android:paddingTop="5dp"
+            android:layout_weight="10"
+            android:orientation="horizontal">
 
+            <EditText
+                android:id="@+id/setInfoEdit"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="Insert informations about the product"
+                android:gravity="top"
+                android:background="#FFFFFF"
+                android:textSize="23sp" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:paddingTop="40dp">
+
+            <Button
+                android:id="@+id/saveProduct"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/confirm_button"
+                android:textColor="#FFFFFF"
+                android:text="Save"
+                style="?android:attr/borderlessButtonStyle"/>
+
+        </LinearLayout>
     </LinearLayout>
-
-
 </LinearLayout>

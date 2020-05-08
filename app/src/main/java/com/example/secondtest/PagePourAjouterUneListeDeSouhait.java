@@ -55,12 +55,15 @@ public class PagePourAjouterUneListeDeSouhait extends AppCompatActivity {
     }
     private void configureconfirm(){
         Button buttonConfirm = findViewById(R.id.ConfirmAddWishlist);
+        final UserDAO userDAO = new UserDAO(this);
         buttonConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (name.getText().toString().equals("")){
                     showToast("Please fill the name in");
-                } else{
+                } else if (!recipient.getText().toString().equals("") && !userDAO.exist(recipient.getText().toString())){
+                    showToast("The login of the recipient does not exist");
+                } else {
                     WishList newList = configureWishList();
                     wishListDAO.addList(newList.getName(), publicAccess, newList.getListNb(), description.getText().toString(), recipient.getText().toString(), login);
                     showToast("WishList has been created");
