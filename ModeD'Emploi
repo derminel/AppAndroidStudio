@@ -1,0 +1,24 @@
+#Mode d'emploi de l'application (repris du Rapport)
+En arrivant sur l’écran du téléphone , il suffit d’appuyer sur le bouton de l’application pour com- mencer à utiliser DreamList.
+ 
+
+11
+10.1 Inscription et connexion
+Une fois que l’application est lancée vous serez envoyé vers l’écran de connexion. Si vous n’étiez pas encore inscrit dans l’application vous serez invité à créer un compte en cliquant sur le bouton ’Create an account’. Vous devez dans un premier temps choisir un login . Deux situations peuvent se présenter : 1) Si celui-ci n’est pas encore utilisé par une tierce personne, vous êtes invité à en- trer votre mot de passe, et à le confirmer. Une fois votre compte crée, vous serez automatiquement redirigé vers la page de création de profil, ce qui vous permettra d’entrer toutes les données vous caractérisant (nom, prénom, préférences, adresse).
+2) Si par contre le login entré est déjà utilisé ou que votre mot de passe ne correspond pas à ce- lui que vous confirmez, un message vous indiquant de devoir réitérer l’opération s’affichera.
+Si vous avez déjà créé un compte sur l’application, vous devez vous connecter et vous serez redirigé vers le menu principal.
+10.2 Menu principal
+Le menu principal donne accès aux fonctionnalités suivantes : - Wishlist
+- Friends
+- Profile
+En cliquant sur chaque fonctionnalité, un nouvel écran spécifique apparaît :
+10.3 Profile
+L’écran ’profil’ permet de voir ses informations personnelles (Nom, Prénom, préférences et adresse) Si vous souhaitez changer votre profil, vous êtes invité à cliquer sur le bouton en haut à droite pour modifier vos données personnelles dans les espaces prévus à cet effet.
+10.4 Friends
+Notre application permet d’ajouter des amis. En effet, depuis le menu principal vous pouvez accéder à l’écran Friends qui permet de voir votre liste d’amis ou d’ajouter un nouvel ami. Si vous souhaitez ajouter un ami, vous devez appuyer sur le bouton ’+’ ; un nouvel écran apparaîtra où vous pourrez écrire son login (si il existe) dans l’espace prévu à cet effet, ensuite il suffit de confirmer l’ajout sur le bouton ’Confirm’ et la demande sera envoyée automatiquement au nouvel ami.
+10.5 Wishlist
+Quand vous cliquez sur ’Wishlist’, vous aurez la possibilité de rechercher parmi toutes les wishlists auxquelles vous avez accès, et de naviguer parmi celles-ci. Vous pouvez aussi créer une nouvelle liste, en allant sur le bouton ’+’. Une fois que vous avez appuyé sur ce bouton, un nouvel écran apparaît et il est alors possible de créer la nouvelle wishlist sur un espace prévu à cet effet. Une fois l’opération terminée, il suffit de confirmer la création de la liste.
+12
+
+10.6 Produits
+Quand vous cliquez sur une de vos wishlist, vous aurez la possibilité de voir tous les produits qui font parties de celle-ci. Vous pouvez aussi créer un nouveau produit, en allant sur le bouton ’+’. Une fois que vous avez appuyé sur ce bouton, un nouvel écran apparaît et il est alors possible de créer le nouveau produit. Une fois l’opération terminée, il suffit de confirmer la création du produit.
