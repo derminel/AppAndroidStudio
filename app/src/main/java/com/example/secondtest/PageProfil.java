@@ -19,6 +19,7 @@ public class PageProfil extends AppCompatActivity {
     private TextView preferences;//
     private UserDAO userDAO;
 
+    //Creation de la page profil
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

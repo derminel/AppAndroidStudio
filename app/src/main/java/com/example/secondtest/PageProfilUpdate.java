@@ -21,6 +21,7 @@ public class PageProfilUpdate extends AppCompatActivity {
     private String login;//
     private Cursor userInfo;
 
+    //Creation de la page pour modifier son profil
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -54,6 +54,7 @@ public class User {
         //Ajouter une wishlist a la DAO
     }
 
+    //verifie que le password du login est bien correct
     public boolean connection(String login, String password){
         try{
             return this.userDAO.getPassword(login).equals(password);

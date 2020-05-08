@@ -41,6 +41,7 @@ public class PagesListesDeSouhaits extends AppCompatActivity {
     private Button Back;
 
 
+    //Creation de la page ou l on peut consulter ses wishlists
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
