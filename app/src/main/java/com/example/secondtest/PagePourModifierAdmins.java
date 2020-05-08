@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 public class PagePourModifierAdmins extends AppCompatActivity {
     String wishlistNb;
-    ListView listView;
+    ListView listViewad;
     SearchView searchView;
     Button addButton;
     private boolean canInit = true;
@@ -30,14 +30,15 @@ public class PagePourModifierAdmins extends AppCompatActivity {
         this.wishlistNb  = getIntent().getStringExtra("LISTNB_ADMIN");
         modifierDAO = new ModifierDAO(this);
 
-        listView=(ListView)findViewById(R.id.ListViewAdmins);
+        listViewad=(ListView)findViewById(R.id.ListViewAdmins);
         searchView=(SearchView) findViewById(R.id.SearchbarAdmins);
         addButton=(Button) findViewById(R.id.addAdminbutton);
 
-        if(canInit){
+        initList();
+        /*if(canInit){
             initList();
             canInit = false;
-        }
+        }*/
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -55,9 +56,9 @@ public class PagePourModifierAdmins extends AppCompatActivity {
     }
 
     private void initList(){
-        this.admins = new ArrayList<String>();
-        adapter=new ArrayAdapter<String>(this,R.layout.row_admins, modifierDAO.getAdmin(wishlistNb));
-        listView.setAdapter(adapter);
+        this.admins = modifierDAO.getAdmin(wishlistNb);
+        adapter=new CustomAdapterAdmins(this, R.layout.row_wishlists, admins, wishlistNb);
+        listViewad.setAdapter(adapter);
     }
     private void configureAddButton(){
         addButton.setOnClickListener(new View.OnClickListener() {
