@@ -122,7 +122,7 @@ public class CustomAdapterFriendsRequests extends ArrayAdapter<User> {
 
     //permet de supprimer une wishlist
     private void refuseFriend(final User friendsRequest) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        AlertDialog.Builder builder = new android.app.AlertDialog.Builder(context,R.style.AlertDialog);
         builder.setTitle("Are you sure you want to refuse this person?");
 
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
@@ -150,7 +150,7 @@ public class CustomAdapterFriendsRequests extends ArrayAdapter<User> {
     }
 
     private void acceptFriend(final User friendsRequest) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        AlertDialog.Builder builder = new android.app.AlertDialog.Builder(context,R.style.AlertDialog);
         builder.setTitle("Are you sure you want to accept this person?");
 
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {

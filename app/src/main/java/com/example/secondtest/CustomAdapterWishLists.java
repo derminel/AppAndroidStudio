@@ -129,7 +129,7 @@ public class CustomAdapterWishLists extends ArrayAdapter<WishList> {
 
     //permet de supprimer une wishlist
     private void removeWishList(final WishList wishList) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        AlertDialog.Builder builder = new android.app.AlertDialog.Builder(context,R.style.AlertDialog);
         builder.setTitle("Are you sure you want to delete this?");
 
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {

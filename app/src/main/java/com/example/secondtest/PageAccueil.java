@@ -86,7 +86,7 @@ public class PageAccueil extends AppCompatActivity implements View.OnClickListen
     //Si une demande d'ami est en attente
     public void openDialog(View view) {
         AlertDialog.Builder alertDialogBuilder = new android.app.AlertDialog.Builder(this,R.style.AlertDialog);
-        alertDialogBuilder.setMessage("Do you want to go to friends' requests ?");
+        alertDialogBuilder.setMessage("Do you want to go to friend requests ?");
 
         alertDialogBuilder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
