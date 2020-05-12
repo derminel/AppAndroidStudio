@@ -46,6 +46,7 @@ public class PagePourAjouterUnProduit extends AppCompatActivity implements Adapt
 
         configureSpinner();
         configureCreate();
+        configureback();
     }
 
     private int parseprice(){
@@ -96,6 +97,15 @@ public class PagePourAjouterUnProduit extends AppCompatActivity implements Adapt
                         start(PageProduits.class);
                     }
                 }catch(Exception e) { showToast("Your price is not an integer");}
+            }
+        });
+    }
+    private void configureback(){
+        Button Back = findViewById(R.id.GoBackAddProduct);
+        Back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                start(PageProduits.class);
             }
         });
     }

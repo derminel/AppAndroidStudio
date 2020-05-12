@@ -76,9 +76,7 @@ public class PageModifierWishListUpdate extends AppCompatActivity {
                     showToast("The login of the recipient does not exist");
                 } else {
                     wishListDAO.updateWishlist(wishlistNb, name.getText().toString(), recipient.getText().toString(), publicAccess);
-                    Intent intent = new Intent(PageModifierWishListUpdate.this, PageModifierWishList.class);
-                    intent.putExtra("WishlistNb", wishlistNb);
-                    startActivity(intent);
+                    start(PageModifierWishList.class);
                 }
             }
         });
@@ -88,9 +86,7 @@ public class PageModifierWishListUpdate extends AppCompatActivity {
         Button goBack = findViewById(R.id.GoBackWishlistUpdate);
         goBack.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view){
-                Intent intent = new Intent(PageModifierWishListUpdate.this, PageModifierWishList.class);
-                intent.putExtra("WishlistNb", wishlistNb);
-                startActivity(intent);
+                start(PageModifierWishList.class);
             }
         });
     }
